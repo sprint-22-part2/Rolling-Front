@@ -1,0 +1,163 @@
+/* 기본 테마 */
+.rollingCard {
+  --bg: rgba(255, 190, 11, 0.07);
+  --accent: #ffbe0b;
+  --text-main: #111;
+  --emoji-bg: rgba(191, 149, 33, 0.1);
+  --emoji-text: #bf9521;
+  --numberAuthor: #363537;
+
+  border-radius: 24px;
+  font-family: Poppins, 'Pretendard Variable', Pretendard;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg);
+  padding: 24px;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.07);
+}
+
+.recipient {
+  display: flex;
+  flex-direction: column;
+}
+.name {
+  color: var(--text-main);
+  font-size: 28px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.to {
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.numberAuthorsWrap {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.profilePhotos {
+  display: flex;
+  flex-direction: row;
+}
+
+.profilePhotos span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background-color: #fff;
+  border: 1px solid #fff;
+  margin-left: -8px;
+  padding: 0 4px;
+  width: fit-content;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.02);
+}
+
+.plusNum {
+  background-color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  color: #555;
+}
+.numberAuthor {
+  font-weight: 400;
+  color: var(--numberAuthor);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+.number {
+  font-weight: 700;
+}
+
+.emojis {
+  display: flex;
+  gap: 4px;
+  flex-grow: 1;
+  align-items: flex-end;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.emoji {
+  background-color: var(--emoji-bg);
+  color: var(--emoji-text);
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.yellow {
+  --bg: #fff5de;
+  --accent: #ffbe0b;
+  --emoji-bg: #f4e7c8;
+  --emoji-text: #bf9521;
+}
+
+.orange {
+  --bg: #ffe8dc;
+  --accent: #fb5607;
+  --emoji-bg: #ffd7c3;
+  --emoji-text: #c45119;
+}
+
+.pink {
+  --bg: #ffedf5;
+  --accent: #ff006e;
+  --emoji-bg: #f9d9e7;
+  --emoji-text: #be1a61;
+}
+
+.purple {
+  --bg: #f6f1fe;
+  --accent: #8338ec;
+  --emoji-bg: #e7def5;
+  --emoji-text: #5c29a3;
+}
+
+.blue {
+  --bg: #f1f6ff;
+  --accent: #3a86ff;
+  --emoji-bg: #dde6f6;
+  --emoji-text: #2053a3;
+}
+.green {
+  --bg: #edfbf8;
+  --accent: #02c39a;
+  --emoji-bg: #d9efea;
+  --emoji-text: #1c7d68;
+}
+
+.image {
+  --text-main: #fff;
+  --bg: #333333;
+  --accent: #fff;
+  --emoji-bg: rgba(255, 255, 255, 0.3);
+  --emoji-text: #fff;
+  --numberAuthor: #fffc;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 1079px) {
+  .rollingCard {
+    gap: 20px;
+    aspect-ratio: 4 / 3;
+  }
+}
+@media (max-width: 767px) {
+  .name {
+    font-size: 24px;
+  }
+  .to {
+    font-size: 14px;
+  }
+}

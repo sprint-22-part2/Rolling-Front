@@ -1,0 +1,43 @@
+.popularRolling {
+  position: relative;
+}
+
+.rollingSwiper {
+  position: relative;
+}
+
+.swiperArrowButtons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+}
+.swiperButtonPrev,
+.swiperButtonNext {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+}
+
+.swiperButtonPrev {
+  left: -20px;
+}
+.swiperButtonNext {
+  right: -20px;
+}
+
+:global(.swiper-button-disabled) {
+  opacity: 0.3;
+  pointer-events: none;
+}
