@@ -18,7 +18,7 @@
 .swiperButtonNext {
   width: 40px;
   height: 40px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--white-opacity-50);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);

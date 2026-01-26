@@ -18,6 +18,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 .makeButton {
   color: var(--main-color);

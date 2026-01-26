@@ -27,11 +27,17 @@ function PopularRolling() {
         slidesPerView={1}
         onSwiper={(swiper) => {
           setTimeout(() => {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
-            swiper.navigation.init();
-            swiper.navigation.update();
-          }, 0);
+            if (swiper.params && swiper.params.navigation) {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }
+
+            // navigation 객체가 존재할 때만 실행
+            if (swiper.navigation) {
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }
+          }, 10);
         }}
         className={styles.rollingSwiper}
         breakpoints={{

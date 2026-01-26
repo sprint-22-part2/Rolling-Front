@@ -1,4 +1,6 @@
 import styles from './index.module.css';
+import PropTypes from 'prop-types';
+
 function RollingCard({ theme = 'yellow' }) {
   return (
     <div className={`${styles.rollingCard} ${styles[theme]}`}>
@@ -8,15 +10,9 @@ function RollingCard({ theme = 'yellow' }) {
       </div>
       <div className={styles.numberAuthorsWrap}>
         <div className={styles.profilePhotos}>
-          <span className={styles.profilePhoto}>
-            <img src="" alt="" />
-          </span>
-          <span className={styles.profilePhoto}>
-            <img src="" alt="" />
-          </span>
-          <span className={styles.profilePhoto}>
-            <img src="" alt="" />
-          </span>
+          <span className={styles.profilePhoto}>1</span>
+          <span className={styles.profilePhoto}>2</span>
+          <span className={styles.profilePhoto}>3</span>
           <span className={styles.plusNum}>+34</span>
         </div>
         <div className={styles.numberAuthor}>
@@ -32,4 +28,7 @@ function RollingCard({ theme = 'yellow' }) {
   );
 }
 
+RollingCard.propTypes = {
+  theme: PropTypes.string.isRequired,
+};
 export default RollingCard;

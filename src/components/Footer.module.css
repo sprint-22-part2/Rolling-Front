@@ -1,7 +1,7 @@
 .footer {
   padding: 48px 24px;
-  background-color: #34344a;
-  color: #fff;
+  background-color: var(--primary-100);
+  color: var(--white);
 }
 .footerWrap {
   max-width: 1200px;
@@ -11,7 +11,10 @@
   align-items: center;
   gap: 24px;
 }
-
+.logoImage {
+  height: 30px;
+  filter: brightness(0) invert(1);
+}
 .memberWrap {
   font-family: 'Poppins', sans-serif;
   display: flex;
