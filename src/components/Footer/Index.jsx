@@ -1,4 +1,4 @@
-import styles from './Footer.module.css';
+import styles from './Index.module.css';
 import LogoImage from '@/assets/logo/logo.svg';
 
 function Footer() {
