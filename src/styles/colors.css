@@ -1,0 +1,59 @@
+:root {
+  /* Primary */
+  --primary-400: #9935ff;
+  --primary-300: #a64eff;
+  --primary-200: #e2c4ff;
+  --primary-100: #34344a;
+
+  /* Blue */
+  --blue-400: #2053a3;
+  --blue-300: #3a86ff;
+  --blue-200: #dde6f6;
+  --blue-100: #f1f6ff;
+
+  /* Green */
+  --green-400: #1c7d68;
+  --green-300: #02c39a;
+  --green-200: #d9efea;
+  --green-100: #edfbf8;
+
+  /* Yellow */
+  --yellow-400: #bf9521;
+  --yellow-300: #ffbe0b;
+  --yellow-200: #f4e7c8;
+  --yellow-100: #fff5de;
+
+  /* Purple */
+  --purple-400: #5c29a3;
+  --purple-300: #8338ec;
+  --purple-200: #e7def5;
+  --purple-100: #f6f1fe;
+
+  /* Pink */
+  --pink-400: #be1a61;
+  --pink-300: #ff006e;
+  --pink-200: #f9d9e7;
+  --pink-100: #ffedf5;
+
+  /* Gray */
+  --gray-800: #111111;
+  --gray-700: #4a494f;
+  --gray-600: #555555;
+  --gray-500: #747474;
+  --gray-400: #868686;
+  --gray-300: #999999;
+  --gray-200: #c2c2c2;
+  --gray-100: #ededed;
+
+  /* White */
+  --white: #ffffff;
+
+  /* Error */
+  --error: #dc3a3a;
+
+  /* White Opacity */
+  --white-opacity-70: rgba(255, 255, 255, 0.7);
+  --white-opacity-50: rgba(255, 255, 255, 0.5);
+  --white-opacity-30: rgba(255, 255, 255, 0.3);
+  --white-opacity-10: rgba(255, 255, 255, 0.1);
+}
