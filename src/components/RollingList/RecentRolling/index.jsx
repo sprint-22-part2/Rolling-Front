@@ -1,5 +1,5 @@
-import styles from './index.module.css';
-import RollingCard from '../RollingCard';
+import styles from './Index.module.css';
+import RollingCard from '@/components/RollingList/RollingCard';
 
 function RecentRolling() {
   return (

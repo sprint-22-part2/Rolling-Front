@@ -1,28 +1,45 @@
-.rollingList {
-  max-width: 1200px;
+[type='yellow'] {
+  --bg: var(--yellow-100);
+}
+
+[type='orange'] {
+  --bg: #ffd7c3;
+}
+
+[type='pink'] {
+  --bg: var(--pink-100);
+}
+
+[type='purple'] {
+  --bg: var(--purple-100);
+}
+
+[type='blue'] {
+  --bg: var(--blue-100);
+}
+[type='green'] {
+  --bg: var(--green-100);
+}
+
+[type='image'] {
+  --bg: var(--white-opacity-30);
+  --emoji-text: var(--white);
+}
+
+.postList {
+  width: 100%;
+  display: flex;
+  gap: 64px;
+  padding: 0 24px;
+  background-color: var(--bg);
+}
+
+.sectionPostList {
+  max-width: 1248px;
   width: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 64px;
-}
-
-.sectionRollingList {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.sectionTop {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.makeButton {
-  color: var(--main-color);
-  font-size: 18px;
-  font-weight: 700;
+  padding: 80px 24px;
 }

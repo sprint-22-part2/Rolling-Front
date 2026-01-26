@@ -1,26 +1,19 @@
 import styles from './index.module.css';
-import PopularRolling from '../../components/RollingList/PopularRolling';
-import RecentRolling from '../../components/RollingList/RecentRolling';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import RollingHeader from '@/components/MessageList/RollingHeader';
+import MessageWrap from '@/components/MessageList/MessageWrap';
 
-function RollingListPage() {
+function PostListPage({ theme = 'red' }) {
   return (
-    <div className={styles.rollingList}>
-      <section className={styles.sectionRollingList}>
-        <h2>인기 롤링 페이퍼 🔥</h2>
-        <PopularRolling />
-      </section>
-      <section className={styles.sectionRollingList}>
-        <div className={styles.sectionTop}>
-          <h2>최근에 만든 롤링 페이퍼 ⭐️️</h2>
-          <Link to="/" className={styles.makeButton}>
-            + 롤링 페이퍼 만들기
-          </Link>
-        </div>
-        <RecentRolling />
+    <div className={`${styles.postList} ${styles[theme]}`} type={theme}>
+      <section className={styles.sectionPostList}>
+        <RollingHeader />
+        <MessageWrap />
       </section>
     </div>
   );
 }
-
-export default RollingListPage;
+PostListPage.propTypes = {
+  theme: PropTypes.string.isRequired,
+};
+export default PostListPage;
