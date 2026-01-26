@@ -35,7 +35,7 @@ export default defineConfig([
       'import/resolver': {
         alias: {
           map: [['@', './src']],
-          extensions: ['.js', '.jsx'],
+          extensions: ['.js', '.jsx', '.svg'],
         },
       },
     },
@@ -48,7 +48,12 @@ export default defineConfig([
       eqeqeq: 'error',
       curly: 'error',
       'react/react-in-jsx-scope': 'off',
-      'import/no-unresolved': 'error',
+      'import/no-unresolved': [
+        'error',
+        {
+          ignore: ['.svg\\?react$'],
+        },
+      ],
       'import/no-relative-packages': 'warn',
     },
   },
