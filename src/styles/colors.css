@@ -50,4 +50,10 @@
 
   /* Error */
   --error: #dc3a3a;
+
+  /* White Opacity */
+  --white-opacity-70: rgba(255, 255, 255, 0.7);
+  --white-opacity-50: rgba(255, 255, 255, 0.5);
+  --white-opacity-30: rgba(255, 255, 255, 0.3);
+  --white-opacity-10: rgba(255, 255, 255, 0.1);
 }
