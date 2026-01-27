@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styles from '@/components/common/Button/index.module.css';
 
 import Button from '@/components/common/Button';
 import DeletedIcon from '@/assets/icons/ic-deleted.svg?react';
@@ -37,82 +36,59 @@ export default function ButtonPreview() {
 
       {/* 만들기 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button
-          className={`${styles.button} ${styles.sizeMd} ${styles.variantOutlinePrimary}`}
-        >
+        <Button size="sizeMd" variant="variantOutlinePrimary">
           롤링페이퍼 만들기
         </Button>
       </section>
 
       {/* Primary 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button
-          className={`${styles.button} ${styles.sizeBig} ${styles.variantPrimary}`}
-        >
+        <Button size="sizeBig" variant="variantPrimary">
           구경해보기
         </Button>
       </section>
       <section style={{ marginTop: 24 }}>
-        <Button
-          className={`${styles.button} ${styles.sizeLg} ${styles.variantPrimary}`}
-        >
+        <Button size="sizeLg" variant="variantPrimary">
           SizeLg
         </Button>
       </section>
       <section style={{ marginTop: 24 }}>
-        <Button
-          className={`${styles.button} ${styles.sizeMd} ${styles.variantPrimary}`}
-        >
+        <Button size="sizeMd" variant="variantPrimary">
           SizeMd
         </Button>
       </section>
       <section style={{ marginTop: 24 }}>
-        <Button
-          className={`${styles.button} ${styles.sizeSm} ${styles.variantPrimary}`}
-        >
+        <Button size="sizeSm" variant="variantPrimary">
           SizeSm
         </Button>
       </section>
 
       {/* 더보기 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button
-          className={`${styles.button} ${styles.sizeLg} ${styles.variantGray}`}
-        >
+        <Button size="sizeLg" variant="variantGray">
           더보기
         </Button>
       </section>
 
       {/* 작은글씨 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button
-          className={`${styles.button} ${styles.smallTxtButton}`}
-          leftIcon={<DeletedIcon />}
-        >
+        <Button leftIcon={<DeletedIcon />} variant="variantSmallText">
           롤링페이퍼 삭제하기
         </Button>
-        <Button
-          leftIcon={<ShareIcon />}
-          className={`${styles.button} ${styles.smallTxtButton}`}
-        >
+        <Button leftIcon={<ShareIcon />} variant="variantSmallText">
           공유하기
         </Button>
-        <Button
-          leftIcon={<EditIcon />}
-          className={`${styles.button} ${styles.smallTxtButton}`}
-        >
+        <Button leftIcon={<EditIcon />} variant="variantSmallText">
           편집하기
         </Button>
       </section>
 
       {/* 확인/아니오 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button
-          className={`${styles.button} ${styles.sizeSm} ${styles.variantPrimary}`}
-        >
+        <Button size="sizeSm" variant="variantPrimary">
           확인
         </Button>
-        <Button className={`${styles.button} ${styles.notConfirmButton}`}>
+        <Button size="sizeSm" variant="variantGhost">
           아니오
         </Button>
       </section>
@@ -120,10 +96,7 @@ export default function ButtonPreview() {
       {/* 저장 버튼 */}
       <section style={{ marginTop: 24 }}>
         <form>
-          <Button
-            type="submit"
-            className={`${styles.button} ${styles.sizeMd} ${styles.variantPrimary}`}
-          >
+          <Button type="submit" size="sizeMd" variant="variantPrimary">
             submit
           </Button>
         </form>
@@ -131,19 +104,19 @@ export default function ButtonPreview() {
 
       {/* 플러스 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className={`${styles.circleIcon}`} leftIcon={<PlusIcon />} />
+        <Button variant="variantCircle" leftIcon={<PlusIcon />} />
       </section>
 
       {/* 화살표 버튼 */}
       <section style={{ marginTop: 24 }}>
         <Button
-          className={`${styles.arrowButton}`}
+          variant="variantArrow"
           leftIcon={<ArrowLeftIcon width={20} height={20} />}
           aria-label="이전"
           onClick={() => {}}
         />
         <Button
-          className={`${styles.arrowButton}`}
+          variant="variantArrow"
           leftIcon={<ArrowRightIcon width={20} height={20} />}
           aria-label="다음"
           onClick={() => {}}
@@ -153,7 +126,6 @@ export default function ButtonPreview() {
       {/* 토글 버튼 */}
       <div style={{ padding: 20 }}>
         <SegmentToggle value={tab} onChange={setTab} />
-        <div style={{ marginTop: 16 }}>현재 선택: {tab}</div>
       </div>
     </div>
   );

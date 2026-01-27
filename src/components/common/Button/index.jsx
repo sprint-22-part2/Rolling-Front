@@ -8,17 +8,29 @@ export default function Button({
   disabled,
   onClick,
   leftIcon,
+  size = '',
+  variant = '',
   styleKey = '',
 }) {
+  const mergedClassName = [
+    styles.button,
+    styles[size],
+    styles[variant],
+    styleKey ? styles[styleKey] : '',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <button
       type={type}
-      className={`${styles.button} ${styleKey ? styles[styleKey] : ''} ${className}`}
+      className={mergedClassName}
       disabled={disabled}
       onClick={onClick}
     >
-      {leftIcon && <span className={styles.leftIcon}>{leftIcon}</span>}
-      {children && <span className={styles.label}>{children}</span>}
+      {leftIcon ? <span className={styles.leftIcon}>{leftIcon}</span> : null}
+      {children ? <span className={styles.label}>{children}</span> : null}
     </button>
   );
 }
@@ -30,5 +42,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   leftIcon: PropTypes.node,
+  size: PropTypes.string,
+  variant: PropTypes.string,
   styleKey: PropTypes.string,
 };

@@ -70,7 +70,8 @@
   background-color: var(--white);
   color: var(--primary-100);
 }
-.smallTxtButton {
+
+.variantSmallText {
   background: transparent;
   border: none;
   padding: 7.5px;
@@ -79,15 +80,15 @@
   font-weight: var(--font-weight-regular);
   gap: 5px;
 }
-.smallTxtButton:hover {
+.variantSmallText:hover {
   color: var(--gray-600);
 }
-.smallTxtButton:disabled {
+.variantSmallText:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.notConfirmButton {
+.variantGhost {
   width: 80px;
   height: 40px;
   padding: 6px 16px;
@@ -99,11 +100,11 @@
   border-radius: 12px;
   transition: all 0.2s ease;
 }
-.notConfirmButton:hover {
+.variantGhost:hover {
   color: var(--gray-500);
 }
 
-.circleIcon {
+.variantCircle {
   width: 72px;
   height: 72px;
   padding: 0;
@@ -114,14 +115,14 @@
   cursor: pointer;
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
-.circleIcon:hover {
+.variantCircle:hover {
   background: var(--gray-200);
 }
-.circleIcon:active {
+.variantCircle:active {
   transform: translateY(0);
 }
 
-.arrowButton {
+.variantArrow {
   width: 40px;
   height: 40px;
   padding: 0;
@@ -132,6 +133,6 @@
   cursor: pointer;
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
-.arrowButton:hover {
+.variantArrow:hover {
   background-color: var(--gray-100);
 }
