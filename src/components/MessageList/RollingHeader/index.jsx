@@ -45,17 +45,6 @@ function RollingHeader({ theme = 'blue', recipientName = 'recipientName' }) {
             <ImojiIcon />
           </button>
         </div>
-        {/* <div className={styles.numberAuthorsWrap}>
-          <div className={styles.profilePhotos}>
-            <span className={styles.profilePhoto}>1</span>
-            <span className={styles.profilePhoto}>2</span>
-            <span className={styles.profilePhoto}>3</span>
-            <span className={styles.plusNum}>+34</span>
-          </div>
-          <div className={styles.numberAuthor}>
-            <span className={styles.number}>30</span>명이 작성했어요!
-          </div>
-        </div> */}
         <ProfileGroup />
       </div>
     </div>
