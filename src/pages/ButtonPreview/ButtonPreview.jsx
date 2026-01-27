@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
 import Button from '@/components/common/Button';
-import DeletedIcon from '@/assets/icons/ic-deleted.svg?react';
-import EditIcon from '@/assets/icons/ic-edit.svg?react';
-import ShareIcon from '@/assets/icons/ic-share.svg?react';
-import ArrowRightIcon from '@/assets/icons/ic-arrow-right.svg?react';
-import ArrowLeftIcon from '@/assets/icons/ic-arrow-left.svg?react';
 import SegmentToggle from '@/components/common/SegmentToggle';
+import {
+  DeletedIcon,
+  EditIcon,
+  ShareIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon,
+} from '@/assets/icons';
 
 function PlusIcon() {
   return (
