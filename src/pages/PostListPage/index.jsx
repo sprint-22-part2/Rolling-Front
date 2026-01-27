@@ -3,7 +3,11 @@ import PopularRolling from '../../components/RollingList/PopularRolling';
 import RecentRolling from '../../components/RollingList/RecentRolling';
 import { Link } from 'react-router-dom';
 
+<<<<<<< HEAD
 function RollingListPage() {
+=======
+function PostListPage({ theme = 'yellow' }) {
+>>>>>>> 5d01d54 (✨[feat]:post 페이지 구현)
   return (
     <div className={styles.rollingList}>
       <section className={styles.sectionRollingList}>
