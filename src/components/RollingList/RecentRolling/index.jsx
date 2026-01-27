@@ -1,4 +1,4 @@
-import styles from './Index.module.css';
+import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import RollingCard from '@/components/RollingList/RollingCard';
 
