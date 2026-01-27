@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ButtonPreview from '../pages/ButtonPreview.jsx/ButtonPreview';
+import ButtonPreview from '../pages/ButtonPreview/ButtonPreview';
 
 export default function AppRoutes() {
   return (

@@ -1,11 +1,17 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
-export default function SegmentToggle({
-  value, // 'color' | 'image'
-  onChange,
-}) {
-  const isColor = value === 'color';
+const OPTIONS = ['color', 'image'];
+const DEFAULT_VALUE = 'color';
+
+SegmentToggle.propTypes = {
+  value: PropTypes.oneOf(OPTIONS),
+  onChange: PropTypes.func.isRequired,
+};
+
+export default function SegmentToggle({ value, onChange }) {
+  const currentValue = OPTIONS.includes(value) ? value : DEFAULT_VALUE;
+  const isColor = currentValue === 'color';
 
   return (
     <div className={styles.wrapper} role="tablist" aria-label="옵션 선택">

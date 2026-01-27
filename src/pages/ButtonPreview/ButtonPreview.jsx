@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import styles from '@/components/common/Button/index.module.css';
 
-import Button from '@/components/common/CommonButtons';
+import Button from '@/components/common/Button';
 import DeletedIcon from '@/assets/icons/ic-deleted.svg?react';
 import EditIcon from '@/assets/icons/ic-edit.svg?react';
 import ShareIcon from '@/assets/icons/ic-share.svg?react';
 import ArrowRightIcon from '@/assets/icons/ic-arrow-right.svg?react';
 import ArrowLeftIcon from '@/assets/icons/ic-arrow-left.svg?react';
-// import SegmentToggle from '../components/SegmentToggle';
 import SegmentToggle from '@/components/common/SegmentToggle';
 
 function PlusIcon() {
@@ -37,56 +37,91 @@ export default function ButtonPreview() {
 
       {/* 만들기 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className="createButton">롤링페이퍼 만들기</Button>
+        <Button className={`${styles.sizeMd} ${styles.variantOutlinePrimary}`}>
+          롤링페이퍼 만들기
+        </Button>
       </section>
 
       {/* Primary 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className="primaryButton">구경해보기</Button>
+        <Button className={`${styles.sizeBig} ${styles.variantPrimary}`}>
+          구경해보기
+        </Button>
       </section>
       <section style={{ marginTop: 24 }}>
-        <Button className="primaryButton">메세지 남기기</Button>
+        <Button className={`${styles.sizeLg} ${styles.variantPrimary}`}>
+          SizeLg
+        </Button>
+      </section>
+      <section style={{ marginTop: 24 }}>
+        <Button className={`${styles.sizeMd} ${styles.variantPrimary}`}>
+          SizeMd
+        </Button>
+      </section>
+      <section style={{ marginTop: 24 }}>
+        <Button className={`${styles.sizeSm} ${styles.variantPrimary}`}>
+          SizeSm
+        </Button>
       </section>
 
       {/* 더보기 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className="moreButton">더보기</Button>
+        <Button className={`${styles.sizeLg} ${styles.variantGray}`}>
+          더보기
+        </Button>
       </section>
 
       {/* 작은글씨 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className="smallTxtButton" leftIcon={<DeletedIcon />}>
+        <Button
+          className={`${styles.smallTxtButton}`}
+          leftIcon={<DeletedIcon />}
+        >
           롤링페이퍼 삭제하기
         </Button>
-        <Button leftIcon={<ShareIcon />} className="smallTxtButton">
+        <Button leftIcon={<ShareIcon />} className={`${styles.smallTxtButton}`}>
           공유하기
         </Button>
-        <Button leftIcon={<EditIcon />} className="smallTxtButton">
+        <Button leftIcon={<EditIcon />} className={`${styles.smallTxtButton}`}>
           편집하기
         </Button>
       </section>
 
       {/* 확인/아니오 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className="confirmButton">확인</Button>
-        <Button className="notConfirmButton">아니오</Button>
+        <Button className={`${styles.sizeSm} ${styles.variantPrimary}`}>
+          확인
+        </Button>
+        <Button className={`${styles.notConfirmButton}`}>아니오</Button>
+      </section>
+
+      {/* 저장 버튼 */}
+      <section style={{ marginTop: 24 }}>
+        <form>
+          <Button
+            type="submit"
+            className={`${styles.sizeMd} ${styles.variantPrimary}`}
+          >
+            submit
+          </Button>
+        </form>
       </section>
 
       {/* 플러스 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className="circleIcon" leftIcon={<PlusIcon />} />
+        <Button className={`${styles.circleIcon}`} leftIcon={<PlusIcon />} />
       </section>
 
       {/* 화살표 버튼 */}
       <section style={{ marginTop: 24 }}>
         <Button
-          className="arrowButton"
+          className={`${styles.arrowButton}`}
           leftIcon={<ArrowLeftIcon width={20} height={20} />}
           aria-label="이전"
           onClick={() => {}}
         />
         <Button
-          className="arrowButton"
+          className={`${styles.arrowButton}`}
           leftIcon={<ArrowRightIcon width={20} height={20} />}
           aria-label="다음"
           onClick={() => {}}
