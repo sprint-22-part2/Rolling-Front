@@ -1,5 +1,6 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
+import ProfileGroup from '@/components/common/ProfileGroup';
 
 import {
   ShareIcon,
@@ -44,7 +45,7 @@ function RollingHeader({ theme = 'blue', recipientName = 'recipientName' }) {
             <ImojiIcon />
           </button>
         </div>
-        <div className={styles.numberAuthorsWrap}>
+        {/* <div className={styles.numberAuthorsWrap}>
           <div className={styles.profilePhotos}>
             <span className={styles.profilePhoto}>1</span>
             <span className={styles.profilePhoto}>2</span>
@@ -54,7 +55,8 @@ function RollingHeader({ theme = 'blue', recipientName = 'recipientName' }) {
           <div className={styles.numberAuthor}>
             <span className={styles.number}>30</span>명이 작성했어요!
           </div>
-        </div>
+        </div> */}
+        <ProfileGroup />
       </div>
     </div>
   );

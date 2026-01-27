@@ -1,14 +1,14 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 
+import ProfileImage from '@/components/common/ProfileImage';
+
 import { DeletedIcon } from '@/assets/icons';
 function Message({ senderName = 'senderName' }) {
   return (
     <>
       <div className={styles.messageHeader}>
-        <div className={styles.senderImg}>
-          <img src="" alt="az" />
-        </div>
+        <ProfileImage />
         <div className={styles.senderWrap}>
           <div className={styles.sender}>
             <p className={styles.from}>From</p>
