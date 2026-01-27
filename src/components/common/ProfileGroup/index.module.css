@@ -1,0 +1,45 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profileGroup {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profileItem {
+  position: relative;
+  margin-left: -12px;
+}
+
+.profileItem:first-child {
+  margin-left: 0;
+}
+
+.remainingCount {
+  border-radius: 50%;
+  background-color: var(--white);
+  border-style: solid;
+  border-color: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-700);
+  margin-left: -12px;
+  position: relative;
+  font-size: 12px;
+}
+
+.writerCount {
+  font-weight: var(--font-weight-regular);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.countBold{
+  font-weight: var(--font-weight-bold);
+}
