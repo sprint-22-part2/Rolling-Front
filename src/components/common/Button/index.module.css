@@ -3,6 +3,11 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+.button {
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+}
 .sizeBig { 
   width: 280px; 
   height: 56px; 
@@ -72,8 +77,6 @@
   color: var(--gray-500);
   font-size: 14px;
   font-weight: var(--font-weight-regular);
-  display: inline-flex;
-  align-items: center;
   gap: 5px;
 }
 .smallTxtButton:hover {
@@ -108,9 +111,6 @@
   border: none;
   background: var(--gray-600);
   color: var(--white);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
@@ -128,9 +128,6 @@
   border-radius: 9999px;
   border: 1px solid var(--gray-200);
   background: var(--white);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   color: var(--gray-800);
   cursor: pointer;
   transition: border-color 0.2s ease, background-color 0.2s ease;

@@ -4,11 +4,6 @@ import styles from './index.module.css';
 const OPTIONS = ['color', 'image'];
 const DEFAULT_VALUE = 'color';
 
-SegmentToggle.propTypes = {
-  value: PropTypes.oneOf(OPTIONS),
-  onChange: PropTypes.func.isRequired,
-};
-
 export default function SegmentToggle({ value, onChange }) {
   const currentValue = OPTIONS.includes(value) ? value : DEFAULT_VALUE;
   const isColor = currentValue === 'color';
@@ -37,3 +32,8 @@ export default function SegmentToggle({ value, onChange }) {
     </div>
   );
 }
+
+SegmentToggle.propTypes = {
+  value: PropTypes.oneOf(OPTIONS),
+  onChange: PropTypes.func.isRequired,
+};

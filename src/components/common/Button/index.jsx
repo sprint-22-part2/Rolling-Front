@@ -1,16 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from '@/components/common/Button/index.module.css';
 
-Button.propTypes = {
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  children: PropTypes.node,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  onClick: PropTypes.func,
-  leftIcon: PropTypes.node,
-  styleKey: PropTypes.string,
-};
-
 export default function Button({
   type = 'button',
   children,
@@ -32,3 +22,13 @@ export default function Button({
     </button>
   );
 }
+
+Button.propTypes = {
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
+  children: PropTypes.node,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  leftIcon: PropTypes.node,
+  styleKey: PropTypes.string,
+};

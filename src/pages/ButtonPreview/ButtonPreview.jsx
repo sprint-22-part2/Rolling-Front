@@ -37,36 +37,48 @@ export default function ButtonPreview() {
 
       {/* 만들기 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className={`${styles.sizeMd} ${styles.variantOutlinePrimary}`}>
+        <Button
+          className={`${styles.button} ${styles.sizeMd} ${styles.variantOutlinePrimary}`}
+        >
           롤링페이퍼 만들기
         </Button>
       </section>
 
       {/* Primary 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className={`${styles.sizeBig} ${styles.variantPrimary}`}>
+        <Button
+          className={`${styles.button} ${styles.sizeBig} ${styles.variantPrimary}`}
+        >
           구경해보기
         </Button>
       </section>
       <section style={{ marginTop: 24 }}>
-        <Button className={`${styles.sizeLg} ${styles.variantPrimary}`}>
+        <Button
+          className={`${styles.button} ${styles.sizeLg} ${styles.variantPrimary}`}
+        >
           SizeLg
         </Button>
       </section>
       <section style={{ marginTop: 24 }}>
-        <Button className={`${styles.sizeMd} ${styles.variantPrimary}`}>
+        <Button
+          className={`${styles.button} ${styles.sizeMd} ${styles.variantPrimary}`}
+        >
           SizeMd
         </Button>
       </section>
       <section style={{ marginTop: 24 }}>
-        <Button className={`${styles.sizeSm} ${styles.variantPrimary}`}>
+        <Button
+          className={`${styles.button} ${styles.sizeSm} ${styles.variantPrimary}`}
+        >
           SizeSm
         </Button>
       </section>
 
       {/* 더보기 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className={`${styles.sizeLg} ${styles.variantGray}`}>
+        <Button
+          className={`${styles.button} ${styles.sizeLg} ${styles.variantGray}`}
+        >
           더보기
         </Button>
       </section>
@@ -74,25 +86,35 @@ export default function ButtonPreview() {
       {/* 작은글씨 버튼 */}
       <section style={{ marginTop: 24 }}>
         <Button
-          className={`${styles.smallTxtButton}`}
+          className={`${styles.button} ${styles.smallTxtButton}`}
           leftIcon={<DeletedIcon />}
         >
           롤링페이퍼 삭제하기
         </Button>
-        <Button leftIcon={<ShareIcon />} className={`${styles.smallTxtButton}`}>
+        <Button
+          leftIcon={<ShareIcon />}
+          className={`${styles.button} ${styles.smallTxtButton}`}
+        >
           공유하기
         </Button>
-        <Button leftIcon={<EditIcon />} className={`${styles.smallTxtButton}`}>
+        <Button
+          leftIcon={<EditIcon />}
+          className={`${styles.button} ${styles.smallTxtButton}`}
+        >
           편집하기
         </Button>
       </section>
 
       {/* 확인/아니오 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button className={`${styles.sizeSm} ${styles.variantPrimary}`}>
+        <Button
+          className={`${styles.button} ${styles.sizeSm} ${styles.variantPrimary}`}
+        >
           확인
         </Button>
-        <Button className={`${styles.notConfirmButton}`}>아니오</Button>
+        <Button className={`${styles.button} ${styles.notConfirmButton}`}>
+          아니오
+        </Button>
       </section>
 
       {/* 저장 버튼 */}
@@ -100,7 +122,7 @@ export default function ButtonPreview() {
         <form>
           <Button
             type="submit"
-            className={`${styles.sizeMd} ${styles.variantPrimary}`}
+            className={`${styles.button} ${styles.sizeMd} ${styles.variantPrimary}`}
           >
             submit
           </Button>
