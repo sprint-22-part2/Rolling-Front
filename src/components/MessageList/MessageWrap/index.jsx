@@ -4,11 +4,19 @@ import AddMessage from '@/components/MessageList/AddMessage';
 import Message from '@/components/MessageList/Message';
 
 function MessageWrap() {
-  <div className={styles.messageWrap}>
-    <NoMessage />
-    <AddMessage />
-    <Message />
-  </div>;
+  return (
+    <div className={styles.messageWrap}>
+      <NoMessage />
+      <div className={styles.hasMessage}>
+        <div className={styles.messageItem}>
+          <AddMessage />
+        </div>
+        <div className={styles.messageItem}>
+          <Message />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default MessageWrap;

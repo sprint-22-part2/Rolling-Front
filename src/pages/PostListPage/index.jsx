@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import RollingHeader from '@/components/MessageList/RollingHeader';
 import MessageWrap from '@/components/MessageList/MessageWrap';
 
-function PostListPage({ theme = 'red' }) {
+function PostListPage({ theme = 'yellow' }) {
   return (
     <div className={`${styles.postList} ${styles[theme]}`} type={theme}>
       <section className={styles.sectionPostList}>
