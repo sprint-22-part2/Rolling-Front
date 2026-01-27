@@ -1,0 +1,9 @@
+.profileImage {
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+
+  border-style: solid;
+  border-color: var(--gray-200);
+  border-width: 1px;
+}
