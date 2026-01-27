@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
-function TextInput({ placeholder, onChange, name, value, disabled }) {
+function TextInput({ label, placeholder, onChange, name, value, disabled }) {
   // 에러 메시지 상태 관리
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -29,6 +29,7 @@ function TextInput({ placeholder, onChange, name, value, disabled }) {
 
   return (
     <div className={styles.inputContainer}>
+      {label && <label className={styles.label}>{label}</label>}
       <input
         // 기본 스타일과 에러 발생 시 스타일을 조건부로 결합
         disabled={disabled}
@@ -47,6 +48,7 @@ function TextInput({ placeholder, onChange, name, value, disabled }) {
 
 // Props 타입 정의 및 검사
 TextInput.propTypes = {
+  label: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   name: PropTypes.string,
