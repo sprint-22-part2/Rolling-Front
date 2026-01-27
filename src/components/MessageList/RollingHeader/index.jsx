@@ -1,4 +1,5 @@
 import styles from './index.module.css';
+import PropTypes from 'prop-types';
 
 import {
   ShareIcon,
@@ -8,13 +9,13 @@ import {
   ImojiIcon,
 } from '@/assets/icons';
 
-function RollingHeader() {
+function RollingHeader({ theme = 'blue', recipientName = 'recipientName' }) {
   return (
-    <div className={styles.rollingHeader}>
+    <div className={styles.rollingHeader} type={theme}>
       <div className={styles.rollingHeaderTop}>
         <div className={styles.recipient}>
           <span className={styles.to}>To</span>
-          <p className={styles.name}>ABC김송현asasasdad현hihihi</p>
+          <p className={styles.name}>{recipientName}</p>
         </div>
         <div className={styles.rollingButtons}>
           <button>
@@ -59,4 +60,8 @@ function RollingHeader() {
   );
 }
 
+RollingHeader.propTypes = {
+  theme: PropTypes.string.isRequired,
+  recipientName: PropTypes.string.isRequired,
+};
 export default RollingHeader;

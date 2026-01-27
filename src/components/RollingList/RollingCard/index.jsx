@@ -1,12 +1,12 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 
-function RollingCard({ theme = 'yellow' }) {
+function RollingCard({ theme = 'yellow', recipientName = 'recipientName' }) {
   return (
     <div className={`${styles.rollingCard} ${styles[theme]}`}>
       <div className={styles.recipient}>
         <span className={styles.to}>To</span>
-        <p className={styles.name}>ABC김송현asasasdad현hihihi</p>
+        <p className={styles.name}>{recipientName}</p>
       </div>
       <div className={styles.numberAuthorsWrap}>
         <div className={styles.profilePhotos}>
@@ -30,5 +30,6 @@ function RollingCard({ theme = 'yellow' }) {
 
 RollingCard.propTypes = {
   theme: PropTypes.string.isRequired,
+  recipientName: PropTypes.string.isRequired,
 };
 export default RollingCard;

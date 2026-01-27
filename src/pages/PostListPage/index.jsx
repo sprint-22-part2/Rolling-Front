@@ -15,5 +15,6 @@ function PostListPage({ theme = 'yellow' }) {
 }
 PostListPage.propTypes = {
   theme: PropTypes.string.isRequired,
+  recipientName: PropTypes.string.isRequired,
 };
 export default PostListPage;

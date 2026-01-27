@@ -1,4 +1,5 @@
 import styles from './index.module.css';
+import PropTypes from 'prop-types';
 import RollingCard from '../RollingCard';
 
 // Import Swiper React components
@@ -16,7 +17,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
-function PopularRolling() {
+function PopularRolling({ theme = 'blue', recipientName = 'recipientName' }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
@@ -52,25 +53,7 @@ function PopularRolling() {
         }}
       >
         <SwiperSlide>
-          <RollingCard theme="pink" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <RollingCard theme="yellow" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <RollingCard theme="green" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <RollingCard theme="blue" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <RollingCard theme="purple" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <RollingCard theme="orange" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <RollingCard theme="image" />
+          <RollingCard theme={theme} recipientName={recipientName} />
         </SwiperSlide>
       </Swiper>
       <div className={styles.swiperArrowButtons}>
@@ -84,5 +67,8 @@ function PopularRolling() {
     </div>
   );
 }
-
+PopularRolling.propTypes = {
+  theme: PropTypes.string.isRequired,
+  recipientName: PropTypes.string.isRequired,
+};
 export default PopularRolling;
