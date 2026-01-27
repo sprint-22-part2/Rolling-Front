@@ -1,7 +1,8 @@
 import styles from './index.module.css';
+import PropTypes from 'prop-types';
 
 import { DeletedIcon } from '@/assets/icons';
-function Message() {
+function Message({ senderName = 'senderName' }) {
   return (
     <>
       <div className={styles.messageHeader}>
@@ -11,7 +12,7 @@ function Message() {
         <div className={styles.senderWrap}>
           <div className={styles.sender}>
             <p className={styles.from}>From</p>
-            <p className={styles.senderName}>성ㄴasdassaasdasddasda sdas</p>
+            <p className={styles.senderName}>{senderName}</p>
           </div>
           <div className={styles.relation}>형제</div>
         </div>
@@ -34,5 +35,7 @@ function Message() {
     </>
   );
 }
-
+Message.propTypes = {
+  senderName: PropTypes.string.isRequired,
+};
 export default Message;

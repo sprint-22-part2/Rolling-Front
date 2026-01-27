@@ -17,7 +17,7 @@ function RollingListPage() {
             + 롤링 페이퍼 만들기
           </Link>
         </div>
-        <RecentRolling />
+        <RecentRolling recipientName="Song" />
       </section>
     </div>
   );

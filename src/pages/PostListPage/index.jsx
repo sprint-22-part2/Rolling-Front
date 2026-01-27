@@ -26,5 +26,13 @@ function PostListPage({ theme = 'yellow' }) {
     </div>
   );
 }
+<<<<<<< HEAD
 
 export default RollingListPage;
+=======
+PostListPage.propTypes = {
+  theme: PropTypes.string.isRequired,
+  recipientName: PropTypes.string.isRequired,
+};
+export default PostListPage;
+>>>>>>> 9b57446 (이름 프롭으로 변경)
