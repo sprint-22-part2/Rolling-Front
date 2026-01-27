@@ -2,20 +2,20 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
-function TextInput({ placeholder, onChange, name, value }) {
+function TextInput({ placeholder, onChange, name, value, disabled }) {
   // 에러 메시지 상태 관리
   const [errorMessage, setErrorMessage] = useState('');
 
   // 에러 존재 여부를 불리언 값으로 변환 (메시지가 있으면 true)
   const isError = !!errorMessage;
 
-  const isFilled = !!value && value.length > 0;
+  const isFilled = value && value.length > 0;
 
   // 입력창에서 포커스가 나갈 때 실행 (유효성 검사)
   const handleBlur = (e) => {
     // 앞뒤 공백을 제거한 값이 비어있을 경우 에러 메시지 설정
     if (!e.target.value.trim()) {
-      setErrorMessage('값을 입력해 주세요');
+      setErrorMessage('이름을 입력해 주세요');
     } else {
       setErrorMessage('');
     }
@@ -31,6 +31,7 @@ function TextInput({ placeholder, onChange, name, value }) {
     <div className={styles.inputContainer}>
       <input
         // 기본 스타일과 에러 발생 시 스타일을 조건부로 결합
+        disabled={disabled}
         className={`${styles.inputField} ${isFilled ? styles.filled : ''} ${isError ? styles.errorField : ''}`}
         value={value}
         placeholder={placeholder}
