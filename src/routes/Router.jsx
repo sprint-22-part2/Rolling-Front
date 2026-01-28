@@ -12,7 +12,8 @@ export default function AppRoutes() {
         <Route path="/" element={<Layout />}>
           <Route index element={<div>Home Page</div>} />
           <Route path="/list" element={<RollingListPage />} />
-          <Route path="/post" element={<PostListPage theme="blue" />} />
+          <Route path="/post" element={<PostListPage />} />
+          <Route path="/post/:id" element={<PostListPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/preview/button" element={<ButtonPreview />} />
         </Route>

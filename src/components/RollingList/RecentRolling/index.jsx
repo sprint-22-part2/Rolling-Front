@@ -1,18 +1,31 @@
 import styles from './index.module.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import RollingCard from '@/components/RollingList/RollingCard';
+import { getRecipients } from '@/apis/recipients';
+import { useEffect, useState } from 'react';
 
-function RecentRolling({ theme = 'blue', recipientName = 'recipientName' }) {
+function RecentRolling() {
+  const [rolling, setRolling] = useState([]);
+
+  useEffect(() => {
+    async function rec() {
+      const recipients = await getRecipients();
+      setRolling(recipients);
+    }
+    rec();
+  }, []);
+
   return (
     <div className={styles.recentRolling}>
-      <div className={styles.RollingCard}>
-        <RollingCard theme={theme} recipientName={recipientName} />
-      </div>
+      {rolling.results?.map((item) => (
+        <div className={styles.RollingCard} key={item.id}>
+          <RollingCard item={item} />
+        </div>
+      ))}
     </div>
   );
 }
-RecentRolling.propTypes = {
-  theme: PropTypes.string.isRequired,
-  recipientName: PropTypes.string.isRequired,
-};
+// RecentRolling.propTypes = {
+//   theme: PropTypes.string.isRequired,
+// };
 export default RecentRolling;

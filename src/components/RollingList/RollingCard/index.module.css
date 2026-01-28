@@ -53,7 +53,7 @@
   font-size: 14px;
 }
 
-.yellow {
+.beige {
   --bg: var(--yellow-100);
   --accent: var(--yellow-300);
   --emoji-bg: var(--yellow-200);

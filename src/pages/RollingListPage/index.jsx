@@ -1,5 +1,5 @@
 import styles from './index.module.css';
-import PopularRolling from '@/components/RollingList/PopularRolling';
+// import PopularRolling from '@/components/RollingList/PopularRolling';
 import RecentRolling from '@/components/RollingList/RecentRolling';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ function RollingListPage() {
     <div className={styles.rollingList}>
       <section className={styles.sectionRollingList}>
         <h2>인기 롤링 페이퍼 🔥</h2>
-        <PopularRolling />
+        {/* <PopularRolling /> */}
       </section>
       <section className={styles.sectionRollingList}>
         <div className={styles.sectionTop}>
@@ -17,7 +17,7 @@ function RollingListPage() {
             + 롤링 페이퍼 만들기
           </Link>
         </div>
-        <RecentRolling recipientName="Song" />
+        <RecentRolling />
       </section>
     </div>
   );
