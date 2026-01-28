@@ -14,15 +14,13 @@ function isSafeTo(to) {
     return false;
   }
 
-  // javascript:, data:, vbscript: 같은 프로토콜 차단
-  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(value)) {
+  // javascript:, data:, vbscript: 같은 위험 프로토콜 차단
+  if (/^(javascript|data|vbscript):/i.test(value)) {
     return false;
   }
 
-  // 내부 라우팅만: / 또는 # 또는 ? 로 시작하는 것만 허용
-  return (
-    value.startsWith('/') || value.startsWith('#') || value.startsWith('?')
-  );
+  // 내부 라우트만 허용
+  return value.startsWith('/');
 }
 
 // href 보안 검사(외부 링크)
@@ -63,11 +61,11 @@ export default function Button({
     .join(' ');
 
   // react-router 내부 링크
-  if (to && !isSafeTo(to)) {
+  if (to && isSafeTo(to)) {
     return (
       <Link to={to} className={mergedClassName}>
-        {leftIcon ? <span className={styles.leftIcon}>{leftIcon}</span> : null}
-        {children ? <span className={styles.label}>{children}</span> : null}
+        {leftIcon && <span className={styles.leftIcon}>{leftIcon}</span>}
+        {children && <span className={styles.label}>{children}</span>}
       </Link>
     );
   }
