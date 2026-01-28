@@ -76,12 +76,22 @@ function Dropdown({
       </button>
 
       {isOpen && !disabled && (
-        <ul className={styles.menu}>
-          {options.map((option, index) => (
+        <ul className={styles.menu} role="listbox">
+          {' '}
+          {options.map((option) => (
+            // TODO: 추후 API 연결 데이터의 id를 key로 사용하도록 수정 필요
             <li
-              key={index}
+              key={option}
               className={styles.item}
               onClick={() => handleSelect(option)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleSelect(option);
+                }
+              }}
+              role="option"
+              tabIndex="0"
             >
               {option}
             </li>
