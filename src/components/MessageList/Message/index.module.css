@@ -47,6 +47,7 @@
   gap: 8px;
   flex-grow: 1;
   width: calc(100% - 72px);
+  align-items: flex-start;
 }
 .from {
   color: var(--accent);

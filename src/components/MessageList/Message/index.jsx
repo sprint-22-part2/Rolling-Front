@@ -1,10 +1,9 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
-
 import ProfileImage from '@/components/common/ProfileImage';
-
+import RelationshipBadge from '@/components/common/RelationshipBadge';
 import { DeletedIcon } from '@/assets/icons';
-function Message({ senderName = 'senderName' }) {
+function Message({ senderName = 'senderName', relationship = '친구' }) {
   return (
     <>
       <div className={styles.messageHeader}>
@@ -14,7 +13,7 @@ function Message({ senderName = 'senderName' }) {
             <p className={styles.from}>From</p>
             <p className={styles.senderName}>{senderName}</p>
           </div>
-          <div className={styles.relation}>형제</div>
+          <RelationshipBadge relationship={relationship} />
         </div>
       </div>
       <div className={styles.messageContent}>
@@ -37,5 +36,6 @@ function Message({ senderName = 'senderName' }) {
 }
 Message.propTypes = {
   senderName: PropTypes.string.isRequired,
+  relationship: PropTypes.string.isRequired,
 };
 export default Message;
