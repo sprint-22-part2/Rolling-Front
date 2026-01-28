@@ -144,7 +144,9 @@ export default function ButtonPreview() {
 
       {/* 플러스 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button variant="variantCircle" leftIcon={<PlusIcon />} />
+        <Button variant="variantCircle" leftIcon={<PlusIcon />}>
+          메시지 추가하기
+        </Button>
       </section>
 
       {/* 화살표 버튼 */}

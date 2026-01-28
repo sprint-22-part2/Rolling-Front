@@ -118,18 +118,42 @@
 }
 
 .variantCircle {
-  width: 72px;
-  height: 72px;
-  padding: 0;
-  border-radius: 9999px;
+  width: max-content; 
+  flex-direction: column;
+  justify-content: flex-start;
   border: none;
-  background: var(--gray-600);
   color: var(--white);
   cursor: pointer;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  border-radius: 0;
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
-.variantCircle:hover {
-  background: var(--gray-200);
+.variantCircle .leftIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.variantCircle .leftIcon svg {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
+.variantCircle .label {
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-500);
+  line-height: 1.2;
+  margin-top: 24px;
+}
+.variantCircle .leftIcon:hover {
+  background: var(--gray-400);
 }
 .variantCircle:active {
   transform: translateY(0);
