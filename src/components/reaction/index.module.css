@@ -1,0 +1,151 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+/* 상단 바 */
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* 뱃지 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  background: #efe9d6;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.badge:hover {
+  background: #e8e1cc;
+}
+.badgeEmoji {
+  font-size: 16px;
+  line-height: 1;
+}
+.badgeCount {
+  font-size: 14px;
+  font-weight: 600;
+  color: #7a7a7a;
+}
+
+/* ⌄ 버튼 */
+.expandButton {
+  width: 44px;
+  height: 38px;
+  border-radius: 9999px;
+  background: #efe9d6;
+  border: none;
+  cursor: pointer;
+  color: #6b6b6b;
+  font-size: 18px;
+  transition: background-color 0.15s ease;
+}
+.expandButton:hover {
+  background: #e8e1cc;
+}
+
+/* 기본 추가 버튼 */
+.addButton {
+  width: 70px;
+  height: 38px;
+  border-radius: 9999px;
+  background: #f7edc9;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.addButton:hover {
+  background: #f0e4bd;
+}
+.addEmoji {
+  font-size: 18px;
+  line-height: 1;
+}
+.addPlus {
+  font-size: 16px;
+  line-height: 1;
+  color: #c39a2a;
+  font-weight: 700;
+}
+
+/* 말풍선 패널 */
+.panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 420px;
+  padding: 18px 22px;
+  border-radius: 26px;
+  background: var(--white);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+.panelGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px 22px;
+}
+.panelItem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  background: transparent;
+  padding: 6px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.panelItem:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.panelEmoji {
+  font-size: 18px;
+  line-height: 1;
+}
+.panelCount {
+  font-size: 18px;
+  font-weight: 600;
+  color: #5a5a5a;
+}
+
+/* 간단 이모지 피커 */
+.picker {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 9999px;
+  background: var(--white);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+.picker,
+.panel {
+  z-index: 10;
+}
+.pickerItem {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  border: none;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.pickerItem:hover {
+  background: #ededed;
+  transform: translateY(-1px);
+}
