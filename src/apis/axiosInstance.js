@@ -1,0 +1,12 @@
+import axios from 'axios';
+import { ENV } from './env';
+
+const axiosInstance = axios.create({
+  baseURL: ENV.API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  timeout: 5000,
+});
+
+export default axiosInstance;
