@@ -41,34 +41,12 @@ export default function ButtonPreview() {
         <Button size="sizeMd" variant="variantOutlinePrimary">
           롤링페이퍼 만들기
         </Button>
-        <Button size="sizeMd" variant="variantOutlinePrimary" to="/profile">
-          내부 라우트 이동
-        </Button>
-        <Button
-          size="sizeMd"
-          variant="variantOutlinePrimary"
-          href="https://www.codeit.kr"
-          target="_blank"
-        >
-          외부 링크 이동
-        </Button>
       </section>
 
       {/* Primary 버튼 */}
       <section style={{ marginTop: 24 }}>
         <Button size="sizeBig" variant="variantPrimary">
           일반 버튼
-        </Button>
-        <Button size="sizeBig" variant="variantPrimary" to="/profile">
-          내부 라우트 이동 버튼
-        </Button>
-        <Button
-          size="sizeBig"
-          variant="variantPrimary"
-          href="https://www.codeit.kr"
-          target="_blank"
-        >
-          외부링크 이동 버튼
         </Button>
       </section>
       <section style={{ marginTop: 24 }}>
@@ -91,17 +69,6 @@ export default function ButtonPreview() {
       <section style={{ marginTop: 24 }}>
         <Button size="sizeLg" variant="variantGray">
           더보기
-        </Button>
-        <Button size="sizeLg" variant="variantGray" to="/profile">
-          내부 라우트 이동
-        </Button>
-        <Button
-          size="sizeLg"
-          variant="variantGray"
-          href="https://www.codeit.kr"
-          target="_blank"
-        >
-          외부 링크 이동
         </Button>
       </section>
 

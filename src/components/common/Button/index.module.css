@@ -3,6 +3,15 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+.linkButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.linkButton {
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+}
 .button {
   display: inline-flex; 
   align-items: center; 
