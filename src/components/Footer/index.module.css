@@ -17,7 +17,6 @@
   filter: brightness(0) invert(1);
 }
 .memberWrap {
-  font-family: 'Poppins', sans-serif;
   display: flex;
   gap: 4px;
   flex-direction: column;
@@ -25,7 +24,7 @@
 }
 .title {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   opacity: 0.7;
   text-transform: uppercase;
 }
@@ -35,7 +34,7 @@
 }
 .member {
   font-size: 16px;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
 }
 
 @media (max-width: 767px) {

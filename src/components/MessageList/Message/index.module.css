@@ -51,7 +51,7 @@
 .from {
   color: var(--accent);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 .senderName {
   width: 100%;
@@ -60,7 +60,7 @@
   text-overflow: ellipsis;
   font-size: 24px;
   color: var(--gray-800);
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
 }
 .relation {
   border-radius: 6px;
