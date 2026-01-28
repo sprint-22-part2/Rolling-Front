@@ -1,0 +1,31 @@
+.hasMessage {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+.messageItem {
+  width: calc(33.3% - 22px);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  background-color: var(--white);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+}
+
+@media (max-width: 1079px) {
+  .messageItem {
+    width: calc(50% - 16px);
+  }
+}
+
+@media (max-width: 767px) {
+  .messageItem {
+    width: 100%;
+  }
+}

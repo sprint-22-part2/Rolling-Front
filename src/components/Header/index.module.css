@@ -1,0 +1,38 @@
+header {
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid var(--gray-100);
+  background-color: var(--white);
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+  z-index: 1000;
+}
+
+.headerWrap {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.logoImage {
+  height: 30px;
+}
+.headerWrap button {
+  color: var(--main-color);
+  border-radius: var(--small-button-border-radius);
+  border: 1px solid var(--main-color);
+  height: var(--small-button-height);
+  padding: 0 var(--small-button-padding);
+  font-size: var(--small-button-font-size);
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.headerWrap button:hover {
+  color: var(--white);
+  background-color: var(--main-color);
+}
