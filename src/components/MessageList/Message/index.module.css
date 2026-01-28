@@ -24,7 +24,12 @@
 [type='image'] {
   --accent: var(--white);
 }
-
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
 .messageHeader {
   display: flex;
   gap: 16px;
@@ -94,7 +99,12 @@
   gap: 2px;
   padding: 6px 3px;
 }
-
 .messageFoot svg {
   height: 20px;
+}
+
+@media (max-width: 767px) {
+  article {
+    gap: 16px;
+  }
 }
