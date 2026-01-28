@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styles from '@/components/common/Button/index.module.css';
 
 export default function Button({
@@ -11,6 +12,10 @@ export default function Button({
   size = '',
   variant = '',
   styleKey = '',
+  // 링크 관련 props
+  to,
+  href,
+  target,
 }) {
   const mergedClassName = [
     styles.button,
@@ -21,6 +26,31 @@ export default function Button({
   ]
     .filter(Boolean)
     .join(' ');
+
+  // react-router 내부 링크
+  if (to) {
+    return (
+      <Link to={to} className={mergedClassName}>
+        {leftIcon}
+        {children}
+      </Link>
+    );
+  }
+
+  // 외부 링크
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={mergedClassName}
+        target={target}
+        rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+      >
+        {leftIcon}
+        {children}
+      </a>
+    );
+  }
 
   return (
     <button
@@ -45,4 +75,8 @@ Button.propTypes = {
   size: PropTypes.string,
   variant: PropTypes.string,
   styleKey: PropTypes.string,
+  // 링크 관련
+  to: PropTypes.string,
+  href: PropTypes.string,
+  target: PropTypes.string,
 };
