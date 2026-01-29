@@ -1,18 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from '@/components/common/Dropdown';
-
-const FONT_OPTIONS = [
-  'Noto Sans',
-  'Pretendard',
-  '나눔명조',
-  '나눔손글씨 손편지체',
-];
+import { FONT_MAP } from '@/constants/editor';
 
 const FontControl = ({ value, onChange }) => {
+  const fontOptions = Object.keys(FONT_MAP);
+
   return (
     <Dropdown
-      options={FONT_OPTIONS}
+      options={fontOptions}
       placeholder="폰트를 선택하세요"
       value={value}
       onChange={onChange}
