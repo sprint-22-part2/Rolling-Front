@@ -1,0 +1,50 @@
+/* Noto Sans, 나눔명조 불러오기 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans:wght@400;700&display=swap');
+
+/* 나눔손글씨 손편지체 정의 */
+@import url('https://cdn.jsdelivr.net/gh/fonts-archive/NanumSonPyeonJiCe/NanumSonPyeonJiCe.css');
+
+.editorWrapper {
+  width: 100%;
+}
+
+/* 툴바 디자인 */
+.quillEditor :global(.ql-toolbar.ql-snow) {
+  background-color: var(--gray-100);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 13px 15px 12px;
+}
+
+/* 입력창 디자인 */
+.quillEditor :global(.ql-container.ql-snow) {
+  background-color: var(--white);
+  border: 1px solid var(--gray-200);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  height: 211px;
+
+  font-size: 16px;
+  font-family: inherit;
+}
+
+/* 실제 입력 부분 */
+.quillEditor :global(.ql-editor) {
+  min-height: 100%;
+  font-family: inherit;
+}
+
+/* 플레이스 홀더 */
+.quillEditor :global(.ql-editor.ql-blank::before) {
+  color: var(--gray-500);
+  font-style: normal;
+  transition: opacity 0.1s ease;
+  left: 16px;
+  top: 16px;
+}
+
+/* 포커스 시 플레이스 홀더 제거 */
+.quillEditor :global(.ql-editor:focus.ql-blank::before) {
+  opacity: 0;
+}
