@@ -3,7 +3,6 @@ import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
-import { FONT_MAP } from '@/constants/editor';
 
 const TextEditor = ({ content, setContent, currentFont }) => {
   const modules = useMemo(
@@ -31,7 +30,7 @@ const TextEditor = ({ content, setContent, currentFont }) => {
         onChange={setContent}
         modules={modules}
         placeholder="내용을 입력해 주세요."
-        style={{ fontFamily: FONT_MAP[currentFont] || currentFont }}
+        style={{ fontFamily: currentFont }}
         className={styles.quillEditor}
       />
     </div>

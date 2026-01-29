@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from '@/components/common/Dropdown';
-import { FONT_MAP } from '@/constants/editor';
 
-const FontControl = ({ value, onChange }) => {
-  const fontOptions = Object.keys(FONT_MAP);
-
+const FontControl = ({ options, value, onChange }) => {
   return (
     <Dropdown
-      options={fontOptions}
+      options={options}
       placeholder="폰트를 선택하세요"
       value={value}
       onChange={onChange}
@@ -17,6 +14,7 @@ const FontControl = ({ value, onChange }) => {
 };
 
 FontControl.propTypes = {
+  options: PropTypes.array.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func,
 };
