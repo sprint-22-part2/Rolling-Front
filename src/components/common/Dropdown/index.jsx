@@ -6,6 +6,7 @@ import { ArrowDownIcon } from '@/assets/icons';
 function Dropdown({
   placeholder,
   options,
+  value,
   disabled,
   isError,
   errorMessage,
@@ -16,6 +17,8 @@ function Dropdown({
 
   const dropdownRef = useRef(null);
 
+  const currentValue = value !== undefined ? value : selectedOption;
+
   const handleToggle = () => {
     if (disabled) {
       return;
@@ -24,9 +27,11 @@ function Dropdown({
   };
 
   const handleSelect = (option) => {
-    setSelectedOption(option);
     if (onChange) {
       onChange(option);
+    }
+    if (value === undefined) {
+      setSelectedOption(option);
     }
     setIsOpen(false);
   };
@@ -54,7 +59,7 @@ function Dropdown({
         type="button"
         className={`
           ${styles.trigger} 
-          ${selectedOption ? styles.triggerFilled : ''} 
+          ${currentValue ? styles.triggerFilled : ''} 
           ${isOpen ? styles.triggerOpen : ''}
           ${isError ? styles.triggerError : ''}
           ${disabled ? styles.triggerDisabled : ''}
@@ -64,10 +69,10 @@ function Dropdown({
       >
         <span
           className={
-            selectedOption ? styles.textSelected : styles.textPlaceholder
+            currentValue ? styles.textSelected : styles.textPlaceholder
           }
         >
-          {selectedOption || placeholder}
+          {currentValue || placeholder}
         </span>
 
         <ArrowDownIcon
@@ -109,6 +114,7 @@ function Dropdown({
 Dropdown.propTypes = {
   placeholder: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  value: PropTypes.string,
   disabled: PropTypes.bool,
   isError: PropTypes.bool,
   errorMessage: PropTypes.string,
