@@ -1,5 +1,7 @@
 import LinkButton from '@/components/common/LinkButton';
 
+import { EditIcon } from '@/assets/icons';
+
 export default function LinkButtonPreview() {
   return (
     <div style={{ padding: 40 }}>
@@ -12,15 +14,6 @@ export default function LinkButtonPreview() {
         <LinkButton size="sizeMd" variant="variantOutlinePrimary" to="/profile">
           내부 라우트 이동
         </LinkButton>
-
-        <LinkButton
-          size="sizeMd"
-          variant="variantOutlinePrimary"
-          href="https://www.codeit.kr"
-          target="_blank"
-        >
-          외부 링크 이동
-        </LinkButton>
       </section>
 
       {/* Primary */}
@@ -29,15 +22,6 @@ export default function LinkButtonPreview() {
       >
         <LinkButton size="sizeBig" variant="variantPrimary" to="/profile">
           내부 라우트 이동
-        </LinkButton>
-
-        <LinkButton
-          size="sizeBig"
-          variant="variantPrimary"
-          href="https://www.codeit.kr"
-          target="_blank"
-        >
-          외부링크 이동
         </LinkButton>
       </section>
 
@@ -48,15 +32,6 @@ export default function LinkButtonPreview() {
         <LinkButton size="sizeLg" variant="variantGray" to="/profile">
           내부 라우트 이동
         </LinkButton>
-
-        <LinkButton
-          size="sizeLg"
-          variant="variantGray"
-          href="https://www.codeit.kr"
-          target="_blank"
-        >
-          외부 링크 이동
-        </LinkButton>
       </section>
 
       {/* 텍스트만 있는 버튼 */}
@@ -64,13 +39,17 @@ export default function LinkButtonPreview() {
         <LinkButton size="sizeLg" variant="variantMiddleText" to="/profile">
           + 내부 라우트 이동
         </LinkButton>
+      </section>
 
+      {/* 텍스트만 있는 작은 버튼 */}
+      <section style={{ marginTop: 24 }}>
         <LinkButton
-          variant="variantMiddleText"
-          href="https://www.codeit.kr"
-          target="_blank"
+          leftIcon={<EditIcon />}
+          size="sizeLg"
+          variant="variantSmallText"
+          to="/profile"
         >
-          + 외부 링크 이동
+          내부 라우트 이동
         </LinkButton>
       </section>
     </div>

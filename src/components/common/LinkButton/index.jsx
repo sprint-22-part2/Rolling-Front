@@ -2,21 +2,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styles from '@/components/common/Button/index.module.css';
 
-const ALLOWED_PROTOCOLS = ['http:', 'https:', 'mailto:', 'tel:'];
-
-function isSafeHref(href) {
-  if (typeof href !== 'string') {
-    return false;
-  }
-
-  try {
-    const url = new URL(href, window.location.origin);
-    return ALLOWED_PROTOCOLS.includes(url.protocol);
-  } catch {
-    return false;
-  }
-}
-
 function isSafeTo(to) {
   if (typeof to !== 'string') {
     return false;
@@ -43,14 +28,10 @@ export default function LinkButton({
   size = 'sizeMd',
   variant = 'variantPrimary',
   leftIcon = null,
-
-  // 링크 전용
-  to,
-  href,
-  target,
+  to, // 링크 전용
 }) {
   const mergedClassName = [
-    styles.linkButton, // ✅ LinkButton의 기본 스타일(여기가 styles.button 역할)
+    styles.linkButton,
     styles[size],
     styles[variant],
     className,
@@ -78,30 +59,6 @@ export default function LinkButton({
     );
   }
 
-  // 외부 링크
-  if (href) {
-    if (!isSafeHref(href)) {
-      return null;
-    }
-
-    const normalizedTarget = typeof target === 'string' ? target : undefined;
-
-    return (
-      <a
-        href={href}
-        className={mergedClassName}
-        target={normalizedTarget}
-        rel={
-          normalizedTarget?.toLowerCase() === '_blank'
-            ? 'noopener noreferrer'
-            : undefined
-        }
-      >
-        {content}
-      </a>
-    );
-  }
-
   // to/href 둘 다 없으면 렌더 X
   return null;
 }
@@ -112,10 +69,7 @@ LinkButton.propTypes = {
   size: PropTypes.string,
   variant: PropTypes.string,
   leftIcon: PropTypes.node,
-
   to: PropTypes.string,
-  href: PropTypes.string,
-  target: PropTypes.string,
 };
 
 LinkButton.defaultProps = {
@@ -125,6 +79,4 @@ LinkButton.defaultProps = {
   variant: 'variantPrimary',
   leftIcon: null,
   to: null,
-  href: null,
-  target: undefined,
 };
