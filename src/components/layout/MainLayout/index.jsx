@@ -3,7 +3,7 @@ import styles from './index.module.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
-function Layout() {
+function MainLayout() {
   return (
     <div className={styles.layout}>
       <Header className={styles.header} />
@@ -15,4 +15,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default MainLayout;

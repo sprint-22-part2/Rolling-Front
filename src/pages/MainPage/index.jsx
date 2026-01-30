@@ -3,7 +3,7 @@ import PopularRolling from '@/components/main/PopularRolling';
 import RecentRolling from '@/components/main/RecentRolling';
 import { Link } from 'react-router-dom';
 
-function RollingListPage() {
+function MainPage() {
   return (
     <div className={styles.rollingList}>
       <section className={styles.sectionRollingList}>
@@ -23,4 +23,4 @@ function RollingListPage() {
   );
 }
 
-export default RollingListPage;
+export default MainPage;
