@@ -1,0 +1,2 @@
+# Code Style Guide
+- 모든 리뷰는 한국어로 합니다.

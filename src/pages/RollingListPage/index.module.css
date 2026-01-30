@@ -1,0 +1,41 @@
+.rollingList {
+  max-width: 1248px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 80px 24px;
+}
+
+.sectionRollingList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sectionTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.makeButton {
+  color: var(--main-color);
+  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+}
+
+@media (max-width: 1079px) {
+  .rollingList {
+    padding: 48px 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .rollingList {
+    padding: 32px 24px;
+  }
+}

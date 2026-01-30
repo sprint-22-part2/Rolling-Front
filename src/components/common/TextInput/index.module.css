@@ -1,0 +1,89 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+}
+
+.label {
+  color: var(--gray-800);
+  font-weight: var(--font-weight-bold);
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: -0.01em; /* 자간 -1% */
+  text-align: left;
+}
+
+/* 기본 상태 */
+.inputField {
+  width: 100%;
+  padding: 16px;
+  outline: none;
+  border-radius: 20px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  transition: all 0.2s ease-in-out;
+
+  font-weight: var(--font-weight-regular);
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: -0.01em;
+}
+
+/* 플레이스홀더 스타일 */
+.inputField::placeholder {
+  color: var(--gray-500);
+}
+
+/* 포커스 상태 */
+.inputField:focus {
+  border: 2px solid var(--gray-500);
+  color: var(--gray-900);
+}
+
+/* 입력 완료 상태 */
+.filled {
+  color: var(--gray-500);
+  border: 1px solid var(--gray-500);
+}
+
+/* 우선순위: Filled 상태라도 Focus가 되면 테두리가 진해지도록 함 */
+.filled:focus {
+  border: 2px solid var(--gray-500);
+}
+
+/* 비활성화 상태 */
+.inputField:disabled {
+  background-color: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  color: var(--gray-400);
+  cursor: not-allowed;
+}
+
+/* 에러 발생 상태 */
+.errorField {
+  border: 1px solid var(--error);
+  color: var(--gray-900);
+}
+
+/* 에러 발생 포커스 */
+.errorField:focus {
+  border: 2px solid var(--error);
+}
+
+/* 에러 메시지 텍스트 */
+.errorMessage {
+  color: var(--error);
+  font-size: 14px;
+  line-height: 14px;
+  margin-top: 4px;
+  text-align: left;
+  letter-spacing: -0.01em;
+}
+
+/* 모바일 전용 스타일 */
+@media screen and (max-width: 767px) {
+  .label {
+    font-size: 22px;
+  }
+}

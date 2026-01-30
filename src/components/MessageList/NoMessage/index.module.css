@@ -1,0 +1,17 @@
+.noMessageBox {
+  padding: 128px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.notiMessage {
+  font-size: 20px;
+  font-weight: var(--font-weight-medium);
+  color: var(--gray-400);
+}
+
+[type='image'] .notiMessage {
+  color: var(white);
+}
