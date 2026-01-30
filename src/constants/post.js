@@ -1,4 +1,4 @@
-const COLOR_OPTIONS = [
+export const COLOR_OPTIONS = [
   {
     id: 'beige',
     label: '노랑',

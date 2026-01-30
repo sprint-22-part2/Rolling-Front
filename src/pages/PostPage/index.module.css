@@ -11,13 +11,13 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .sectionHeader {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .sectionTitle {
@@ -41,13 +41,15 @@
   justify-content: center;
 }
 
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
 @media screen and (max-width: 767px) {
   .postPage {
     padding: 48px 24px;
-    gap: 40px;
-  }
-
-  .sectionTitle {
-    font-size: 22px;
+    gap: 48px;
   }
 }
