@@ -16,10 +16,10 @@ function FeatureSection({ labelText, title, description, children }) {
 }
 
 FeatureSection.propTypes = {
-  labelText: PropTypes.string,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  children: PropTypes.node,
+  labelText: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
+  description: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default FeatureSection;

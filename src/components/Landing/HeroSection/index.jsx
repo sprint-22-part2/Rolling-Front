@@ -1,19 +1,18 @@
 import styles from './index.module.css';
-import AirplaneIcon from '@/assets/icons/ic-favicon.svg';
+import LogoImage from '@/assets/logo/logo.svg';
 
 function HeroSection() {
   return (
     <section className={styles.heroSection}>
       <div className={styles.logoWrapper}>
-        <img src={AirplaneIcon} alt="비행기 아이콘" className={styles.icon} />
-        <span className={styles.logoText}>Rolling</span>
+        <img src={LogoImage} alt="Rolling 로고" className={styles.logoImage} />
       </div>
 
-      <h1 className={styles.title}>
+      <h2 className={styles.title}>
         마음을 모으는 가장 쉬운 방법
         <br />
         로그인 없이 만드는 온라인 롤링 페이퍼
-      </h1>
+      </h2>
     </section>
   );
 }

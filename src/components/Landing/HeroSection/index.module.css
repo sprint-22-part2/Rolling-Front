@@ -7,22 +7,14 @@
   gap: 32px;
 }
 
-/* 로고 아이콘 + 로고 텍스트 */
 .logoWrapper {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  display: block;
 }
 
-.icon {
-  width: 56px;
-  height: 56px;
-}
-
-.logoText {
-  font-size: 50px;
-  font-weight: var(--font-weight-bold);
-  color: var(--gray-700);
+.logoImage {
+  width: 249px;
+  height: auto;
+  object-fit: contain;
 }
 
 /* 메인 제목 */
@@ -35,17 +27,8 @@
 
 /* 반응형 (태블릿) */
 @media (max-width: 1079px) {
-  .logoWrapper {
-    gap: 14px;
-  }
-
-  .icon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .logoText {
-    font-size: 44px;
+  .logoImage {
+    width: 208px;
   }
 
   .title {
@@ -55,17 +38,8 @@
 
 /* 반응형 모바일 */
 @media (max-width: 767px) {
-  .logoWrapper {
-    gap: 10px;
-  }
-
-  .icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .logoText {
-    font-size: 30px;
+  .logoImage {
+    width: 139px;
   }
 
   .title {

@@ -1,16 +1,15 @@
-import { Link } from 'react-router-dom';
 import styles from './index.module.css';
 
 import HeroSection from '@/components/Landing/HeroSection';
 import FeatureSection from '@/components/Landing/FeatureSection';
-import Button from '@/components/common/Button';
 
 import RollingCardImage from '@/assets/images/img-card-list.svg';
-import EmojiImage from '@/assets/images/img-emoji-reaction.svg';
+import EmojiImage from '@/assets/images/img-emoji-reaction.png';
+import LinkButton from '@/components/common/LinkButton';
 
 function LandingPage() {
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       {/* 히어로 섹션 */}
       <HeroSection />
 
@@ -53,13 +52,16 @@ function LandingPage() {
 
       {/* 하단 버튼 */}
       <div className={styles.bottomSection}>
-        <Link to="/list">
-          <Button size="sizeBig" variant="variantPrimary">
-            구경해보기
-          </Button>
-        </Link>
+        <LinkButton
+          to="/list"
+          size="sizeBig"
+          variant="variantPrimary"
+          className={styles.linkButton}
+        >
+          구경해보기
+        </LinkButton>
       </div>
-    </div>
+    </main>
   );
 }
 
