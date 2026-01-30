@@ -8,13 +8,6 @@ import AddReactionButton from '@/components/reaction/AddReactionButton/index';
 import { ArrowDownIcon } from '@/assets/icons';
 
 const THEMES = ['blue', 'green', 'purple', 'beige', 'trans'];
-// -> ㅇ 베이지, 퍼플, 블루, 그린으로 수정
-// -> ㅇ 내림차순으로 정렬되는 코드 빼기~~ 백엔드에서 알아서 줍니다
-// -> ㅇ 리액션바 css 컬러칩 헥사값 -> 변수값으로 변경하기
-// -> ㅇ 컬러들 다 컬러칩 사용해서 변경
-// -> ㅇ 이모티콘 추가버튼 currentColor 사용해서 변경해야함.. 테마별로 아이콘 색이 다름 ㅠㅠ
-// -> 라우터부분 충돌 해결하기 (머지방법 노션 참고)
-// -> 이모티콘 모듈 별도 외부에서 불러오는거 먼저 하기 (별도의 이슈,브랜치로 파기)
 
 /**
  * 기본으로 제공할 이모지 목록
