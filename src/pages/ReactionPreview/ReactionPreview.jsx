@@ -21,7 +21,7 @@ export default function ReactionPreview() {
       <section style={{ marginTop: 24 }}>
         <h3>Green</h3>
         <ReactionBar
-          theme="mint"
+          theme="green"
           initialReactions={{ '👍': 20, '🙏': 12, '😍': 12, '🥺': 7 }}
         />
       </section>
@@ -32,15 +32,15 @@ export default function ReactionPreview() {
       </section>
 
       <section style={{ marginTop: 24 }}>
-        <h3>Yellow</h3>
+        <h3>Beige</h3>
         <ReactionBar
-          theme="sand"
+          theme="beige"
           initialReactions={{ '👍': 20, '🙏': 12, '😍': 12 }}
         />
       </section>
 
-      <section style={{ marginTop: 24 }}>
-        <h3>Image</h3>
+      <h3 style={{ marginTop: 24 }}>Image</h3>
+      <section style={{ backgroundColor: 'gray' }}>
         <ReactionBar theme="trans" initialReactions={{ '👍': 20, '🙏': 12 }} />
       </section>
     </div>
