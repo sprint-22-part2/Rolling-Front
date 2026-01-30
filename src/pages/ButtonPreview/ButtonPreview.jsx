@@ -41,12 +41,22 @@ export default function ButtonPreview() {
         <Button size="sizeMd" variant="variantOutlinePrimary">
           롤링페이퍼 만들기
         </Button>
+        <Button
+          size="sizeMd"
+          variant="variantOutlinePrimary"
+          disabled={'disabled'}
+        >
+          Disabled
+        </Button>
       </section>
 
       {/* Primary 버튼 */}
       <section style={{ marginTop: 24 }}>
         <Button size="sizeBig" variant="variantPrimary">
           일반 버튼
+        </Button>
+        <Button size="sizeBig" variant="variantPrimary" disabled={'disabled'}>
+          Disabled
         </Button>
       </section>
       <section style={{ marginTop: 24 }}>
@@ -70,6 +80,9 @@ export default function ButtonPreview() {
         <Button size="sizeLg" variant="variantGray">
           더보기
         </Button>
+        <Button size="sizeLg" variant="variantGray" disabled={'disabled'}>
+          Disabled
+        </Button>
       </section>
 
       {/* 작은글씨 버튼 */}
@@ -83,11 +96,21 @@ export default function ButtonPreview() {
         <Button leftIcon={<EditIcon />} variant="variantSmallText">
           편집하기
         </Button>
+        <Button
+          leftIcon={<DeletedIcon />}
+          variant="variantSmallText"
+          disabled={'disabled'}
+        >
+          Disabled
+        </Button>
       </section>
 
       {/* 텍스트만 있는 버튼 */}
       <section style={{ marginTop: 24 }}>
         <Button variant="variantMiddleText">+ 롤링 페이퍼 만들기</Button>
+        <Button variant="variantMiddleText" disabled={'disabled'}>
+          - Disabled
+        </Button>
       </section>
 
       {/* 확인/아니오 버튼 */}
@@ -113,6 +136,13 @@ export default function ButtonPreview() {
       <section style={{ marginTop: 24 }}>
         <Button variant="variantCircle" leftIcon={<PlusIcon />}>
           메시지 추가하기
+        </Button>
+        <Button
+          variant="variantCircle"
+          leftIcon={<PlusIcon />}
+          disabled={'disabled'}
+        >
+          Disabled
         </Button>
       </section>
 

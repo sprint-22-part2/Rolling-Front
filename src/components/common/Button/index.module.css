@@ -1,12 +1,4 @@
 /* Disabled */
-.button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-.linkButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
 .linkButton {
   display: inline-flex; 
   align-items: center; 
@@ -56,6 +48,11 @@
   color: var(--white); 
   border: 1px solid var(--primary-100);
 }
+.variantPrimary:disabled {
+  background-color: var(--gray-300);
+  cursor: not-allowed;
+  border: none;
+}
 .variantOutlinePrimary { 
   background: var(--white); 
   color: var(--primary-400); 
@@ -68,6 +65,12 @@
   color: var(--white); 
   border: 1px solid var(--primary-400); 
 }
+.variantOutlinePrimary:disabled {
+  background-color: var(--white);
+  color: var(--gray-300);
+  cursor: not-allowed;
+  border: 1px solid var(--gray-300);
+}
 .variantGray { 
   background-color: var(--white);
   color: var(--gray-600);
@@ -78,6 +81,12 @@
 .variantGray:hover { 
   background-color: var(--white);
   color: var(--primary-100);
+}
+.variantGray:disabled {
+  background-color: var(--gray-300);
+  color: var(--white); 
+  cursor: not-allowed;
+  border: none;
 }
 
 .variantSmallText {
@@ -93,7 +102,7 @@
   color: var(--gray-600);
 }
 .variantSmallText:disabled {
-  opacity: 0.6;
+  color: var(--gray-300);
   cursor: not-allowed;
 }
 
@@ -108,6 +117,10 @@
 }
 .variantMiddleText:hover {
   color: var(--primary-100);
+}
+.variantMiddleText:disabled {
+  color: var(--gray-300);
+  cursor: not-allowed;
 }
 
 .variantGhost {
@@ -166,6 +179,13 @@
 }
 .variantCircle:active {
   transform: translateY(0);
+}
+.variantCircle:disabled {
+  cursor: not-allowed;
+}
+.variantCircle:disabled .leftIcon:hover {
+  cursor: not-allowed;
+  background-color: var(--gray-300);
 }
 
 .variantArrow {
