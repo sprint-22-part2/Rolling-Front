@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import RollingListPage from '@/pages/RollingListPage';
 import PostListPage from '@/pages/PostListPage';
-import ButtonPreview from '../pages/ButtonPreview/ButtonPreview';
+import ButtonPreview from '@/pages/ButtonPreview/ButtonPreview';
+import LinkButtonPreview from '@/pages/LinkButtonPreview/LinkButtonPreview';
 import ProfilePage from '@/pages/ProfilePage';
 import PostPage from '@/pages/PostPage';
 
@@ -16,6 +17,7 @@ export default function AppRoutes() {
           <Route path="/post" element={<PostListPage theme="blue" />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/preview/button" element={<ButtonPreview />} />
+          <Route path="/preview/linkButton" element={<LinkButtonPreview />} />
           <Route path="/post/create" element={<PostPage />} />
         </Route>
       </Routes>

@@ -46,7 +46,7 @@ export default function ButtonPreview() {
       {/* Primary 버튼 */}
       <section style={{ marginTop: 24 }}>
         <Button size="sizeBig" variant="variantPrimary">
-          구경해보기
+          일반 버튼
         </Button>
       </section>
       <section style={{ marginTop: 24 }}>
@@ -85,6 +85,11 @@ export default function ButtonPreview() {
         </Button>
       </section>
 
+      {/* 텍스트만 있는 버튼 */}
+      <section style={{ marginTop: 24 }}>
+        <Button variant="variantMiddleText">+ 롤링 페이퍼 만들기</Button>
+      </section>
+
       {/* 확인/아니오 버튼 */}
       <section style={{ marginTop: 24 }}>
         <Button size="sizeSm" variant="variantPrimary">
@@ -106,7 +111,9 @@ export default function ButtonPreview() {
 
       {/* 플러스 버튼 */}
       <section style={{ marginTop: 24 }}>
-        <Button variant="variantCircle" leftIcon={<PlusIcon />} />
+        <Button variant="variantCircle" leftIcon={<PlusIcon />}>
+          메시지 추가하기
+        </Button>
       </section>
 
       {/* 화살표 버튼 */}
