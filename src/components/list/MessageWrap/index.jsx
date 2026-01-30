@@ -1,7 +1,7 @@
 import styles from './index.module.css';
-import NoMessage from '@/components/message-list/NoMessage';
-import AddMessage from '@/components/message-list/AddMessage';
-import Message from '@/components/message-list/Message';
+import NoMessage from '@/components/list/NoMessage';
+import AddMessage from '@/components/list/AddMessage';
+import Message from '@/components/list/Message';
 
 function MessageWrap() {
   return (
