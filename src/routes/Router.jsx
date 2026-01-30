@@ -11,7 +11,7 @@ export default function AppRoutes() {
         <Route path="/" element={<Layout />}>
           <Route path="/main" element={<MainPage />} />
           <Route path="/list" element={<ListPage theme="blue" />} />
-          <Route path="/post/create" element={<PostPage />} />
+          <Route path="/post" element={<PostPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
