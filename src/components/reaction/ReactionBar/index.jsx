@@ -2,30 +2,30 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
-import ReactionBadge from './ReactionBadge';
-import ReactionPanel from './ReactionPanel';
-import AddReactionButton from './AddReactionButton';
+import ReactionBadge from '@/components/reaction/ReactionBadge/index';
+import ReactionPanel from '@/components/reaction/ReactionPanel/index';
+import AddReactionButton from '@/components/reaction/AddReactionButton/index';
+import { ArrowDownIcon } from '@/assets/icons';
+
+const THEMES = ['blue', 'mint', 'purple', 'sand', 'trans'];
 
 /**
  * 기본으로 제공할 이모지 목록
  */
 const DEFAULT_EMOJIS = ['👍', '🙏', '🥺', '😍', '😂', '🎉'];
 
-/**
- * 기본으로 제공할 이모지 목록
- */
-export default function ReactionBar({ initialReactions, availableEmojis }) {
+export default function ReactionBar({
+  initialReactions,
+  availableEmojis,
+  theme,
+}) {
   /**
    * reactions
    * - { [emoji]: count } 형태의 리액션 상태
    * - 실제 서비스에서는 서버 상태로 대체 가능
    */
   const [reactions, setReactions] = useState(initialReactions || {});
-  /**
-   * reactions
-   * - { [emoji]: count } 형태의 리액션 상태
-   * - 실제 서비스에서는 서버 상태로 대체 가능
-   */
+  /** 리액션 패널 열림 여부 */
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   /** 이모지 피커 열림 여부 */
   const [isPickerOpen, setIsPickerOpen] = useState(false);
@@ -43,6 +43,9 @@ export default function ReactionBar({ initialReactions, availableEmojis }) {
   const hasReactions = entries.length > 0;
   /** 사용할 이모지 목록 (props 우선, 없으면 기본값) */
   const emojis = availableEmojis?.length ? availableEmojis : DEFAULT_EMOJIS;
+
+  const safeTheme = THEMES.includes(theme) ? theme : 'blue';
+
   /**
    * 모든 레이어를 닫는 공통 함수
    * - 바깥 클릭 / ESC 키 처리에서 재사용
@@ -120,7 +123,10 @@ export default function ReactionBar({ initialReactions, availableEmojis }) {
   };
 
   return (
-    <div className={styles.container} ref={rootRef}>
+    <div
+      className={`${styles.container} ${styles[`theme_${safeTheme}`]}`}
+      ref={rootRef}
+    >
       {/* 상단 요약 바 */}
       <div className={styles.bar}>
         {hasReactions &&
@@ -142,7 +148,10 @@ export default function ReactionBar({ initialReactions, availableEmojis }) {
             aria-expanded={isPanelOpen}
             aria-label="리액션 목록 펼치기"
           >
-            ⌄
+            <ArrowDownIcon
+              className={`${styles.expandIcon} ${isPanelOpen ? styles.open : ''}`}
+              aria-hidden="true"
+            />
           </button>
         )}
         {/* 리액션 추가 버튼 */}
@@ -177,9 +186,11 @@ export default function ReactionBar({ initialReactions, availableEmojis }) {
 ReactionBar.propTypes = {
   initialReactions: PropTypes.objectOf(PropTypes.number),
   availableEmojis: PropTypes.arrayOf(PropTypes.string),
+  theme: PropTypes.oneOf(['blue', 'mint', 'purple', 'sand', 'trans']),
 };
 
 ReactionBar.defaultProps = {
   initialReactions: {},
   availableEmojis: null,
+  theme: 'blue',
 };

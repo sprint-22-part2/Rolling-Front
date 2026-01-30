@@ -1,0 +1,115 @@
+.container {
+  /* 기본 테마 (blue) */
+  --rb-bg: #eaf3ff;
+  --rb-chip-bg: #dbeaff;
+  --rb-text: #2450a5;
+  --rb-icon: #2450a5;
+  --rb-add-bg: #dbeaff;
+
+  position: relative;
+  display: inline-block;
+}
+.theme_blue {
+  --rb-bg: #eaf3ff;
+  --rb-chip-bg: #dbeaff;
+  --rb-text: #2450a5;
+  --rb-icon: #2450a5;
+  --rb-add-bg: #dbeaff;
+}
+.theme_mint {
+  --rb-bg: #e7f7f3;
+  --rb-chip-bg: #d7f2eb;
+  --rb-text: #0f6b5d;
+  --rb-icon: #0f6b5d;
+  --rb-add-bg: #d7f2eb;
+}
+.theme_purple {
+  --rb-bg: #f0eaff;
+  --rb-chip-bg: #e7ddff;
+  --rb-text: #5a34b0;
+  --rb-icon: #5a34b0;
+  --rb-add-bg: #e7ddff;
+}
+.theme_sand {
+  --rb-bg: #fff3d8;
+  --rb-chip-bg: #f6e4bb;
+  --rb-text: #8a5a12;
+  --rb-icon: #8a5a12;
+  --rb-add-bg: #f6e4bb;
+}
+.theme_trans {
+  --rb-bg: transparent;
+  --rb-chip-bg: rgba(0, 0, 0, 0.05);
+  --rb-text: var(--white);
+  --rb-icon: var(--white);
+  --rb-add-bg: rgba(0, 0, 0, 0.05);
+}
+
+/* Reaction Bar */
+.bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 9999px;
+  background: var(--rb-bg);
+}
+
+/* Expand Button */
+.expandButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  border: none;
+  background: var(--rb-chip-bg);
+  color: var(--rb-icon);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.expandButton:hover {
+  opacity: 0.8;
+}
+.expandIcon {
+  line-height: 1;
+  font-size: 16px;
+}
+
+/* Picker */
+.picker {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  padding: 10px;
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  z-index: 10;
+}
+
+.pickerItem {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.pickerItem:hover {
+  background: transparent;
+}
+.expandIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--gray-500);
+  transition: transform 0.2s ease;
+}
+/* 패널 열렸을 때 회전 */
+.open {
+  transform: rotate(180deg);
+}

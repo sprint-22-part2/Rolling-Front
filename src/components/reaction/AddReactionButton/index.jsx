@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
-import ImojiIcon from '@/assets/icons/ic-imoji.svg?react';
+import { ImojiIcon } from '@/assets/icons';
 
 export default function AddReactionButton({ onClick }) {
   return (
