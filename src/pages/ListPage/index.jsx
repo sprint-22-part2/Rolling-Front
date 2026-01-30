@@ -1,7 +1,7 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
-import RollingHeader from '@/components/MessageList/RollingHeader';
-import MessageWrap from '@/components/MessageList/MessageWrap';
+import RollingHeader from '@/components/message-list/RollingHeader';
+import MessageWrap from '@/components/message-list/MessageWrap';
 
 function PostListPage({ theme = 'yellow' }) {
   return (

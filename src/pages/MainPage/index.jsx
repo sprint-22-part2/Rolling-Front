@@ -1,6 +1,6 @@
 import styles from './index.module.css';
-import PopularRolling from '@/components/RollingList/PopularRolling';
-import RecentRolling from '@/components/RollingList/RecentRolling';
+import PopularRolling from '@/components/main/PopularRolling';
+import RecentRolling from '@/components/main/RecentRolling';
 import { Link } from 'react-router-dom';
 
 function RollingListPage() {
