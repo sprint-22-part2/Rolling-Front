@@ -1,0 +1,74 @@
+/* 섹션 전체 컨테이너 */
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+}
+
+/* 로고 아이콘 + 로고 텍스트 */
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon {
+  width: 56px;
+  height: 56px;
+}
+
+.logoText {
+  font-size: 50px;
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-700);
+}
+
+/* 메인 제목 */
+.title {
+  font-size: 40px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--gray-700);
+}
+
+/* 반응형 (태블릿) */
+@media (max-width: 1079px) {
+  .logoWrapper {
+    gap: 14px;
+  }
+
+  .icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .logoText {
+    font-size: 44px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+}
+
+/* 반응형 모바일 */
+@media (max-width: 767px) {
+  .logoWrapper {
+    gap: 10px;
+  }
+
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .logoText {
+    font-size: 30px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
