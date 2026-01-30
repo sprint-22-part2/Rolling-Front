@@ -1,6 +1,6 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
-import RollingCard from '@/components/RollingList/RollingCard';
+import RollingCard from '@/components/main/RollingCard';
 
 function RecentRolling({ theme = 'blue', recipientName = 'recipientName' }) {
   return (

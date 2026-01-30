@@ -1,6 +1,6 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
-import RollingCard from '@/components/RollingList/RollingCard';
+import RollingCard from '@/components/main/RollingCard';
 
 // Import Swiper React components
 // import Swiper core and required modules

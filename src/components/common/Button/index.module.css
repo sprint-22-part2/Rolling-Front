@@ -1,7 +1,8 @@
 /* Disabled */
-.button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.linkButton {
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
 }
 .button {
   display: inline-flex; 
@@ -47,6 +48,11 @@
   color: var(--white); 
   border: 1px solid var(--primary-100);
 }
+.variantPrimary:disabled {
+  background-color: var(--gray-300);
+  cursor: not-allowed;
+  border: none;
+}
 .variantOutlinePrimary { 
   background: var(--white); 
   color: var(--primary-400); 
@@ -59,6 +65,12 @@
   color: var(--white); 
   border: 1px solid var(--primary-400); 
 }
+.variantOutlinePrimary:disabled {
+  background-color: var(--white);
+  color: var(--gray-300);
+  cursor: not-allowed;
+  border: 1px solid var(--gray-300);
+}
 .variantGray { 
   background-color: var(--white);
   color: var(--gray-600);
@@ -69,6 +81,12 @@
 .variantGray:hover { 
   background-color: var(--white);
   color: var(--primary-100);
+}
+.variantGray:disabled {
+  background-color: var(--gray-300);
+  color: var(--white); 
+  cursor: not-allowed;
+  border: none;
 }
 
 .variantSmallText {
@@ -84,7 +102,24 @@
   color: var(--gray-600);
 }
 .variantSmallText:disabled {
-  opacity: 0.6;
+  color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+.variantMiddleText {
+  background: transparent;
+  border: none;
+  padding: 7.5px;
+  color: var(--primary-400);
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  gap: 5px;
+}
+.variantMiddleText:hover {
+  color: var(--primary-100);
+}
+.variantMiddleText:disabled {
+  color: var(--gray-300);
   cursor: not-allowed;
 }
 
@@ -105,21 +140,52 @@
 }
 
 .variantCircle {
-  width: 72px;
-  height: 72px;
-  padding: 0;
-  border-radius: 9999px;
+  width: max-content; 
+  flex-direction: column;
+  justify-content: flex-start;
   border: none;
-  background: var(--gray-600);
   color: var(--white);
   cursor: pointer;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  border-radius: 0;
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
-.variantCircle:hover {
-  background: var(--gray-200);
+.variantCircle .leftIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.variantCircle .leftIcon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--white);
+}
+.variantCircle .label {
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-500);
+  line-height: 1.2;
+  margin-top: 24px;
+}
+.variantCircle .leftIcon:hover {
+  background: var(--gray-400);
 }
 .variantCircle:active {
   transform: translateY(0);
+}
+.variantCircle:disabled {
+  cursor: not-allowed;
+}
+.variantCircle:disabled .leftIcon:hover {
+  cursor: not-allowed;
+  background-color: var(--gray-300);
 }
 
 .variantArrow {

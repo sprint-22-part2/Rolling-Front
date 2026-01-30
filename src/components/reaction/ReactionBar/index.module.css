@@ -1,0 +1,108 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+.theme_blue {
+  --rb-bg: var(--blue-100);
+  --rb-chip-bg: var(--blue-200);
+  --rb-text: var(--blue-400);
+  --rb-icon: var(--blue-400);
+  --rb-add-bg: var(--blue-200);
+}
+.theme_green {
+  --rb-bg: var(--green-100);
+  --rb-chip-bg: var(--green-200);
+  --rb-text: var(--green-400);
+  --rb-icon: var(--green-400);
+  --rb-add-bg: var(--green-200);
+}
+.theme_purple {
+  --rb-bg: var(--purple-100);
+  --rb-chip-bg: var(--purple-200);
+  --rb-text: var(--purple-400);
+  --rb-icon: var(--purple-400);
+  --rb-add-bg: var(--purple-200);
+}
+.theme_beige {
+  --rb-bg: var(--yellow-100);
+  --rb-chip-bg: var(--yellow-200);
+  --rb-text: var(--yellow-400);
+  --rb-icon: var(--yellow-400);
+  --rb-add-bg: var(--yellow-200);
+}
+.theme_trans {
+  --rb-bg: transparent;
+  --rb-chip-bg: var(--white-opacity-30);
+  --rb-text: var(--white);
+  --rb-icon: var(--white);
+  --rb-add-bg: var(--white-opacity-30);
+}
+
+/* Reaction Bar */
+.bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 9999px;
+  background: var(--rb-bg);
+}
+
+/* Expand Button */
+.expandButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  border: none;
+  background: var(--rb-chip-bg);
+  color: var(--rb-icon);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.expandButton:hover {
+  opacity: 0.8;
+}
+.expandIcon {
+  line-height: 1;
+  font-size: 16px;
+}
+
+/* Picker */
+.picker {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  padding: 10px;
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  z-index: 10;
+}
+
+.pickerItem {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.pickerItem:hover {
+  background: transparent;
+}
+.expandIcon {
+  width: 20px;
+  height: 20px;
+  color: var(--gray-500);
+  transition: transform 0.2s ease;
+}
+/* 패널 열렸을 때 회전 */
+.open {
+  transform: rotate(180deg);
+}
