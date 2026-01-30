@@ -6,6 +6,7 @@ import RollingListPage from '@/pages/RollingListPage';
 import PostListPage from '@/pages/PostListPage';
 import LinkButtonPreview from '@/pages/LinkButtonPreview/LinkButtonPreview';
 import ProfilePage from '@/pages/ProfilePage';
+import PostPage from '@/pages/PostPage';
 
 export default function AppRoutes() {
   return (
@@ -22,6 +23,7 @@ export default function AppRoutes() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/preview/button" element={<ButtonPreview />} />
           <Route path="/preview/linkButton" element={<LinkButtonPreview />} />
+          <Route path="/post/create" element={<PostPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

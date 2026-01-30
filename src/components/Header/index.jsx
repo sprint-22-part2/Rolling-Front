@@ -1,8 +1,11 @@
 import styles from './index.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import LogoImage from '@/assets/logo/logo.svg';
 
 function Header() {
+  const { pathname } = useLocation();
+  const isPostPage = pathname === '/post/create';
+
   return (
     <header className={styles.header}>
       <div className={styles.headerWrap}>
@@ -15,7 +18,7 @@ function Header() {
             />
           </Link>
         </h1>
-        <Link to="/">롤링 페이퍼 만들기</Link>
+        {!isPostPage && <Link to="/">롤링 페이퍼 만들기</Link>}
       </div>
     </header>
   );

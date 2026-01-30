@@ -1,0 +1,71 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.imageCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+
+  background-image: var(--image-card-bg);
+  background-size: cover;
+  background-position: center;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.imageCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.imageCard:focus-visible {
+  outline: 2px solid var(--gray-500);
+  outline-offset: 3px;
+}
+
+.selected {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.selected:hover {
+  transform: none;
+}
+
+.selected::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(74, 73, 79, 0.3);
+}
+
+.checkMark {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--white-opacity-30);
+  color: var(--white);
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  z-index: 1;
+}
