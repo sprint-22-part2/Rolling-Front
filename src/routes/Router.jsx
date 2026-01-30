@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ButtonPreview from '../pages/ButtonPreview/ButtonPreview';
-import ReactionPreview from '../pages/ReactionPreview/ReactionPreview';
+import ButtonPreview from '@/pages/ButtonPreview/ButtonPreview';
+import ReactionPreview from '@/pages/ReactionPreview/ReactionPreview';
 import Layout from '@/components/Layout';
 import RollingListPage from '@/pages/RollingListPage';
 import PostListPage from '@/pages/PostListPage';
