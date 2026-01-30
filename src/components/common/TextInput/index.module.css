@@ -6,7 +6,7 @@
 }
 
 .label {
-  color: var(--gray-800);
+  color: var(--gray-900);
   font-weight: var(--font-weight-bold);
   font-size: 24px;
   line-height: 1.5;
