@@ -13,9 +13,9 @@ const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
 const normalizeImageOptions = (payload) => {
   const list = payload.imageUrls;
 
-  return list.map((url, index) => ({
-    id: `image-${index + 1}`,
-    label: `image-${index + 1}`,
+  return list.map((url) => ({
+    id: url,
+    label: url,
     url,
   }));
 };
