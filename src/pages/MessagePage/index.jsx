@@ -37,12 +37,6 @@ function MessagePage() {
     !hasContent ||
     !selectedProfileImageId;
 
-  const handleNameChange = (field, nextValue) => {
-    if (field === 'senderName') {
-      setSenderName(nextValue);
-    }
-  };
-
   return (
     <div className={styles.messagePage}>
       <section className={styles.section}>
@@ -51,7 +45,7 @@ function MessagePage() {
           name="senderName"
           placeholder="보내는 사람 이름을 입력해 주세요"
           value={senderName}
-          onChange={handleNameChange}
+          onChange={(_, nextValue) => setSenderName(nextValue)}
         />
       </section>
       <section className={styles.section}>
