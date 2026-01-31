@@ -1,6 +1,4 @@
 .popup {
   position: fixed;
-  z-index: 9999;
   border-radius: 22px;
-  overflow: hidden;
 }

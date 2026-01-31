@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Picker from '@emoji-mart/react';
 import data from '@emoji-mart/data';
 import styles from './index.module.css';
+import { createPortal } from 'react-dom';
 
 export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
   const popupRef = useRef(null);
@@ -111,7 +112,7 @@ export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
     return null;
   }
 
-  return (
+  return createPortal(
     <div
       ref={popupRef}
       className={styles.popup}
@@ -128,7 +129,8 @@ export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
         previewPosition="none"
         onEmojiSelect={(emoji) => onPick(emoji.native)}
       />
-    </div>
+    </div>,
+    document.body
   );
 }
 
