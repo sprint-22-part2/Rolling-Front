@@ -1,0 +1,48 @@
+/* 섹션 전체 컨테이너 */
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+}
+
+.logoWrapper {
+  display: block;
+}
+
+.logoImage {
+  width: 249px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* 메인 제목 */
+.title {
+  font-size: 40px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  color: var(--gray-700);
+}
+
+/* 반응형 (태블릿) */
+@media (max-width: 1079px) {
+  .logoImage {
+    width: 208px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+}
+
+/* 반응형 모바일 */
+@media (max-width: 767px) {
+  .logoImage {
+    width: 139px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
