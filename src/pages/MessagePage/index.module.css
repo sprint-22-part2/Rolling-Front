@@ -1,0 +1,41 @@
+.messagePage {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 64px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sectionTitleWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle {
+  color: var(--gray-900);
+  font-weight: var(--font-weight-bold);
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .messagePage {
+    padding: 48px 24px;
+  }
+}
