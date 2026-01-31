@@ -36,46 +36,34 @@ export default function ReactionBar({ initialReactions, theme }) {
   /** 사용할 이모지 목록 (props 우선, 없으면 기본값) */
   const safeTheme = THEMES.includes(theme) ? theme : 'blue';
 
-  /**
-   * 모든 레이어를 닫는 공통 함수
-   * - 바깥 클릭 / ESC 키 처리에서 재사용
-   */
-  const closeAll = () => {
-    setIsPanelOpen(false);
-    setIsPickerOpen(false);
-  };
-
   // 바깥 클릭하면 닫기
   useEffect(() => {
     const handlePointerDown = (e) => {
-      if (!rootRef.current) {
-        return;
+      // 패널이 열려있고, 클릭이 rootRef 요소 외부에서 발생했을 때만 패널을 닫습니다.
+      if (
+        isPanelOpen &&
+        rootRef.current &&
+        !rootRef.current.contains(e.target)
+      ) {
+        setIsPanelOpen(false);
       }
+    };
 
-      if (!rootRef.current.contains(e.target)) {
-        closeAll();
+    const handleKeyDown = (e) => {
+      // 패널이 열려있을 때 ESC 키를 누르면 패널을 닫습니다.
+      if (isPanelOpen && e.key === 'Escape') {
+        setIsPanelOpen(false);
       }
     };
 
     document.addEventListener('pointerdown', handlePointerDown);
+    document.addEventListener('keydown', handleKeyDown);
+
     return () => {
       document.removeEventListener('pointerdown', handlePointerDown);
+      document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
-
-  // ESC로 닫기
-  useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        closeAll();
-      }
-    };
-
-    document.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-    };
-  }, []);
+  }, [isPanelOpen]); // 의존성 배열에 isPanelOpen을 추가합니다.
 
   /**
    * 상단 요약 뱃지 클릭 시 해당 이모지 카운트 증가
