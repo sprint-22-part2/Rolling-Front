@@ -3,6 +3,7 @@ import { getProfileImages } from '@/apis/profileImage';
 
 const useProfileImages = () => {
   const [imageOptions, setImageOptions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -19,6 +20,9 @@ const useProfileImages = () => {
         if (error?.code === 'ERR_CANCELED') {
           return;
         }
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
 
     return () => {
@@ -26,7 +30,7 @@ const useProfileImages = () => {
     };
   }, []);
 
-  return { imageOptions };
+  return { imageOptions, isLoading };
 };
 
 export default useProfileImages;
