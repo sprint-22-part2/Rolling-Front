@@ -43,8 +43,9 @@
 
 /* 입력 완료 상태 */
 .filled {
-  color: var(--gray-500);
+  color: var(--gray-900);
   border: 1px solid var(--gray-500);
+  font-weight: var(--font-weight-medium);
 }
 
 /* 우선순위: Filled 상태라도 Focus가 되면 테두리가 진해지도록 함 */
