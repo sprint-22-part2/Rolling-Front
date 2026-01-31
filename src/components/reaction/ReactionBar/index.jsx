@@ -1,69 +1,46 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
 import ReactionBadge from '@/components/reaction/ReactionBadge/index';
 import ReactionPanel from '@/components/reaction/ReactionPanel/index';
 import AddReactionButton from '@/components/reaction/AddReactionButton/index';
+import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
 import { ArrowDownIcon } from '@/assets/icons';
 
 const THEMES = ['blue', 'green', 'purple', 'beige', 'trans'];
 
-/**
- * 기본으로 제공할 이모지 목록
- */
-const DEFAULT_EMOJIS = ['👍', '🙏', '🥺', '😍', '😂', '🎉'];
-
-export default function ReactionBar({
-  initialReactions,
-  availableEmojis,
-  theme,
-}) {
-  /**
-   * reactions
-   * - { [emoji]: count } 형태의 리액션 상태
-   * - 실제 서비스에서는 서버 상태로 대체 가능
-   */
+export default function ReactionBar({ initialReactions, theme }) {
   const [reactions, setReactions] = useState(initialReactions || {});
-  /** 리액션 패널 열림 여부 */
   const [isPanelOpen, setIsPanelOpen] = useState(false);
-  /** 이모지 피커 열림 여부 */
   const [isPickerOpen, setIsPickerOpen] = useState(false);
-  /**
-   * rootRef
-   * - 바깥 클릭 감지를 위한 컨테이너 참조
-   */
+
   const rootRef = useRef(null);
+  const addBtnRef = useRef(null);
 
-  // 상단 요약 바는 서버에서 내려준 순서를 그대로 사용
-  const entries = useMemo(() => {
-    return Object.entries(reactions);
-  }, [reactions]);
-  /** 리액션이 하나라도 있는지 여부 */
+  // 서버에서 내려준 순서를 그대로 사용
+  const entries = useMemo(() => Object.entries(reactions), [reactions]);
   const hasReactions = entries.length > 0;
-  /** 사용할 이모지 목록 (props 우선, 없으면 기본값) */
-  const emojis = availableEmojis?.length ? availableEmojis : DEFAULT_EMOJIS;
-
   const safeTheme = THEMES.includes(theme) ? theme : 'blue';
 
-  /**
-   * 모든 레이어를 닫는 공통 함수
-   * - 바깥 클릭 / ESC 키 처리에서 재사용
-   */
-  const closeAll = () => {
+  // ReactionBar의 외부 클릭/ESC는 패널만 닫음
+  const closePanel = useCallback(() => {
     setIsPanelOpen(false);
-    setIsPickerOpen(false);
-  };
+  }, []);
 
-  // 바깥 클릭하면 닫기
+  // 바깥 클릭 -> 패널만 닫기
   useEffect(() => {
+    if (!isPanelOpen) {
+      return;
+    }
+
     const handlePointerDown = (e) => {
       if (!rootRef.current) {
         return;
       }
 
       if (!rootRef.current.contains(e.target)) {
-        closeAll();
+        closePanel();
       }
     };
 
@@ -71,13 +48,17 @@ export default function ReactionBar({
     return () => {
       document.removeEventListener('pointerdown', handlePointerDown);
     };
-  }, []);
+  }, [isPanelOpen, closePanel]);
 
-  // ESC로 닫기
+  // ESC -> 패널만 닫기
   useEffect(() => {
+    if (!isPanelOpen) {
+      return;
+    }
+
     const onKeyDown = (e) => {
       if (e.key === 'Escape') {
-        closeAll();
+        closePanel();
       }
     };
 
@@ -85,42 +66,37 @@ export default function ReactionBar({
     return () => {
       document.removeEventListener('keydown', onKeyDown);
     };
+  }, [isPanelOpen, closePanel]);
+
+  const handleBadgeClick = useCallback((emoji) => {
+    setReactions((prev) => ({
+      ...prev,
+      [emoji]: (prev[emoji] || 0) + 1,
+    }));
   }, []);
 
-  /**
-   * 상단 요약 뱃지 클릭 시 해당 이모지 카운트 증가
-   */
-  const handleBadgeClick = (emoji) => {
-    setReactions((prev) => ({
-      ...prev,
-      [emoji]: (prev[emoji] || 0) + 1,
-    }));
-  };
-  /**
-   * ⌄ 버튼 클릭 시 상세 패널 토글
-   */
-  const handleTogglePanel = () => {
+  const handleTogglePanel = useCallback(() => {
     setIsPanelOpen((v) => !v);
     setIsPickerOpen(false);
-  };
+  }, []);
 
-  const handleAddClick = () => {
-    // 클릭하면 이모지 피커 토글
-    setIsPickerOpen((v) => !v);
-    setIsPanelOpen(false);
-  };
-  /**
-   * 이모지 피커에서 이모지 선택 시
-   * - 리액션 카운트 증가
-   * - 피커 닫기
-   */
-  const handlePickEmoji = (emoji) => {
+  const handlePickEmoji = useCallback((emoji) => {
     setReactions((prev) => ({
       ...prev,
       [emoji]: (prev[emoji] || 0) + 1,
     }));
     setIsPickerOpen(false);
-  };
+  }, []);
+
+  // Add 버튼 클릭 -> 피커 토글 및 패널 닫기
+  const handleOpenPicker = useCallback(() => {
+    setIsPickerOpen((v) => !v);
+    setIsPanelOpen(false);
+  }, []);
+
+  const handleClosePicker = useCallback(() => {
+    setIsPickerOpen(false);
+  }, []);
 
   return (
     <div
@@ -154,8 +130,9 @@ export default function ReactionBar({
             />
           </button>
         )}
-        {/* 리액션 추가 버튼 */}
-        <AddReactionButton onClick={handleAddClick} />
+
+        {/* wrapper div 제거 -> AddReactionButton이 ref를 직접 받음 */}
+        <AddReactionButton ref={addBtnRef} onClick={handleOpenPicker} />
       </div>
 
       {/* 상세 리액션 패널 */}
@@ -163,34 +140,23 @@ export default function ReactionBar({
         <ReactionPanel reactions={reactions} onItemClick={handleBadgeClick} />
       )}
 
-      {/* 간단 이모지 피커 */}
-      {isPickerOpen && (
-        <div className={styles.picker} role="menu" aria-label="이모지 선택">
-          {emojis.map((emoji) => (
-            <button
-              key={emoji}
-              type="button"
-              className={styles.pickerItem}
-              onClick={() => handlePickEmoji(emoji)}
-              role="menuitem"
-            >
-              {emoji}
-            </button>
-          ))}
-        </div>
-      )}
+      {/* emoji-mart 팝업 */}
+      <EmojiPickerPopup
+        open={isPickerOpen}
+        onClose={handleClosePicker}
+        onPick={handlePickEmoji}
+        anchorRef={addBtnRef}
+      />
     </div>
   );
 }
 
 ReactionBar.propTypes = {
   initialReactions: PropTypes.objectOf(PropTypes.number),
-  availableEmojis: PropTypes.arrayOf(PropTypes.string),
   theme: PropTypes.oneOf(['blue', 'green', 'purple', 'beige', 'trans']),
 };
 
 ReactionBar.defaultProps = {
   initialReactions: {},
-  availableEmojis: null,
   theme: 'blue',
 };
