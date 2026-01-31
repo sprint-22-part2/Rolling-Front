@@ -11,7 +11,6 @@ import useProfileImages from '@/hooks/useProfileImages';
 
 const RELATIONSHIP_OPTIONS = ['친구', '지인', '동료', '가족'];
 
-//
 const getPlainText = (value) => {
   return value
     .replace(/<[^>]+>/g, '')
