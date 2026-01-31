@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import styles from './index.module.css';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
@@ -35,8 +35,18 @@ function ProfileSelector({ options, selectedOption, onSelect }) {
     }
   };
 
-  useEffect(() => {
-    attachNavigation(swiperRef.current);
+  const setPrevRef = useCallback((node) => {
+    prevRef.current = node;
+    if (swiperRef.current) {
+      attachNavigation(swiperRef.current);
+    }
+  }, []);
+
+  const setNextRef = useCallback((node) => {
+    nextRef.current = node;
+    if (swiperRef.current) {
+      attachNavigation(swiperRef.current);
+    }
   }, []);
 
   return (
@@ -79,7 +89,7 @@ function ProfileSelector({ options, selectedOption, onSelect }) {
                       className={styles.optionImage}
                     />
                     {isSelected && (
-                      <span className={styles.check}>
+                      <span className={styles.check} aria-hidden="true">
                         <CheckIcon />
                       </span>
                     )}
@@ -90,7 +100,7 @@ function ProfileSelector({ options, selectedOption, onSelect }) {
           </Swiper>
           <div className={styles.swiperArrowButtons}>
             <button
-              ref={prevRef}
+              ref={setPrevRef}
               type="button"
               className={styles.swiperButtonPrev}
               aria-label="이전 프로필"
@@ -98,7 +108,7 @@ function ProfileSelector({ options, selectedOption, onSelect }) {
               <ArrowLeftIcon />
             </button>
             <button
-              ref={nextRef}
+              ref={setNextRef}
               type="button"
               className={styles.swiperButtonNext}
               aria-label="다음 프로필"
