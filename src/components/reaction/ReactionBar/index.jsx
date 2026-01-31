@@ -5,20 +5,12 @@ import styles from './index.module.css';
 import ReactionBadge from '@/components/reaction/ReactionBadge/index';
 import ReactionPanel from '@/components/reaction/ReactionPanel/index';
 import AddReactionButton from '@/components/reaction/AddReactionButton/index';
+import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
 import { ArrowDownIcon } from '@/assets/icons';
 
 const THEMES = ['blue', 'green', 'purple', 'beige', 'trans'];
 
-/**
- * 기본으로 제공할 이모지 목록
- */
-const DEFAULT_EMOJIS = ['👍', '🙏', '🥺', '😍', '😂', '🎉'];
-
-export default function ReactionBar({
-  initialReactions,
-  availableEmojis,
-  theme,
-}) {
+export default function ReactionBar({ initialReactions, theme }) {
   /**
    * reactions
    * - { [emoji]: count } 형태의 리액션 상태
@@ -42,8 +34,6 @@ export default function ReactionBar({
   /** 리액션이 하나라도 있는지 여부 */
   const hasReactions = entries.length > 0;
   /** 사용할 이모지 목록 (props 우선, 없으면 기본값) */
-  const emojis = availableEmojis?.length ? availableEmojis : DEFAULT_EMOJIS;
-
   const safeTheme = THEMES.includes(theme) ? theme : 'blue';
 
   /**
@@ -122,6 +112,8 @@ export default function ReactionBar({
     setIsPickerOpen(false);
   };
 
+  const addBtnRef = useRef(null);
+
   return (
     <div
       className={`${styles.container} ${styles[`theme_${safeTheme}`]}`}
@@ -155,7 +147,9 @@ export default function ReactionBar({
           </button>
         )}
         {/* 리액션 추가 버튼 */}
-        <AddReactionButton onClick={handleAddClick} />
+        <div ref={addBtnRef}>
+          <AddReactionButton onClick={handleAddClick} />
+        </div>
       </div>
 
       {/* 상세 리액션 패널 */}
@@ -163,22 +157,13 @@ export default function ReactionBar({
         <ReactionPanel reactions={reactions} onItemClick={handleBadgeClick} />
       )}
 
-      {/* 간단 이모지 피커 */}
-      {isPickerOpen && (
-        <div className={styles.picker} role="menu" aria-label="이모지 선택">
-          {emojis.map((emoji) => (
-            <button
-              key={emoji}
-              type="button"
-              className={styles.pickerItem}
-              onClick={() => handlePickEmoji(emoji)}
-              role="menuitem"
-            >
-              {emoji}
-            </button>
-          ))}
-        </div>
-      )}
+      {/* emoji-mart 팝업 */}
+      <EmojiPickerPopup
+        open={isPickerOpen}
+        onClose={() => setIsPickerOpen(false)}
+        onPick={handlePickEmoji}
+        anchorRef={addBtnRef}
+      />
     </div>
   );
 }
