@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import RollingHeader from '@/components/list/RollingHeader';
 import MessageWrap from '@/components/list/MessageWrap';
 
+// API 연결 시 MOCK 데이터 삭제 필요
 const MOCK_RECIPIENT = {
   id: 2,
   name: '강영훈',
@@ -19,7 +20,7 @@ const MOCK_RECIPIENT = {
       profileImageURL:
         'https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8',
       relationship: '가족',
-      content: '열심히 일하는 모습 멋있습니다.',
+      content: 'MZ 김장인 두쫀쿠 만들기를 하고싶어요',
       font: 'Pretendard',
       createdAt: '2025-11-01T08:05:25.399056Z',
     },
@@ -29,7 +30,7 @@ const MOCK_RECIPIENT = {
       profileImageURL:
         'https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8',
       relationship: '지인',
-      content: '항상 응원합니다',
+      content: '양념치킨은 페리카나',
       font: 'Noto Sans',
       createdAt: '2025-11-01T08:04:12.852691Z',
     },
@@ -67,48 +68,7 @@ const MOCK_MESSAGES = {
   count: 3,
   next: null,
   previous: null,
-  results: [
-    {
-      id: 32,
-      sender: '김하은',
-      profileImageURL:
-        'https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8',
-      relationship: '가족',
-      content: '열심히 일하는 모습 멋있습니다.',
-      font: 'Pretendard',
-      createdAt: '2025-11-01T08:05:25.399056Z',
-    },
-    {
-      id: 31,
-      sender: '이영준',
-      profileImageURL:
-        'https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8',
-      relationship: '지인',
-      content: '양념치킨은 페리카나',
-      font: 'Noto Sans',
-      createdAt: '2025-11-01T08:04:12.852691Z',
-    },
-    {
-      id: 30,
-      sender: '손동욱',
-      profileImageURL:
-        'https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8',
-      relationship: '친구',
-      content: '프로젝트 화이팅!',
-      font: '나눔명조',
-      createdAt: '2025-11-01T08:01:52.605133Z',
-    },
-    {
-      id: 29,
-      sender: '김민지',
-      profileImageURL:
-        'https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8',
-      relationship: '동료',
-      content: '붕어빵은 슈크림이 최고야.',
-      font: '나눔손글씨 손편지체',
-      createdAt: '2025-11-01T08:01:52.605133Z',
-    },
-  ],
+  results: [],
 };
 
 function ListPage() {

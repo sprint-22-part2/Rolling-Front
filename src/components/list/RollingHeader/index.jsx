@@ -1,3 +1,4 @@
+import { useState, useRef } from 'react';
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
@@ -6,8 +7,12 @@ import {
   EditIcon,
   DeletedIcon,
   ArrowDownIcon,
-  ImojiIcon,
 } from '@/assets/icons';
+
+import ReactionBadge from '@/components/reaction/ReactionBadge';
+import AddReactionButton from '@/components/reaction/AddReactionButton';
+import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
+import ReactionPanel from '@/components/reaction/ReactionPanel';
 
 function RollingHeader({
   theme = 'blue',
@@ -19,14 +24,33 @@ function RollingHeader({
   messageCount = 0,
   topReactions = [],
 }) {
+  const [isPickerOpen, setIsPickerOpen] = useState(false);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+
+  const addBtnRef = useRef(null);
+  const moreBtnRef = useRef(null);
+
   const handleEdit = () => setIsEditMode(true);
   const handleSave = () => setIsEditMode(false);
+
+  const handleEmojiClick = (emoji) => {
+    // TODO: API 연결 시 이모지 추가, 성공 후 처리 필요
+    console.log(`이모지 클릭/추가: ${emoji}`);
+    setIsPickerOpen(false);
+  };
 
   const profiles = recentMessages.map((msg) => ({
     id: msg.id,
     src: msg.profileImageURL,
     alt: msg.sender,
   }));
+
+  const reactionsObject = topReactions.reduce((acc, curr) => {
+    acc[curr.emoji] = curr.count;
+    return acc;
+  }, {});
+
+  const MAX_VISIBLE_BADGES = 5;
 
   return (
     <div className={styles.rollingHeader} type={theme}>
@@ -64,19 +88,46 @@ function RollingHeader({
 
       <div className={styles.rollingHeaderBottom}>
         <div className={styles.emojis}>
-          {topReactions.map((reaction) => (
-            <div key={reaction.id} className={styles.emoji}>
-              {reaction.emoji} {reaction.count}
-            </div>
+          {topReactions.slice(0, MAX_VISIBLE_BADGES).map((reaction) => (
+            <ReactionBadge
+              key={reaction.id}
+              emoji={reaction.emoji}
+              count={reaction.count}
+              onClick={() => handleEmojiClick(reaction.emoji)}
+            />
           ))}
 
-          <button className={styles.moreEmoji}>
-            <ArrowDownIcon />
-          </button>
-          <button className={styles.addEmoji}>
-            <ImojiIcon />
-          </button>
+          {topReactions.length > MAX_VISIBLE_BADGES && (
+            <div className={styles.moreEmojiWrapper} ref={moreBtnRef}>
+              <button
+                className={styles.moreEmoji}
+                onClick={() => setIsPanelOpen(!isPanelOpen)}
+              >
+                <ArrowDownIcon />
+              </button>
+
+              {isPanelOpen && (
+                <ReactionPanel
+                  reactions={reactionsObject}
+                  onItemClick={handleEmojiClick}
+                />
+              )}
+            </div>
+          )}
+
+          <AddReactionButton
+            ref={addBtnRef}
+            onClick={() => setIsPickerOpen((prev) => !prev)}
+          />
+
+          <EmojiPickerPopup
+            open={isPickerOpen}
+            anchorRef={addBtnRef}
+            onClose={() => setIsPickerOpen(false)}
+            onPick={handleEmojiClick}
+          />
         </div>
+
         <ProfileGroup profiles={profiles} messageCount={messageCount} />
       </div>
     </div>
