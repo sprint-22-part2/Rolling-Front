@@ -30,14 +30,17 @@ article {
   gap: 24px;
   width: 100%;
 }
+
 .messageHeader {
   display: flex;
   gap: 16px;
   width: 100%;
 }
+
 .sender {
   width: 100%;
 }
+
 .senderImg {
   width: 56px;
   height: 56px;
@@ -54,11 +57,13 @@ article {
   width: calc(100% - 72px);
   align-items: flex-start;
 }
+
 .from {
   color: var(--accent);
   font-size: 14px;
   font-weight: var(--font-weight-bold);
 }
+
 .senderName {
   width: 100%;
   white-space: nowrap;
@@ -68,20 +73,24 @@ article {
   color: var(--gray-800);
   font-weight: var(--font-weight-semibold);
 }
+
 .relation {
   border-radius: 6px;
   height: 20px;
   position: flex;
 }
+
 .messageContent {
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.5;
   max-height: 6em;
   color: var(--gray-700);
 }
+
 .messageFoot {
   display: flex;
   align-items: center;
@@ -92,6 +101,7 @@ article {
 .data {
   color: var(--gray-300);
 }
+
 .messageFoot button {
   color: var(--gray-500);
   display: flex;
@@ -99,6 +109,7 @@ article {
   gap: 2px;
   padding: 6px 3px;
 }
+
 .messageFoot svg {
   height: 20px;
 }
