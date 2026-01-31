@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
@@ -94,11 +94,6 @@ export default function ReactionBar({ initialReactions, theme }) {
     setIsPickerOpen(false);
   };
 
-  const handleAddClick = () => {
-    // 클릭하면 이모지 피커 토글
-    setIsPickerOpen((v) => !v);
-    setIsPanelOpen(false);
-  };
   /**
    * 이모지 피커에서 이모지 선택 시
    * - 리액션 카운트 증가
@@ -113,6 +108,15 @@ export default function ReactionBar({ initialReactions, theme }) {
   };
 
   const addBtnRef = useRef(null);
+
+  const handleOpenPicker = useCallback(() => {
+    setIsPickerOpen((v) => !v);
+    setIsPanelOpen(false);
+  }, []);
+
+  const handleClosePicker = useCallback(() => {
+    setIsPickerOpen(false);
+  }, []);
 
   return (
     <div
@@ -148,7 +152,7 @@ export default function ReactionBar({ initialReactions, theme }) {
         )}
         {/* 리액션 추가 버튼 */}
         <div ref={addBtnRef}>
-          <AddReactionButton onClick={handleAddClick} />
+          <AddReactionButton onClick={handleOpenPicker} />
         </div>
       </div>
 
@@ -160,7 +164,7 @@ export default function ReactionBar({ initialReactions, theme }) {
       {/* emoji-mart 팝업 */}
       <EmojiPickerPopup
         open={isPickerOpen}
-        onClose={() => setIsPickerOpen(false)}
+        onClose={handleClosePicker}
         onPick={handlePickEmoji}
         anchorRef={addBtnRef}
       />

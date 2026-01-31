@@ -118,10 +118,8 @@ export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
       role="dialog"
       aria-label="이모지 선택"
       style={{
-        position: 'fixed',
         top: pos.top,
         left: pos.left,
-        zIndex: 9999,
       }}
     >
       <Picker
