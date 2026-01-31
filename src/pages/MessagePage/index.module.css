@@ -33,3 +33,9 @@
   justify-content: center;
   margin-top: 16px;
 }
+
+@media screen and (max-width: 768px) {
+  .messagePage {
+    padding: 48px 24px;
+  }
+}
