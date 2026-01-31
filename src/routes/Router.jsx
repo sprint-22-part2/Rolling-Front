@@ -3,6 +3,7 @@ import Layout from '@/components/layout/MainLayout';
 import MainPage from '@/pages/MainPage';
 import ListPage from '@/pages/ListPage';
 import PostPage from '@/pages/PostPage';
+import MessagePage from '@/pages/MessagePage';
 
 export default function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ export default function AppRoutes() {
           <Route path="/main" element={<MainPage />} />
           <Route path="/list" element={<ListPage theme="blue" />} />
           <Route path="/post" element={<PostPage />} />
+          <Route path="/post/message" element={<MessagePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
