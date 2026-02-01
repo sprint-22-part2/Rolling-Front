@@ -4,11 +4,13 @@ import SegmentToggle from '@/components/common/SegmentToggle';
 import ColorSelector from '@/components/post/ColorSelector';
 import ImageSelector from '@/components/post/ImageSelector';
 import { COLOR_OPTIONS } from '@/constants/post';
+import { createRecipient } from '@/apis/post';
 import useBackgroundImages from '@/hooks/useBackgroundImages';
 import Button from '@/components/common/Button';
 import styles from './index.module.css';
 
 const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
+const TEAM = '22-2';
 
 function PostPage() {
   const [recipientName, setRecipientName] = useState('');
@@ -32,6 +34,26 @@ function PostPage() {
   const handleNameChange = (field, nextValue) => {
     if (field === 'recipientName') {
       setRecipientName(nextValue);
+    }
+  };
+
+  const handleSubmit = async () => {
+    const resolvedBackgroundColor =
+      backgroundType === 'color' ? backgroundColor : DEFAULT_COLOR_ID;
+    const resolvedBackgroundImageURL =
+      backgroundType === 'image' ? selectedBackgroundImage : null;
+
+    const payload = {
+      team: TEAM,
+      name: recipientName.trim(),
+      backgroundColor: resolvedBackgroundColor,
+      backgroundImageURL: resolvedBackgroundImageURL,
+    };
+
+    try {
+      await createRecipient(TEAM, payload);
+    } catch {
+      // TODO: 필요 시 사용자에게 에러 메시지 노출(토스트)
     }
   };
 
@@ -80,6 +102,7 @@ function PostPage() {
           size="sizeBig"
           variant="variantPrimary"
           disabled={isSubmitDisabled}
+          onClick={handleSubmit}
         >
           생성하기
         </Button>
