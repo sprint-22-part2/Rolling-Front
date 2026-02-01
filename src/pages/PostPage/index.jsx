@@ -1,31 +1,21 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import TextInput from '@/components/common/TextInput';
 import SegmentToggle from '@/components/common/SegmentToggle';
 import ColorSelector from '@/components/post/ColorSelector';
 import ImageSelector from '@/components/post/ImageSelector';
 import { COLOR_OPTIONS } from '@/constants/post';
-import axiosInstance from '@/apis/axiosInstance';
+import useBackgroundImages from '@/hooks/useBackgroundImages';
 import Button from '@/components/common/Button';
 import styles from './index.module.css';
 
 const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
-
-const normalizeImageOptions = (payload) => {
-  const list = payload.imageUrls;
-
-  return list.map((url) => ({
-    id: url,
-    label: url,
-    url,
-  }));
-};
 
 function PostPage() {
   const [recipientName, setRecipientName] = useState('');
   const [backgroundType, setBackgroundType] = useState('color');
   const [backgroundColor, setBackgroundColor] = useState(DEFAULT_COLOR_ID);
   const [backgroundImage, setBackgroundImage] = useState('');
-  const [imageOptions, setImageOptions] = useState([]);
+  const { imageOptions } = useBackgroundImages();
 
   const selectedBackgroundImage = useMemo(
     () => backgroundImage || (imageOptions[0]?.id ?? ''),
@@ -38,24 +28,6 @@ function PostPage() {
       (backgroundType === 'image' && !selectedBackgroundImage),
     [recipientName, backgroundType, selectedBackgroundImage]
   );
-
-  useEffect(() => {
-    let isMounted = true;
-
-    axiosInstance
-      .get('/background-images/')
-      .then((response) => {
-        const normalized = normalizeImageOptions(response?.data);
-        if (isMounted) {
-          setImageOptions(normalized);
-        }
-      })
-      .catch(() => {});
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
 
   const handleNameChange = (field, nextValue) => {
     if (field === 'recipientName') {
