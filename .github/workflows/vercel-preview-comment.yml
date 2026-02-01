@@ -19,13 +19,22 @@ jobs:
             const base = context.payload.pull_request.base.ref;
             const labels = context.payload.pull_request.labels.map(l => l.name);
             const assoc = context.payload.pull_request.author_association;
+            const author = context.payload.pull_request.user.login;
             core.info(`base: ${base}`);
             core.info(`labels: ${labels.join(', ')}`);
             core.info(`author_association: ${assoc}`);
+            core.info(`author: ${author}`);
+            const allowedAuthors = new Set([
+              'Lseojeong',
+              'bitna0a',
+              'geniexx64',
+              'ziy1027',
+            ]);
             const allowed =
               base === 'develop' &&
               labels.includes('🔎 Preview') &&
-              ['MEMBER', 'OWNER', 'COLLABORATOR'].includes(assoc);
+              ['MEMBER', 'OWNER', 'COLLABORATOR'].includes(assoc) &&
+              allowedAuthors.has(author);
             core.setOutput('allowed', allowed ? 'true' : 'false');
 
       - uses: actions/checkout@v4
