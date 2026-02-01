@@ -1,12 +1,12 @@
-import axiosInstance from '@/apis/axiosInstance';
+import { apiClient, teamClient } from '@/apis/axiosInstance';
 
 export const getBackgroundImages = async (signal) => {
-  const response = await axiosInstance.get('/background-images/', { signal });
+  const response = await apiClient.get('/background-images/', { signal });
   return response?.data?.imageUrls ?? [];
 };
 
-export const createRecipient = async (team, data, signal) => {
-  const response = await axiosInstance.post(`/${team}/recipients/`, data, {
+export const createRecipient = async (data, signal) => {
+  const response = await teamClient.post('/recipients/', data, {
     signal,
   });
   return response?.data;

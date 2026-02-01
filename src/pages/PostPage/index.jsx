@@ -10,7 +10,6 @@ import Button from '@/components/common/Button';
 import styles from './index.module.css';
 
 const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
-const TEAM = '22-2';
 
 function PostPage() {
   const [recipientName, setRecipientName] = useState('');
@@ -44,14 +43,13 @@ function PostPage() {
       backgroundType === 'image' ? selectedBackgroundImage : null;
 
     const payload = {
-      team: TEAM,
       name: recipientName.trim(),
       backgroundColor: resolvedBackgroundColor,
       backgroundImageURL: resolvedBackgroundImageURL,
     };
 
     try {
-      await createRecipient(TEAM, payload);
+      await createRecipient(payload);
     } catch {
       // TODO: 필요 시 사용자에게 에러 메시지 노출(토스트)
     }
