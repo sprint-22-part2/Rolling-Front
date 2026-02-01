@@ -1,0 +1,110 @@
+[type='yellow'] {
+  --accent: var(--yellow-300);
+}
+
+[type='orange'] {
+  --accent: #fb5607;
+}
+
+[type='pink'] {
+  --accent: var(--pink-300);
+}
+
+[type='purple'] {
+  --accent: var(--purple-300);
+}
+
+[type='blue'] {
+  --accent: var(--blue-300);
+}
+[type='green'] {
+  --accent: var(--green-300);
+}
+
+[type='image'] {
+  --accent: var(--white);
+}
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+.messageHeader {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+.sender {
+  width: 100%;
+}
+.senderImg {
+  width: 56px;
+  height: 56px;
+  background-color: var(--gray-100);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.senderWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+  width: calc(100% - 72px);
+  align-items: flex-start;
+}
+.from {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+}
+.senderName {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 24px;
+  color: var(--gray-800);
+  font-weight: var(--font-weight-semibold);
+}
+.relation {
+  border-radius: 6px;
+  height: 20px;
+  position: flex;
+}
+.messageContent {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+  max-height: 6em;
+  color: var(--gray-700);
+}
+.messageFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.data {
+  color: var(--gray-300);
+}
+.messageFoot button {
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 3px;
+}
+.messageFoot svg {
+  height: 20px;
+}
+
+@media (max-width: 767px) {
+  article {
+    gap: 16px;
+  }
+}
