@@ -53,7 +53,7 @@ function LandingPage() {
       {/* 하단 버튼 */}
       <div className={styles.bottomSection}>
         <LinkButton
-          to="/list"
+          to="/main"
           size="sizeBig"
           variant="variantPrimary"
           className={styles.linkButton}
