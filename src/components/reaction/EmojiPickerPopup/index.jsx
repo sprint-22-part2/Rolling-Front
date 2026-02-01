@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import { createPortal } from 'react-dom';
 import styles from './index.module.css';
@@ -49,7 +55,7 @@ export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
   }, [anchorRef]);
 
   // open 동안 resize/scroll에 따라 위치 재계산
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!open) {
       return;
     }
