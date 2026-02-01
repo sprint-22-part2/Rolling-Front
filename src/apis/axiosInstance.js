@@ -12,5 +12,3 @@ const createApiClient = (baseURL) =>
 
 export const apiClient = createApiClient(ENV.API_BASE_URL);
 export const teamClient = createApiClient(ENV.API_TEAM_BASE_URL);
-
-export default apiClient;
