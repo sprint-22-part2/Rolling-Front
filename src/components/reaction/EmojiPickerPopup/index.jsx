@@ -43,13 +43,9 @@ export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
       top = Math.max(VIEWPORT_MARGIN, rect.top - ANCHOR_GAP - pickerHeight);
     }
 
-    // 오른쪽으로 넘치면 왼쪽으로 당기기
-    if (left + pickerWidth > window.innerWidth - VIEWPORT_MARGIN) {
-      left = Math.max(
-        VIEWPORT_MARGIN,
-        window.innerWidth - VIEWPORT_MARGIN - pickerWidth
-      );
-    }
+    // 뷰포트 경계에 맞게 가로 위치 조정
+    left = Math.min(left, window.innerWidth - pickerWidth - VIEWPORT_MARGIN);
+    left = Math.max(left, VIEWPORT_MARGIN);
 
     return { top, left };
   }, [anchorRef]);
