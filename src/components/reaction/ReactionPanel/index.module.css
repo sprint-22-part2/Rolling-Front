@@ -68,8 +68,10 @@
 /* 말풍선 패널 */
 .panel {
   position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
+  top: calc(100% + 8px);
+  left: 0;
+  right: auto;
+  z-index: 50;
   min-width: 420px;
   padding: 18px 22px;
   border-radius: 26px;
