@@ -8,14 +8,3 @@
   justify-content: center;
   pointer-events: auto;
 }
-
-.modal {
-  width: 500px;
-  max-height: 432px;
-  background: var(--white);
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  overflow-y: auto;
-  pointer-events: auto;
-}
