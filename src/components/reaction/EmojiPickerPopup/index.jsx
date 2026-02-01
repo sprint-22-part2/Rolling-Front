@@ -4,15 +4,15 @@ import EmojiPicker from 'emoji-picker-react';
 import { createPortal } from 'react-dom';
 import styles from './index.module.css';
 
+const ANCHOR_GAP = 8;
+const VIEWPORT_MARGIN = 8;
+const PICKER_FALLBACK_HEIGHT = 435;
+const PICKER_FALLBACK_WIDTH = 350;
+
 export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
   const popupRef = useRef(null);
   const rafIdRef = useRef(null);
   const [pos, setPos] = useState({ top: 0, left: 0 });
-
-  const ANCHOR_GAP = 8;
-  const VIEWPORT_MARGIN = 8;
-  const PICKER_FALLBACK_HEIGHT = 435;
-  const PICKER_FALLBACK_WIDTH = 350;
 
   // 뷰포트 기준 좌표 계산
   const calcPos = useCallback(() => {
