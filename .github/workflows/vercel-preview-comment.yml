@@ -11,6 +11,7 @@ jobs:
       contents: read
       pull-requests: write
     if: >
+      github.event.pull_request.base.ref == 'develop' &&
       contains(github.event.pull_request.labels.*.name, '🔎 Preview') &&
       (github.event.pull_request.author_association == 'MEMBER' ||
       github.event.pull_request.author_association == 'OWNER' ||
