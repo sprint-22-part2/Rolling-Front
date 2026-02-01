@@ -9,6 +9,11 @@ export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
   const rafIdRef = useRef(null);
   const [pos, setPos] = useState({ top: 0, left: 0 });
 
+  const ANCHOR_GAP = 8;
+  const VIEWPORT_MARGIN = 8;
+  const PICKER_FALLBACK_HEIGHT = 435;
+  const PICKER_FALLBACK_WIDTH = 350;
+
   // 뷰포트 기준 좌표 계산
   const calcPos = useCallback(() => {
     const anchorEl = anchorRef?.current;
@@ -17,25 +22,27 @@ export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
     }
 
     const rect = anchorEl.getBoundingClientRect();
-    const gap = 8;
 
     // 기본: 버튼 아래에 붙이기
-    let top = rect.bottom + gap;
+    let top = rect.bottom + ANCHOR_GAP;
     let left = rect.left;
 
     // 화면 밖으로 나가면 위로 띄우기(간단 안정화)
-    const pickerHeight = popupRef.current?.offsetHeight ?? 435;
-    const pickerWidth = popupRef.current?.offsetWidth ?? 350;
-    const margin = 8;
+    const pickerHeight =
+      popupRef.current?.offsetHeight ?? PICKER_FALLBACK_HEIGHT;
+    const pickerWidth = popupRef.current?.offsetWidth ?? PICKER_FALLBACK_WIDTH;
 
     // 아래로 내리면 화면 밖이면 위로
-    if (top + pickerHeight > window.innerHeight - margin) {
-      top = Math.max(margin, rect.top - gap - pickerHeight);
+    if (top + pickerHeight > window.innerHeight - VIEWPORT_MARGIN) {
+      top = Math.max(VIEWPORT_MARGIN, rect.top - ANCHOR_GAP - pickerHeight);
     }
 
     // 오른쪽으로 넘치면 왼쪽으로 당기기
-    if (left + pickerWidth > window.innerWidth - margin) {
-      left = Math.max(margin, window.innerWidth - margin - pickerWidth);
+    if (left + pickerWidth > window.innerWidth - VIEWPORT_MARGIN) {
+      left = Math.max(
+        VIEWPORT_MARGIN,
+        window.innerWidth - VIEWPORT_MARGIN - pickerWidth
+      );
     }
 
     return { top, left };
