@@ -33,7 +33,6 @@ jobs:
             const allowed =
               base === 'develop' &&
               labels.includes('🔎 Preview') &&
-              ['MEMBER', 'OWNER', 'COLLABORATOR'].includes(assoc) &&
               allowedAuthors.has(author);
             core.setOutput('allowed', allowed ? 'true' : 'false');
 
