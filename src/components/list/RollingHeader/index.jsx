@@ -1,14 +1,9 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
+import ReactionBar from '@/components/reaction/ReactionBar';
 
-import {
-  ShareIcon,
-  EditIcon,
-  DeletedIcon,
-  ArrowDownIcon,
-  ImojiIcon,
-} from '@/assets/icons';
+import { ShareIcon, EditIcon, DeletedIcon } from '@/assets/icons';
 
 function RollingHeader({ theme = 'blue', recipientName = 'recipientName' }) {
   return (
@@ -33,18 +28,15 @@ function RollingHeader({ theme = 'blue', recipientName = 'recipientName' }) {
           </button>
         </div>
       </div>
+
       <div className={styles.rollingHeaderBottom}>
-        <div className={styles.emojis}>
-          <div className={styles.emoji}>🥲 23</div>
-          <div className={styles.emoji}>🥲 203</div>
-          <div className={styles.emoji}>🥲 2663</div>
-          <button className={styles.moreEmoji}>
-            <ArrowDownIcon />
-          </button>
-          <button className={styles.addEmoji}>
-            <ImojiIcon />
-          </button>
-        </div>
+        {/* 이모지 영역 ReactionBar */}
+        <ReactionBar
+          theme={theme}
+          initialReactions={{
+            '🥲': 23,
+          }}
+        />
         <ProfileGroup />
       </div>
     </div>
