@@ -3,8 +3,6 @@
   --emoji-bg: var(--yellow-200);
   --emoji-text: var(--yellow-400);
   --accent: var(--yellow-300);
-  --emoji-filter: brightness(0) saturate(100%) invert(58%) sepia(74%)
-    saturate(452%) hue-rotate(12deg) brightness(93%) contrast(84%);
 
   --rb-chip-bg: var(--yellow-200);
   --rb-text: var(--yellow-400);
@@ -16,8 +14,6 @@
   --bg: var(--purple-100);
   --emoji-bg: var(--purple-200);
   --emoji-text: var(--purple-400);
-  --emoji-filter: brightness(0) saturate(100%) invert(18%) sepia(61%)
-    saturate(3665%) hue-rotate(256deg) brightness(90%) contrast(100%);
   --accent: var(--purple-300);
 
   --rb-chip-bg: var(--purple-200);
@@ -30,8 +26,6 @@
   --bg: var(--blue-100);
   --emoji-bg: var(--blue-200);
   --emoji-text: var(--blue-400);
-  --emoji-filter: brightness(0) saturate(100%) invert(26%) sepia(21%)
-    saturate(5412%) hue-rotate(199deg) brightness(93%) contrast(92%);
   --accent: var(--blue-300);
 
   --rb-chip-bg: var(--blue-200);
@@ -44,8 +38,6 @@
   --bg: var(--green-100);
   --emoji-bg: var(--green-200);
   --emoji-text: var(--green-400);
-  --emoji-filter: brightness(0) saturate(100%) invert(39%) sepia(45%)
-    saturate(553%) hue-rotate(117deg) brightness(96%) contrast(89%);
   --accent: var(--green-300);
 
   --rb-chip-bg: var(--green-200);
