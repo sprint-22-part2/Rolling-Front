@@ -1,13 +1,14 @@
 import styles from './index.module.css';
-import PropTypes from 'prop-types';
 import RollingCard from '@/components/main/RollingCard';
+import { getPopularRecipients } from '@/apis/recipients';
 
 // Import Swiper React components
 // import Swiper core and required modules
 import { Navigation, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // Import Images
 import { ArrowLeftIcon, ArrowRightIcon } from '@/assets/icons';
@@ -17,7 +18,17 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
-function PopularRolling({ theme = 'blue', recipientName = 'recipientName' }) {
+function PopularRolling() {
+  const [rolling, setRolling] = useState([]);
+
+  useEffect(() => {
+    async function rec() {
+      const popularRecipients = await getPopularRecipients({ limit: 8 });
+      setRolling(popularRecipients.results);
+    }
+    rec();
+  }, []);
+
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
@@ -52,9 +63,18 @@ function PopularRolling({ theme = 'blue', recipientName = 'recipientName' }) {
           },
         }}
       >
-        <SwiperSlide>
-          <RollingCard theme={theme} recipientName={recipientName} />
-        </SwiperSlide>
+        {rolling?.map((item) => (
+          <SwiperSlide key={item.id}>
+            <Link
+              className={styles.RollingCard}
+              key={item.id}
+              type={item.id}
+              to={'/post/' + item.id}
+            >
+              <RollingCard item={item} />
+            </Link>
+          </SwiperSlide>
+        ))}
       </Swiper>
       <div className={styles.swiperArrowButtons}>
         <button ref={prevRef} className={styles.swiperButtonPrev}>
@@ -67,8 +87,5 @@ function PopularRolling({ theme = 'blue', recipientName = 'recipientName' }) {
     </div>
   );
 }
-PopularRolling.propTypes = {
-  theme: PropTypes.string.isRequired,
-  recipientName: PropTypes.string.isRequired,
-};
+
 export default PopularRolling;
