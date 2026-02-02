@@ -140,7 +140,7 @@ export default function ReactionBar({ initialReactions, theme }) {
         <ReactionPanel reactions={reactions} onItemClick={handleBadgeClick} />
       )}
 
-      {/* emoji-mart 팝업 */}
+      {/* emoji-picker 팝업 */}
       <EmojiPickerPopup
         open={isPickerOpen}
         onClose={handleClosePicker}
