@@ -1,3 +1,9 @@
+/* Noto Sans, 나눔명조 불러오기 */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans:wght@400;700&display=swap');
+
+/* 나눔손글씨 손편지체 정의 */
+@import url('https://cdn.jsdelivr.net/gh/fonts-archive/NanumSonPyeonJiCe/NanumSonPyeonJiCe.css');
+
 /* Poppins Font - English */
 @font-face {
   font-family: 'Poppins';
