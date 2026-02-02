@@ -1,31 +1,24 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import TextInput from '@/components/common/TextInput';
 import SegmentToggle from '@/components/common/SegmentToggle';
 import ColorSelector from '@/components/post/ColorSelector';
 import ImageSelector from '@/components/post/ImageSelector';
+import ImageSelectorSkeleton from '@/components/post/ImageSelectorSkeleton';
 import { COLOR_OPTIONS } from '@/constants/post';
-import axiosInstance from '@/apis/axiosInstance';
+import { createRecipient } from '@/apis/post';
+import useBackgroundImages from '@/hooks/useBackgroundImages';
 import Button from '@/components/common/Button';
 import styles from './index.module.css';
 
 const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
-
-const normalizeImageOptions = (payload) => {
-  const list = payload.imageUrls;
-
-  return list.map((url) => ({
-    id: url,
-    label: url,
-    url,
-  }));
-};
 
 function PostPage() {
   const [recipientName, setRecipientName] = useState('');
   const [backgroundType, setBackgroundType] = useState('color');
   const [backgroundColor, setBackgroundColor] = useState(DEFAULT_COLOR_ID);
   const [backgroundImage, setBackgroundImage] = useState('');
-  const [imageOptions, setImageOptions] = useState([]);
+  const { imageOptions, isLoading: isBackgroundLoading } =
+    useBackgroundImages();
 
   const selectedBackgroundImage = useMemo(
     () => backgroundImage || (imageOptions[0]?.id ?? ''),
@@ -39,27 +32,28 @@ function PostPage() {
     [recipientName, backgroundType, selectedBackgroundImage]
   );
 
-  useEffect(() => {
-    let isMounted = true;
-
-    axiosInstance
-      .get('/background-images/')
-      .then((response) => {
-        const normalized = normalizeImageOptions(response?.data);
-        if (isMounted) {
-          setImageOptions(normalized);
-        }
-      })
-      .catch(() => {});
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   const handleNameChange = (field, nextValue) => {
     if (field === 'recipientName') {
       setRecipientName(nextValue);
+    }
+  };
+
+  const handleSubmit = async () => {
+    const resolvedBackgroundColor =
+      backgroundType === 'color' ? backgroundColor : DEFAULT_COLOR_ID;
+    const resolvedBackgroundImageURL =
+      backgroundType === 'image' ? selectedBackgroundImage : null;
+
+    const payload = {
+      name: recipientName.trim(),
+      backgroundColor: resolvedBackgroundColor,
+      backgroundImageURL: resolvedBackgroundImageURL,
+    };
+
+    try {
+      await createRecipient(payload);
+    } catch {
+      // TODO: 필요 시 사용자에게 에러 메시지 노출(토스트)
     }
   };
 
@@ -94,13 +88,16 @@ function PostPage() {
           />
         )}
 
-        {backgroundType === 'image' && (
-          <ImageSelector
-            images={imageOptions}
-            value={selectedBackgroundImage}
-            onChange={setBackgroundImage}
-          />
-        )}
+        {backgroundType === 'image' &&
+          (isBackgroundLoading ? (
+            <ImageSelectorSkeleton />
+          ) : (
+            <ImageSelector
+              images={imageOptions}
+              value={selectedBackgroundImage}
+              onChange={setBackgroundImage}
+            />
+          ))}
       </section>
       <div className={styles.buttonWrapper}>
         <Button
@@ -108,6 +105,7 @@ function PostPage() {
           size="sizeBig"
           variant="variantPrimary"
           disabled={isSubmitDisabled}
+          onClick={handleSubmit}
         >
           생성하기
         </Button>

@@ -50,7 +50,7 @@
   position: absolute;
   inset: 0;
   border-radius: 16px;
-  background: rgba(74, 73, 79, 0.3);
+  background: var(--background-overlay);
 }
 
 .checkMark {
