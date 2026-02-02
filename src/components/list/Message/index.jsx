@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ProfileImage from '@/components/common/ProfileImage';
 import RelationshipBadge from '@/components/common/RelationshipBadge';
 import { DeletedIcon } from '@/assets/icons';
+import Button from '@/components/common/Button';
 
 function Message({
   senderName,
@@ -55,10 +56,14 @@ function Message({
 
         {/* 편집 모드일 때만 삭제 버튼 노출 */}
         {isEditMode && (
-          <button onClick={handleDelete}>
-            <DeletedIcon />
+          <Button
+            variant="variantSmallText"
+            onClick={handleDelete}
+            leftIcon={<DeletedIcon />}
+            className={styles.deleteBtn}
+          >
             삭제
-          </button>
+          </Button>
         )}
       </div>
     </article>

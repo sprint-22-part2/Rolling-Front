@@ -13,17 +13,17 @@
 }
 
 [type='orange'] {
-  --bg: #ffd7c3;
-  --emoji-bg: #ffd7c3;
-  --emoji-text: #c45119;
+  --bg: var(--orange-200);
+  --emoji-bg: var(--orange-200);
+  --emoji-text: var(--orange-400);
   --emoji-filter: brightness(0) saturate(100%) invert(35%) sepia(85%)
     saturate(1099%) hue-rotate(345deg) brightness(89%) contrast(92%);
-  --accent: #fb5607;
+  --accent: var(--orange-300);
 
-  --rb-chip-bg: #ffd7c3;
-  --rb-text: #c45119;
-  --rb-add-bg: #ffd7c3;
-  --rb-icon: #c45119;
+  --rb-chip-bg: var(--orange-200);
+  --rb-text: var(--orange-400);
+  --rb-add-bg: var(--orange-200);
+  --rb-icon: var(--orange-400);
 }
 
 [type='pink'] {
@@ -123,7 +123,7 @@
 
 .name {
   font-size: 32px;
-  color: var(--gray-800);
+  color: var(--header-text, var(--gray-800));
   font-weight: var(--font-weight-semibold);
 
   display: -webkit-box;

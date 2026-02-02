@@ -46,6 +46,9 @@ function RollingHeader({
     alt: msg.sender,
   }));
 
+  const profileTextColor =
+    theme === 'image' ? 'var(--white)' : 'var(--gray-800)';
+
   const reactionsObject = topReactions.reduce((acc, curr) => {
     acc[curr.emoji] = curr.count;
     return acc;
@@ -144,7 +147,11 @@ function RollingHeader({
           />
         </div>
 
-        <ProfileGroup profiles={profiles} messageCount={messageCount} />
+        <ProfileGroup
+          profiles={profiles}
+          messageCount={messageCount}
+          textColor={profileTextColor}
+        />
       </div>
     </div>
   );
