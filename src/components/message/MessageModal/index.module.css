@@ -85,12 +85,7 @@
 
 /* 모바일 전용 스타일 */
 @media screen and (max-width: 767px) {
-  .modal {
-    width: 100%;
-    max-width: 500px;
-  }
   .modalContent {
     width: 327px;
-    max-height: 230px;
   }
 }
