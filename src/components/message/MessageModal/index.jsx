@@ -29,7 +29,6 @@ export default function MessageModal({
       closeOnOverlayClick
       closeOnEsc
     >
-      {/* ✅ MessageModal 전용 UI 컨테이너 */}
       <div className={styles.modal}>
         <header className={styles.modalHeader}>
           <ProfileImage
