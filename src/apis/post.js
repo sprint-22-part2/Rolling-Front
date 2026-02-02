@@ -5,9 +5,7 @@ export const getBackgroundImages = async (signal) => {
   return response?.data?.imageUrls ?? [];
 };
 
-export const createRecipient = async (data, signal) => {
-  const response = await teamClient.post('/recipients/', data, {
-    signal,
-  });
+export const createRecipient = async (data) => {
+  const response = await teamClient.post('/recipients/', data);
   return response?.data;
 };
