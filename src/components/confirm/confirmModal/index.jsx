@@ -28,7 +28,7 @@ export default function ConfirmModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      ariaLabel="삭제 모달"
+      ariaLabel={title}
       closeOnOverlayClick
       closeOnEsc
     >
