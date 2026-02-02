@@ -3,6 +3,7 @@ import TextInput from '@/components/common/TextInput';
 import SegmentToggle from '@/components/common/SegmentToggle';
 import ColorSelector from '@/components/post/ColorSelector';
 import ImageSelector from '@/components/post/ImageSelector';
+import ImageSelectorSkeleton from '@/components/post/ImageSelectorSkeleton';
 import { COLOR_OPTIONS } from '@/constants/post';
 import { createRecipient } from '@/apis/post';
 import useBackgroundImages from '@/hooks/useBackgroundImages';
@@ -16,7 +17,8 @@ function PostPage() {
   const [backgroundType, setBackgroundType] = useState('color');
   const [backgroundColor, setBackgroundColor] = useState(DEFAULT_COLOR_ID);
   const [backgroundImage, setBackgroundImage] = useState('');
-  const { imageOptions } = useBackgroundImages();
+  const { imageOptions, isLoading: isBackgroundLoading } =
+    useBackgroundImages();
 
   const selectedBackgroundImage = useMemo(
     () => backgroundImage || (imageOptions[0]?.id ?? ''),
@@ -86,13 +88,16 @@ function PostPage() {
           />
         )}
 
-        {backgroundType === 'image' && (
-          <ImageSelector
-            images={imageOptions}
-            value={selectedBackgroundImage}
-            onChange={setBackgroundImage}
-          />
-        )}
+        {backgroundType === 'image' &&
+          (isBackgroundLoading ? (
+            <ImageSelectorSkeleton />
+          ) : (
+            <ImageSelector
+              images={imageOptions}
+              value={selectedBackgroundImage}
+              onChange={setBackgroundImage}
+            />
+          ))}
       </section>
       <div className={styles.buttonWrapper}>
         <Button
