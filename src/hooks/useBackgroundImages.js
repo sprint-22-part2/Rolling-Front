@@ -10,8 +10,9 @@ const useBackgroundImages = () => {
 
     getBackgroundImages(controller.signal)
       .then((list) => {
-        const normalized = list.map((url) => ({
+        const normalized = list.map((url, index) => ({
           id: url,
+          label: `배경 이미지 ${index + 1}`,
           url,
         }));
         setImageOptions(normalized);
