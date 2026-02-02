@@ -1,11 +1,11 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
-
+import ReactionBadge from '@/components/reaction/ReactionBadge';
 function RollingCard({ item }) {
   if (!item) {
     return null;
-  } // ⭐ 핵심
+  }
   const { name, backgroundColor } = item;
 
   return (
@@ -16,6 +16,7 @@ function RollingCard({ item }) {
       </div>
       <ProfileGroup />
       <div className={styles.emojis}>
+        <ReactionBadge />
         <div className={styles.emoji}>🥲 23</div>
         <div className={styles.emoji}>🥲 203</div>
         <div className={styles.emoji}>🥲 2663</div>

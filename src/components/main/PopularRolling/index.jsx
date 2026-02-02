@@ -65,11 +65,7 @@ function PopularRolling() {
       >
         {rolling?.map((item) => (
           <SwiperSlide key={item.id}>
-            <Link
-              className={styles.RollingCard}
-              key={item.id}
-              to={'/post/' + item.id}
-            >
+            <Link className={styles.RollingCard} to={`/post/${item.id}`}>
               <RollingCard item={item} />
             </Link>
           </SwiperSlide>
