@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import styles from './index.module.css';
@@ -11,8 +11,6 @@ export default function Modal({
   closeOnOverlayClick,
   closeOnEsc,
 }) {
-  const overlayRef = useRef(null);
-
   // ESC로 닫기
   useEffect(() => {
     if (!isOpen || !closeOnEsc) {
@@ -58,7 +56,6 @@ export default function Modal({
 
   return createPortal(
     <div
-      ref={overlayRef}
       className={styles.overlay}
       role="presentation"
       onPointerDownCapture={handleOverlayPointerDownCapture}
