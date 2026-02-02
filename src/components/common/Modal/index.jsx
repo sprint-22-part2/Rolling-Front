@@ -1,11 +1,21 @@
+import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './index.module.css';
 
-export default function Modal({ open, onClose, children }) {
+export default function Modal({
+  isOpen,
+  onClose,
+  children,
+  ariaLabel,
+  closeOnOverlayClick,
+  closeOnEsc,
+}) {
+  const overlayRef = useRef(null);
+
+  // ESC로 닫기
   useEffect(() => {
-    if (!open) {
+    if (!isOpen || !closeOnEsc) {
       return;
     }
 
@@ -17,19 +27,49 @@ export default function Modal({ open, onClose, children }) {
 
     document.addEventListener('keydown', onKeyDown);
     return () => document.removeEventListener('keydown', onKeyDown);
-  }, [open, onClose]);
+  }, [isOpen, closeOnEsc, onClose]);
 
-  if (!open) {
+  // 열렸을 때 body 스크롤 잠금
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [isOpen]);
+
+  if (!isOpen) {
     return null;
   }
 
+  const handleOverlayPointerDownCapture = (e) => {
+    if (!closeOnOverlayClick) {
+      return;
+    }
+    // overlay 자체를 누른 경우에만 닫기
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    onClose();
+  };
+
   return createPortal(
-    <div className={styles.overlay} onClick={onClose}>
+    <div
+      ref={overlayRef}
+      className={styles.overlay}
+      role="presentation"
+      onPointerDownCapture={handleOverlayPointerDownCapture}
+    >
       <div
         className={styles.modal}
         role="dialog"
         aria-modal="true"
-        onClick={(e) => e.stopPropagation()} // 내부 클릭 차단
+        aria-label={ariaLabel}
+        onPointerDown={(e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       >
         {children}
       </div>
@@ -39,7 +79,16 @@ export default function Modal({ open, onClose, children }) {
 }
 
 Modal.propTypes = {
-  open: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  ariaLabel: PropTypes.string,
+  closeOnOverlayClick: PropTypes.bool,
+  closeOnEsc: PropTypes.bool,
+};
+
+Modal.defaultProps = {
+  ariaLabel: 'modal',
+  closeOnOverlayClick: true,
+  closeOnEsc: true,
 };

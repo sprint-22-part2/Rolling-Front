@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
+import Modal from '@/components/common/Modal';
 import Button from '@/components/common/Button';
 import ProfileImage from '@/components/common/ProfileImage';
 import RelationshipBadge from '@/components/common/RelationshipBadge';
@@ -16,56 +16,21 @@ export default function MessageModal({
   date,
   content,
 }) {
-  // ESC로 닫기
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    const onKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keydown', onKeyDown);
-  }, [isOpen, onClose]);
-
-  if (!isOpen) {
-    return null;
-  }
-
   const handleConfirm = () => {
-    // 필요하면 확인 시 추가 로직 실행
     onConfirm?.();
-    // 모달 닫기
-    onClose();
-  };
-
-  const handleOverlayPointerDownCapture = (e) => {
-    if (e.target !== e.currentTarget) {
-      return;
-    }
     onClose();
   };
 
   return (
-    <div
-      className={styles.overlay}
-      onClick={onClose}
-      role="presentation"
-      onPointerDownCapture={handleOverlayPointerDownCapture}
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      ariaLabel="메시지 모달"
+      closeOnOverlayClick
+      closeOnEsc
     >
-      {/* 모달 내부 클릭은 닫히지 않게 막기 */}
-      <div
-        className={styles.modal}
-        role="dialog"
-        aria-modal="true"
-        aria-label="메시지 모달"
-        onClick={(e) => e.stopPropagation()}
-        onPointerDown={(e) => e.stopPropagation()}
-      >
+      {/* ✅ MessageModal 전용 UI 컨테이너 */}
+      <div className={styles.modal}>
         <header className={styles.modalHeader}>
           <ProfileImage
             src={profileSrc}
@@ -82,7 +47,6 @@ export default function MessageModal({
                 <span className={styles.from}>From.</span>
                 <span className={styles.name}>{name}</span>
               </div>
-
               <RelationshipBadge relationship={relationship} />
             </div>
 
@@ -104,7 +68,7 @@ export default function MessageModal({
           </Button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 
