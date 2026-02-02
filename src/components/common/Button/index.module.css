@@ -121,14 +121,14 @@
   transition: all 0.2s ease;
 }
 .variantWhite:hover {
-  background-color: var(--gray-100);
+  background-color: var(--white-opacity-10);
   color: var(--white);
 }
 .variantWhite:disabled {
-  background-color: var(--gray-100);
-  color: var(--white);
+  background-color: transparent;
+  color: var(--white-opacity-50);
   cursor: not-allowed;
-  border: none;
+  border: 1px solid var(--white-opacity-50);
 }
 
 /* 배경이 이미지일때 적용하는 하얀색 텍스트 버튼 스타일 */
@@ -136,7 +136,7 @@
   background: transparent;
   border: none;
   padding: 7.5px;
-  color: var(--gray-100);
+  color: var(--white);
   font-size: 14px;
   font-weight: var(--font-weight-regular);
   gap: 5px;
