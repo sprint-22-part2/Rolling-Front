@@ -1,17 +1,27 @@
 import styles from './index.module.css';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import LinkButton from '@/components/common/LinkButton';
+import PropTypes from 'prop-types';
 
-function NoMessage() {
+function NoMessage({ recipientName }) {
+  const { id } = useParams();
+
   return (
     <div className={styles.noMessageBox}>
       <p className={styles.notiMessage}>
         작성된 메세지가 없습니다.
         <br />
-        처음으로 SongHunyKimaa님에게 메세지를 남겨보세요.
+        처음으로 {recipientName}님에게 메세지를 남겨보세요.
       </p>
-      <Link>메세지 남기기</Link>
+      <LinkButton to={`/post/${id}/message`} size="sizeLg">
+        메세지 남기기
+      </LinkButton>
     </div>
   );
 }
+
+NoMessage.propTypes = {
+  recipientName: PropTypes.string,
+};
 
 export default NoMessage;

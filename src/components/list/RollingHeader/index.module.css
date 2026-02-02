@@ -1,54 +1,97 @@
 [type='yellow'] {
+  --bg: var(--yellow-100);
   --emoji-bg: var(--yellow-200);
   --emoji-text: var(--yellow-400);
   --accent: var(--yellow-300);
   --emoji-filter: brightness(0) saturate(100%) invert(58%) sepia(74%)
     saturate(452%) hue-rotate(12deg) brightness(93%) contrast(84%);
+
+  --rb-chip-bg: var(--yellow-200);
+  --rb-text: var(--yellow-400);
+  --rb-add-bg: var(--yellow-200);
+  --rb-icon: var(--yellow-400);
 }
 
 [type='orange'] {
+  --bg: #ffd7c3;
   --emoji-bg: #ffd7c3;
   --emoji-text: #c45119;
   --emoji-filter: brightness(0) saturate(100%) invert(35%) sepia(85%)
     saturate(1099%) hue-rotate(345deg) brightness(89%) contrast(92%);
   --accent: #fb5607;
+
+  --rb-chip-bg: #ffd7c3;
+  --rb-text: #c45119;
+  --rb-add-bg: #ffd7c3;
+  --rb-icon: #c45119;
 }
 
 [type='pink'] {
+  --bg: var(--pink-100);
   --emoji-bg: var(--pink-200);
   --emoji-text: var(--pink-400);
   --emoji-filter: brightness(0) saturate(100%) invert(14%) sepia(87%)
     saturate(5124%) hue-rotate(326deg) brightness(91%) contrast(94%);
   --accent: var(--pink-300);
+
+  --rb-chip-bg: var(--pink-200);
+  --rb-text: var(--pink-400);
+  --rb-add-bg: var(--pink-200);
+  --rb-icon: var(--pink-400);
 }
 
 [type='purple'] {
+  --bg: var(--purple-100);
   --emoji-bg: var(--purple-200);
   --emoji-text: var(--purple-400);
   --emoji-filter: brightness(0) saturate(100%) invert(18%) sepia(61%)
     saturate(3665%) hue-rotate(256deg) brightness(90%) contrast(100%);
   --accent: var(--purple-300);
+
+  --rb-chip-bg: var(--purple-200);
+  --rb-text: var(--purple-400);
+  --rb-add-bg: var(--purple-200);
+  --rb-icon: var(--purple-400);
 }
 
 [type='blue'] {
+  --bg: var(--blue-100);
   --emoji-bg: var(--blue-200);
   --emoji-text: var(--blue-400);
   --emoji-filter: brightness(0) saturate(100%) invert(26%) sepia(21%)
     saturate(5412%) hue-rotate(199deg) brightness(93%) contrast(92%);
   --accent: var(--blue-300);
+
+  --rb-chip-bg: var(--blue-200);
+  --rb-text: var(--blue-400);
+  --rb-add-bg: var(--blue-200);
+  --rb-icon: var(--blue-400);
 }
+
 [type='green'] {
+  --bg: var(--green-100);
   --emoji-bg: var(--green-200);
   --emoji-text: var(--green-400);
   --emoji-filter: brightness(0) saturate(100%) invert(39%) sepia(45%)
     saturate(553%) hue-rotate(117deg) brightness(96%) contrast(89%);
   --accent: var(--green-300);
+
+  --rb-chip-bg: var(--green-200);
+  --rb-text: var(--green-400);
+  --rb-add-bg: var(--green-200);
+  --rb-icon: var(--green-400);
 }
 
 [type='image'] {
+  --bg: var(--white-opacity-30);
   --emoji-bg: var(--white-opacity-30);
   --emoji-text: var(--white);
   --accent: var(--white);
+
+  --rb-chip-bg: var(--white-opacity-30);
+  --rb-text: var(--white);
+  --rb-add-bg: var(--white-opacity-30);
+  --rb-icon: var(--white);
 }
 
 .rollingHeader {
@@ -56,6 +99,7 @@
   flex-direction: column;
   gap: 16px;
 }
+
 .rollingHeaderTop {
   display: flex;
   justify-content: space-between;
@@ -63,29 +107,35 @@
   flex-wrap: wrap;
   gap: 8px 16px;
 }
+
 .recipient {
   display: flex;
   align-items: flex-start;
   gap: 8px;
 }
+
 .to {
   font-size: 18px;
   color: var(--accent);
   font-weight: var(--font-weight-bold);
   margin-top: 8px;
 }
+
 .name {
   font-size: 32px;
   color: var(--gray-800);
   font-weight: var(--font-weight-semibold);
-  line-height: 1.3;
+
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
   line-height: 1.5;
   max-height: 3em;
 }
+
 .rollingHeaderBottom {
   display: flex;
   justify-content: space-between;
@@ -100,17 +150,7 @@
   align-items: center;
   flex-wrap: wrap;
 }
-.rollingButtons button {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  white-space: nowrap;
-  color: var(--gray-500);
-}
 
-.rollingButtons button svg {
-  flex-shrink: 0;
-}
 .emojis {
   display: flex;
   gap: 8px;
@@ -118,24 +158,22 @@
   flex-wrap: wrap;
 }
 
-.emoji {
-  padding: 8px 12px;
-  border-radius: 9999px;
-  color: var(--emoji-text);
-  background-color: var(--emoji-bg);
-  white-space: nowrap;
+.moreEmojiWrapper {
+  position: relative;
+  display: inline-flex;
 }
-.moreEmoji,
-.addEmoji {
-  width: 56px;
+
+.moreEmoji {
+  width: 36px;
+  height: 36px;
   display: flex;
   justify-content: center;
-  padding: 8px 12px;
+  align-items: center;
+  padding: 0;
   border-radius: 9999px;
-  color: var(--emoji-text);
-  background-color: var(--emoji-bg);
-}
-.moreEmoji svg,
-.addEmoji svg {
-  filter: var(--emoji-filter);
+
+  color: var(--rb-text);
+  background-color: var(--rb-chip-bg);
+  border: none;
+  cursor: pointer;
 }
