@@ -21,6 +21,7 @@ const useBackgroundImages = () => {
         if (error?.code === 'ERR_CANCELED') {
           return;
         }
+        console.error('Failed to fetch background images:', error);
       })
       .finally(() => {
         setIsLoading(false);
