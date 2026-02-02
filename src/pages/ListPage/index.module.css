@@ -1,7 +1,5 @@
 /* 색상 배경 테마 공통 변수 설정 */
-[type='yellow'],
-[type='orange'],
-[type='pink'],
+[type='beige'],
 [type='purple'],
 [type='blue'],
 [type='green'] {
@@ -12,14 +10,8 @@
   --header-text: var(--gray-800);
 }
 
-[type='yellow'] {
+[type='beige'] {
   --bg: var(--yellow-100);
-}
-[type='orange'] {
-  --bg: #ffd7c3;
-}
-[type='pink'] {
-  --bg: var(--pink-100);
 }
 [type='purple'] {
   --bg: var(--purple-100);

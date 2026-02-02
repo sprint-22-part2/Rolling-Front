@@ -1,4 +1,4 @@
-[type='yellow'] {
+[type='beige'] {
   --bg: var(--yellow-100);
   --emoji-bg: var(--yellow-200);
   --emoji-text: var(--yellow-400);
@@ -10,34 +10,6 @@
   --rb-text: var(--yellow-400);
   --rb-add-bg: var(--yellow-200);
   --rb-icon: var(--yellow-400);
-}
-
-[type='orange'] {
-  --bg: var(--orange-200);
-  --emoji-bg: var(--orange-200);
-  --emoji-text: var(--orange-400);
-  --emoji-filter: brightness(0) saturate(100%) invert(35%) sepia(85%)
-    saturate(1099%) hue-rotate(345deg) brightness(89%) contrast(92%);
-  --accent: var(--orange-300);
-
-  --rb-chip-bg: var(--orange-200);
-  --rb-text: var(--orange-400);
-  --rb-add-bg: var(--orange-200);
-  --rb-icon: var(--orange-400);
-}
-
-[type='pink'] {
-  --bg: var(--pink-100);
-  --emoji-bg: var(--pink-200);
-  --emoji-text: var(--pink-400);
-  --emoji-filter: brightness(0) saturate(100%) invert(14%) sepia(87%)
-    saturate(5124%) hue-rotate(326deg) brightness(91%) contrast(94%);
-  --accent: var(--pink-300);
-
-  --rb-chip-bg: var(--pink-200);
-  --rb-text: var(--pink-400);
-  --rb-add-bg: var(--pink-200);
-  --rb-icon: var(--pink-400);
 }
 
 [type='purple'] {
