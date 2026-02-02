@@ -33,7 +33,7 @@ export default function MessageModal({
         <header className={styles.modalHeader}>
           <ProfileImage
             src={profileSrc}
-            alt="profile"
+            alt={`${name}의 프로필 이미지`}
             size={56}
             borderColor="var(--gray-200)"
             borderWidth={1}
