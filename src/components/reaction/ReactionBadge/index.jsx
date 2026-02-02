@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
-export default function ReactionBadge({ emoji, count, onClick, theme }) {
+export default function ReactionBadge({
+  emoji,
+  count,
+  onClick,
+  theme = {
+    chipBg: 'var(--blue-200)',
+    text: 'var(--blue-400)',
+  },
+}) {
   return (
     <button
       type="button"
@@ -26,7 +34,7 @@ ReactionBadge.propTypes = {
   theme: PropTypes.shape({
     chipBg: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
 };
 
 ReactionBadge.defaultProps = {
