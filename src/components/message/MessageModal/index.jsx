@@ -53,8 +53,6 @@ export default function MessageModal({
           </div>
         </header>
 
-        <div className={styles.divider} />
-
         <div className={styles.modalContent}>{content}</div>
 
         <div className={styles.actions}>

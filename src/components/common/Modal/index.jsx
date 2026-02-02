@@ -32,7 +32,7 @@ export default function Modal({
   // 열렸을 때 body 스크롤 잠금
   useEffect(() => {
     if (!isOpen) {
-      return undefined;
+      return;
     }
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
