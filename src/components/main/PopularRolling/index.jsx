@@ -68,7 +68,6 @@ function PopularRolling() {
             <Link
               className={styles.RollingCard}
               key={item.id}
-              type={item.id}
               to={'/post/' + item.id}
             >
               <RollingCard item={item} />

@@ -7,18 +7,18 @@ import Button from '@/components/common/Button';
 
 function RecentRolling() {
   const [rolling, setRolling] = useState([]);
-  const [rollingCounts, setrollingCounts] = useState(8);
+  const [rollingCounts, setRollingCounts] = useState(8);
 
   useEffect(() => {
     async function rec() {
-      const recipients = await getRecipients({ limit: 8 });
+      const recipients = await getRecipients();
       setRolling(recipients.results);
     }
     rec();
   }, []);
 
   function handleMore() {
-    setrollingCounts((prev) => prev + 8);
+    setRollingCounts((prev) => prev + 8);
   }
 
   const firstRolling = rolling.slice(0, rollingCounts);
@@ -28,7 +28,6 @@ function RecentRolling() {
         <Link
           className={styles.RollingCard}
           key={item.id}
-          type={item.id}
           to={'/post/' + item.id}
         >
           <RollingCard item={item} />

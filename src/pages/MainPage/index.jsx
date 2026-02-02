@@ -21,7 +21,7 @@ function MainPage() {
             + 롤링 페이퍼 만들기
           </LinkButton>
         </div>
-        <RecentRolling recipientName="Song" />
+        <RecentRolling />
       </section>
     </div>
   );
