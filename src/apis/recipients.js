@@ -1,7 +1,7 @@
-import axiosInstance from './axiosInstance';
+import { apiClient } from './axiosInstance';
 
 export async function getRecipients(params) {
-  const res = await axiosInstance.get('/recipients/', {
+  const res = await apiClient.get('/recipients/', {
     params,
   });
   return res.data;
