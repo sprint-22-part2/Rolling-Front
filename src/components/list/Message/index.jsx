@@ -24,6 +24,9 @@ function Message({
       return '';
     }
     const date = new Date(dateString);
+    if (isNaN(date)) {
+      return '';
+    }
     return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
   };
 
@@ -65,7 +68,7 @@ function Message({
 Message.propTypes = {
   senderName: PropTypes.string.isRequired,
   profileImageURL: PropTypes.string,
-  relationship: PropTypes.string.isRequired,
+  relationship: PropTypes.oneOf(['지인', '동료', '가족', '친구']).isRequired,
   content: PropTypes.string.isRequired,
   font: PropTypes.string,
   createdAt: PropTypes.string.isRequired,

@@ -68,7 +68,7 @@ const MOCK_MESSAGES = {
   count: 3,
   next: null,
   previous: null,
-  results: [],
+  results: MOCK_RECIPIENT.recentMessages,
 };
 
 function ListPage() {
@@ -118,7 +118,6 @@ function ListPage() {
           recipientName={recipient.name}
           messageCount={recipient.messageCount}
           recentMessages={recipient.recentMessages}
-          reactionCount={recipient.reactionCount}
           topReactions={recipient.topReactions}
           isEditMode={isEditMode}
           setIsEditMode={setIsEditMode}

@@ -9,6 +9,7 @@ import {
   ArrowDownIcon,
 } from '@/assets/icons';
 
+import Button from '@/components/common/Button';
 import ReactionBadge from '@/components/reaction/ReactionBadge';
 import AddReactionButton from '@/components/reaction/AddReactionButton';
 import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
@@ -64,22 +65,37 @@ function RollingHeader({
           <div className={styles.rollingButtons}>
             {!isEditMode ? (
               <>
-                <button>
-                  <ShareIcon />
+                <Button
+                  variant="variantSmallText"
+                  leftIcon={<ShareIcon />}
+                  onClick={() => console.log('공유하기 클릭')}
+                >
                   공유하기
-                </button>
-                <button onClick={handleEdit}>
-                  <EditIcon />
+                </Button>
+                <Button
+                  variant="variantSmallText"
+                  leftIcon={<EditIcon />}
+                  onClick={handleEdit}
+                >
                   편집하기
-                </button>
+                </Button>
               </>
             ) : (
               <>
-                <button>
-                  <DeletedIcon />
+                <Button
+                  variant="variantSmallText"
+                  leftIcon={<DeletedIcon />}
+                  onClick={() => console.log('삭제하기 클릭')}
+                >
                   롤링페이퍼 삭제하기
-                </button>
-                <button onClick={handleSave}>편집 완료</button>
+                </Button>
+                <Button
+                  variant="variantSmallText"
+                  leftIcon={<EditIcon />}
+                  onClick={handleSave}
+                >
+                  편집 완료
+                </Button>
               </>
             )}
           </div>

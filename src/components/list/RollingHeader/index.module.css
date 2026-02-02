@@ -151,23 +151,6 @@
   flex-wrap: wrap;
 }
 
-.rollingButtons button {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  white-space: nowrap;
-  color: var(--gray-500);
-  background: none;
-  border: none;
-  font-size: 16px;
-  padding: 6px 0;
-  cursor: pointer;
-}
-
-.rollingButtons button svg {
-  flex-shrink: 0;
-}
-
 .emojis {
   display: flex;
   gap: 8px;
