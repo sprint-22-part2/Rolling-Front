@@ -15,50 +15,48 @@ export default function ConfirmModal({
   confirmButtonProps,
   cancelButtonProps,
 }) {
-  const handleConfirm = () => {
+  const handleConfirm = useCallback(() => {
     onConfirm?.();
     onClose();
-  };
+  }, [onConfirm, onClose]);
 
   const handleCancel = useCallback(() => {
     onClose();
   }, [onClose]);
 
   return (
-    <div className={styles.overlay} role="presentation">
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        ariaLabel="삭제 모달"
-        closeOnOverlayClick
-        closeOnEsc
-      >
-        <div className={styles.modal}>
-          <p className={styles.title}>{title}</p>
-          <div className={styles.actions}>
-            <Button
-              type="button"
-              size="sizeSm"
-              variant="variantPrimary"
-              onClick={handleConfirm}
-              {...confirmButtonProps}
-            >
-              {confirmText}
-            </Button>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      ariaLabel="삭제 모달"
+      closeOnOverlayClick
+      closeOnEsc
+    >
+      <div className={styles.modal}>
+        <p className={styles.title}>{title}</p>
+        <div className={styles.actions}>
+          <Button
+            type="button"
+            size="sizeSm"
+            variant="variantPrimary"
+            onClick={handleConfirm}
+            {...confirmButtonProps}
+          >
+            {confirmText}
+          </Button>
 
-            <Button
-              type="button"
-              size="sizeSm"
-              className={styles.cancelButton}
-              onClick={handleCancel}
-              {...cancelButtonProps}
-            >
-              {cancelText}
-            </Button>
-          </div>
+          <Button
+            type="button"
+            size="sizeSm"
+            className={styles.cancelButton}
+            onClick={handleCancel}
+            {...cancelButtonProps}
+          >
+            {cancelText}
+          </Button>
         </div>
-      </Modal>
-    </div>
+      </div>
+    </Modal>
   );
 }
 
