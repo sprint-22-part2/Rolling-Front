@@ -1,0 +1,24 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+/* 기본 추가 버튼 */
+.addButton {
+  width: 44px;
+  height: 36px;
+  border-radius: 9999px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: var(--rb-add-bg);
+  color: var(--rb-icon);
+}
+.addButton:hover {
+  opacity: 0.7;
+}
+.addButton:active {
+  transform: translateY(1px);
+}

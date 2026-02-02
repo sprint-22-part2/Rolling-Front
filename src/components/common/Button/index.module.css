@@ -1,74 +1,92 @@
 /* Disabled */
-.button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-.button {
-  display: inline-flex; 
-  align-items: center; 
+.linkButton {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
 }
-.sizeBig { 
-  width: 280px; 
-  height: 56px; 
-  padding: 14px 24px; 
-  font-size: 18px; 
-  border-radius: 24px; 
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.sizeLg { 
-  width: 208px; 
-  height: 56px; 
-  padding: 14px 24px; 
-  font-size: 18px; 
-  border-radius: 24px; 
+.sizeBig {
+  width: 280px;
+  height: 56px;
+  padding: 14px 24px;
+  font-size: 18px;
+  border-radius: 24px;
 }
-.sizeMd { 
-  width: 150px; 
-  height: 40px; 
-  padding: 7px 16px; 
-  font-size: 14px; 
-  border-radius: 12px; 
+.sizeLg {
+  width: 208px;
+  height: 56px;
+  padding: 14px 24px;
+  font-size: 18px;
+  border-radius: 24px;
 }
-.sizeSm { 
-  width: 80px; 
-  height: 40px; 
-  padding: 6px 16px; 
-  font-size: 16px; 
-  border-radius: 12px; 
+.sizeMd {
+  width: 135px;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 12px;
+  letter-spacing: -0.01em;
 }
-.variantPrimary { 
-  background: var(--primary-400); 
-  color: var(--white); 
+.sizeSm {
+  width: 80px;
+  height: 40px;
+  padding: 6px 16px;
+  font-size: 16px;
+  border-radius: 12px;
+}
+.variantPrimary {
+  background: var(--primary-400);
+  color: var(--white);
   font-weight: var(--font-weight-bold);
   transition: all 0.2s ease;
 }
-.variantPrimary:hover { 
-  background: var(--primary-100); 
-  color: var(--white); 
+.variantPrimary:hover {
+  background: var(--primary-100);
+  color: var(--white);
   border: 1px solid var(--primary-100);
 }
-.variantOutlinePrimary { 
-  background: var(--white); 
-  color: var(--primary-400); 
-  border: 1px solid var(--primary-400); 
+.variantPrimary:disabled {
+  background-color: var(--gray-300);
+  cursor: not-allowed;
+  border: none;
+}
+.variantOutlinePrimary {
+  background: var(--white);
+  color: var(--primary-400);
+  border: 1px solid var(--primary-400);
   font-weight: var(--font-weight-bold);
   transition: all 0.2s ease;
 }
-.variantOutlinePrimary:hover { 
-  background: var(--primary-400); 
-  color: var(--white); 
-  border: 1px solid var(--primary-400); 
+.variantOutlinePrimary:hover {
+  background: var(--primary-400);
+  color: var(--white);
+  border: 1px solid var(--primary-400);
 }
-.variantGray { 
+.variantOutlinePrimary:disabled {
+  background-color: var(--white);
+  color: var(--gray-300);
+  cursor: not-allowed;
+  border: 1px solid var(--gray-300);
+}
+.variantGray {
   background-color: var(--white);
   color: var(--gray-600);
   font-weight: var(--font-weight-bold);
   border: 1px solid var(--gray-200);
   transition: all 0.2s ease;
 }
-.variantGray:hover { 
+.variantGray:hover {
   background-color: var(--white);
   color: var(--primary-100);
+}
+.variantGray:disabled {
+  background-color: var(--gray-300);
+  color: var(--white);
+  cursor: not-allowed;
+  border: none;
 }
 
 .variantSmallText {
@@ -84,7 +102,24 @@
   color: var(--gray-600);
 }
 .variantSmallText:disabled {
-  opacity: 0.6;
+  color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+.variantMiddleText {
+  background: transparent;
+  border: none;
+  padding: 7.5px;
+  color: var(--primary-400);
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  gap: 5px;
+}
+.variantMiddleText:hover {
+  color: var(--primary-100);
+}
+.variantMiddleText:disabled {
+  color: var(--gray-300);
   cursor: not-allowed;
 }
 
@@ -105,21 +140,54 @@
 }
 
 .variantCircle {
-  width: 72px;
-  height: 72px;
-  padding: 0;
-  border-radius: 9999px;
+  width: max-content;
+  flex-direction: column;
+  justify-content: flex-start;
   border: none;
-  background: var(--gray-600);
   color: var(--white);
   cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  border-radius: 0;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
 }
-.variantCircle:hover {
-  background: var(--gray-200);
+.variantCircle .leftIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.variantCircle .leftIcon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--white);
+}
+.variantCircle .label {
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  color: var(--gray-500);
+  line-height: 1.2;
+  margin-top: 24px;
+}
+.variantCircle .leftIcon:hover {
+  background: var(--gray-400);
 }
 .variantCircle:active {
   transform: translateY(0);
+}
+.variantCircle:disabled {
+  cursor: not-allowed;
+}
+.variantCircle:disabled .leftIcon:hover {
+  cursor: not-allowed;
+  background-color: var(--gray-300);
 }
 
 .variantArrow {
@@ -131,7 +199,9 @@
   background: var(--white);
   color: var(--gray-800);
   cursor: pointer;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 .variantArrow:hover {
   background-color: var(--gray-100);
