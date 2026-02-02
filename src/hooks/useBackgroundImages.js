@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
-import { getProfileImages } from '@/apis/profileImage';
+import { getBackgroundImages } from '@/apis/post';
 
-const useProfileImages = () => {
+const useBackgroundImages = () => {
   const [imageOptions, setImageOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const controller = new AbortController();
 
-    getProfileImages(controller.signal)
+    getBackgroundImages(controller.signal)
       .then((list) => {
-        const normalized = list.map((url) => ({
+        const normalized = list.map((url, index) => ({
           id: url,
+          label: `배경 이미지 ${index + 1}`,
           url,
         }));
         setImageOptions(normalized);
@@ -20,7 +21,7 @@ const useProfileImages = () => {
         if (error?.code === 'ERR_CANCELED') {
           return;
         }
-        console.error('Failed to fetch profile images:', error);
+        console.error('Failed to fetch background images:', error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -34,4 +35,4 @@ const useProfileImages = () => {
   return { imageOptions, isLoading };
 };
 
-export default useProfileImages;
+export default useBackgroundImages;
