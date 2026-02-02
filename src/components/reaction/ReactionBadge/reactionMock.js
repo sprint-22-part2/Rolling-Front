@@ -14,6 +14,5 @@ export const MOCK_REACTION_RESPONSE = {
     { id: 1, emoji: '👍', count: 20 },
     { id: 2, emoji: '🙏', count: 12 },
     { id: 3, emoji: '😍', count: 12 },
-    { id: 4, emoji: '🥺', count: 7 },
   ],
 };

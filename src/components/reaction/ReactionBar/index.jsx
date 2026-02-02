@@ -7,6 +7,7 @@ import ReactionPanel from '@/components/reaction/ReactionPanel/index';
 import AddReactionButton from '@/components/reaction/AddReactionButton/index';
 import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
 import { ArrowDownIcon } from '@/assets/icons';
+import { REACTION_THEMES } from '@/components/reaction/ReactionBadge/reactionMock';
 
 const THEMES = ['blue', 'green', 'purple', 'beige', 'trans'];
 
@@ -21,9 +22,15 @@ export default function ReactionBar({ initialReactions, theme }) {
   // 서버에서 내려준 순서를 그대로 사용
   const entries = useMemo(() => Object.entries(reactions), [reactions]);
   const hasReactions = entries.length > 0;
+  // theme key 검증
   const safeTheme = THEMES.includes(theme) ? theme : 'blue';
 
-  // ReactionBar의 외부 클릭/ESC는 패널만 닫음
+  // ReactionBadge에 넘길 값
+  const themeObj = useMemo(() => {
+    return REACTION_THEMES?.[safeTheme] ?? REACTION_THEMES.blue;
+  }, [safeTheme]);
+
+  // ReactionBar의 외부 클릭 / ESC는 패널만 닫음
   const closePanel = useCallback(() => {
     setIsPanelOpen(false);
   }, []);
@@ -111,6 +118,7 @@ export default function ReactionBar({ initialReactions, theme }) {
               key={emoji}
               emoji={emoji}
               count={count}
+              theme={themeObj}
               onClick={() => handleBadgeClick(emoji)}
             />
           ))}
