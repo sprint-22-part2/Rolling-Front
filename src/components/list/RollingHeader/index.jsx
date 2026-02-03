@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
@@ -14,6 +14,8 @@ import ReactionBadge from '@/components/reaction/ReactionBadge';
 import AddReactionButton from '@/components/reaction/AddReactionButton';
 import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
 import ReactionPanel from '@/components/reaction/ReactionPanel';
+import ShareDropdown from '@/components/common/ShareDropdown';
+import useShareActions from '@/hooks/useShareActions';
 
 function RollingHeader({
   theme = 'blue',
@@ -28,6 +30,8 @@ function RollingHeader({
 }) {
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
+  const { shareKakaoLink, copyUrl } = useShareActions();
 
   const addBtnRef = useRef(null);
   const moreBtnRef = useRef(null);
@@ -39,6 +43,34 @@ function RollingHeader({
     // TODO: API 연결 시 이모지 추가, 성공 후 처리 필요
     console.log(`이모지 클릭/추가: ${emoji}`);
     setIsPickerOpen(false);
+  };
+
+  const handleShareToggle = () => {
+    setIsShareOpen((prev) => !prev);
+  };
+
+  const handleShareClose = useCallback(() => {
+    setIsShareOpen(false);
+  }, []);
+
+  const handleShareSelect = async (type) => {
+    const webUrl = window.location.href;
+    const imageUrl = `${window.location.origin}/assets/img-og.png`;
+
+    if (type === 'kakao') {
+      shareKakaoLink({
+        title: `${recipientName}님의 롤링 페이퍼`,
+        description: '마음을 모으는 가장 쉬운 방법, 롤링',
+        imageUrl,
+        webUrl,
+      });
+    }
+
+    if (type === 'url') {
+      await copyUrl(webUrl);
+    }
+
+    setIsShareOpen(false);
   };
 
   const profiles = recentMessages.map((msg) => ({
@@ -75,10 +107,15 @@ function RollingHeader({
                 <Button
                   variant={btnVariant}
                   leftIcon={<ShareIcon />}
-                  onClick={() => console.log('공유하기 클릭')}
+                  onClick={handleShareToggle}
                 >
                   공유하기
                 </Button>
+                <ShareDropdown
+                  open={isShareOpen}
+                  onClose={handleShareClose}
+                  onSelect={handleShareSelect}
+                />
                 <Button
                   variant={btnVariant}
                   leftIcon={<EditIcon />}
