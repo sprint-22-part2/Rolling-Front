@@ -1,10 +1,8 @@
-[type='yellow'] {
+[type='beige'] {
   --bg: var(--yellow-100);
   --emoji-bg: var(--yellow-200);
   --emoji-text: var(--yellow-400);
   --accent: var(--yellow-300);
-  --emoji-filter: brightness(0) saturate(100%) invert(58%) sepia(74%)
-    saturate(452%) hue-rotate(12deg) brightness(93%) contrast(84%);
 
   --rb-chip-bg: var(--yellow-200);
   --rb-text: var(--yellow-400);
@@ -12,40 +10,10 @@
   --rb-icon: var(--yellow-400);
 }
 
-[type='orange'] {
-  --bg: #ffd7c3;
-  --emoji-bg: #ffd7c3;
-  --emoji-text: #c45119;
-  --emoji-filter: brightness(0) saturate(100%) invert(35%) sepia(85%)
-    saturate(1099%) hue-rotate(345deg) brightness(89%) contrast(92%);
-  --accent: #fb5607;
-
-  --rb-chip-bg: #ffd7c3;
-  --rb-text: #c45119;
-  --rb-add-bg: #ffd7c3;
-  --rb-icon: #c45119;
-}
-
-[type='pink'] {
-  --bg: var(--pink-100);
-  --emoji-bg: var(--pink-200);
-  --emoji-text: var(--pink-400);
-  --emoji-filter: brightness(0) saturate(100%) invert(14%) sepia(87%)
-    saturate(5124%) hue-rotate(326deg) brightness(91%) contrast(94%);
-  --accent: var(--pink-300);
-
-  --rb-chip-bg: var(--pink-200);
-  --rb-text: var(--pink-400);
-  --rb-add-bg: var(--pink-200);
-  --rb-icon: var(--pink-400);
-}
-
 [type='purple'] {
   --bg: var(--purple-100);
   --emoji-bg: var(--purple-200);
   --emoji-text: var(--purple-400);
-  --emoji-filter: brightness(0) saturate(100%) invert(18%) sepia(61%)
-    saturate(3665%) hue-rotate(256deg) brightness(90%) contrast(100%);
   --accent: var(--purple-300);
 
   --rb-chip-bg: var(--purple-200);
@@ -58,8 +26,6 @@
   --bg: var(--blue-100);
   --emoji-bg: var(--blue-200);
   --emoji-text: var(--blue-400);
-  --emoji-filter: brightness(0) saturate(100%) invert(26%) sepia(21%)
-    saturate(5412%) hue-rotate(199deg) brightness(93%) contrast(92%);
   --accent: var(--blue-300);
 
   --rb-chip-bg: var(--blue-200);
@@ -72,8 +38,6 @@
   --bg: var(--green-100);
   --emoji-bg: var(--green-200);
   --emoji-text: var(--green-400);
-  --emoji-filter: brightness(0) saturate(100%) invert(39%) sepia(45%)
-    saturate(553%) hue-rotate(117deg) brightness(96%) contrast(89%);
   --accent: var(--green-300);
 
   --rb-chip-bg: var(--green-200);
@@ -123,7 +87,7 @@
 
 .name {
   font-size: 32px;
-  color: var(--gray-800);
+  color: var(--header-text, var(--gray-800));
   font-weight: var(--font-weight-semibold);
 
   display: -webkit-box;

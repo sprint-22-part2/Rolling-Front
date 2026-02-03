@@ -10,7 +10,8 @@ const MOCK_RECIPIENT = {
   id: 2,
   name: '강영훈',
   backgroundColor: 'green',
-  backgroundImageURL: null,
+  backgroundImageURL:
+    'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1500&auto=format&fit=crop',
   createdAt: '2025-10-26T13:19:31.401765Z',
   messageCount: 3,
   recentMessages: [
@@ -103,7 +104,13 @@ function ListPage() {
   const { backgroundColor, backgroundImageURL } = recipient;
   const theme = backgroundImageURL ? 'image' : backgroundColor;
   const backgroundStyle = backgroundImageURL
-    ? { backgroundImage: `url(${backgroundImageURL})` }
+    ? {
+        backgroundImage: `linear-gradient(var(--background-overlay), var(--background-overlay)), url(${backgroundImageURL})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed',
+      }
     : {};
 
   return (
