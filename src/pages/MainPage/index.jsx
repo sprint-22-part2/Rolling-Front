@@ -4,6 +4,8 @@ import RecentRolling from '@/components/main/RecentRolling';
 import LinkButton from '@/components/common/LinkButton';
 
 function MainPage() {
+  window.scrollTo({ top: 0 });
+
   return (
     <div className={styles.rollingList}>
       <section className={styles.sectionRollingList}>
