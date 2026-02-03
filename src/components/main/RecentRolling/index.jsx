@@ -11,8 +11,12 @@ function RecentRolling() {
 
   useEffect(() => {
     async function fetchRecipients() {
-      const popularRecipients = await getRecipients();
-      setRolling(popularRecipients.results);
+      try {
+        const popularRecipients = await getRecipients();
+        setRolling(popularRecipients.results);
+      } catch (error) {
+        console.error('Failed to fetch recipients:', error);
+      }
     }
     fetchRecipients();
   }, []);

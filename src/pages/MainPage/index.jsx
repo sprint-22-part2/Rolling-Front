@@ -14,7 +14,7 @@ function MainPage() {
         <div className={styles.sectionTop}>
           <h2>최근에 만든 롤링 페이퍼 ⭐️️</h2>
           <LinkButton
-            to={`/post`}
+            to={'/post'}
             variant="variantMiddleText"
             className={styles.makeButton}
           >

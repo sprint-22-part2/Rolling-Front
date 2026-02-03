@@ -23,8 +23,12 @@ function PopularRolling() {
 
   useEffect(() => {
     async function fetchPopularRecipients() {
-      const popularRecipients = await getPopularRecipients();
-      setRolling(popularRecipients.results);
+      try {
+        const popularRecipients = await getPopularRecipients();
+        setRolling(popularRecipients.results);
+      } catch (error) {
+        console.error('Failed to fetch popular recipients:', error);
+      }
     }
     fetchPopularRecipients();
   }, []);
@@ -65,11 +69,7 @@ function PopularRolling() {
       >
         {rolling?.map((item) => (
           <SwiperSlide key={item.id}>
-            <Link
-              className={styles.RollingCard}
-              key={item.id}
-              to={`/list/${item.id}`}
-            >
+            <Link className={styles.RollingCard} to={`/list/${item.id}`}>
               <RollingCard item={item} />
             </Link>
           </SwiperSlide>
