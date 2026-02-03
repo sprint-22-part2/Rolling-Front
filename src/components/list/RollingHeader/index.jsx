@@ -26,6 +26,7 @@ function RollingHeader({
   recentMessages = [],
   messageCount = 0,
   topReactions = [],
+  onDelete,
 }) {
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
@@ -88,6 +89,9 @@ function RollingHeader({
 
   const MAX_VISIBLE_BADGES = 5;
 
+  const btnVariant =
+    theme === 'image' ? 'variantSmallWhiteText' : 'variantSmallText';
+
   return (
     <div className={styles.rollingHeader} type={theme}>
       <div className={styles.rollingHeaderTop}>
@@ -101,7 +105,7 @@ function RollingHeader({
             {!isEditMode ? (
               <>
                 <Button
-                  variant="variantSmallText"
+                  variant={btnVariant}
                   leftIcon={<ShareIcon />}
                   onClick={handleShareToggle}
                 >
@@ -113,7 +117,7 @@ function RollingHeader({
                   onSelect={handleShareSelect}
                 />
                 <Button
-                  variant="variantSmallText"
+                  variant={btnVariant}
                   leftIcon={<EditIcon />}
                   onClick={handleEdit}
                 >
@@ -123,14 +127,14 @@ function RollingHeader({
             ) : (
               <>
                 <Button
-                  variant="variantSmallText"
+                  variant={btnVariant}
                   leftIcon={<DeletedIcon />}
-                  onClick={() => console.log('삭제하기 클릭')}
+                  onClick={onDelete}
                 >
                   롤링페이퍼 삭제하기
                 </Button>
                 <Button
-                  variant="variantSmallText"
+                  variant={btnVariant}
                   leftIcon={<EditIcon />}
                   onClick={handleSave}
                 >
@@ -203,6 +207,7 @@ RollingHeader.propTypes = {
   recentMessages: PropTypes.array,
   messageCount: PropTypes.number,
   topReactions: PropTypes.array,
+  onDelete: PropTypes.func,
 };
 
 export default RollingHeader;
