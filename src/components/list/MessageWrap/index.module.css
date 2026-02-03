@@ -12,14 +12,14 @@
   flex-direction: column;
   gap: 24px;
 
-  background-color: var(--white);
+  background-color: var(--message-bg, var(--white));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   border-radius: 24px;
 
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .addButtonLink {

@@ -1,4 +1,3 @@
-/* Disabled */
 .linkButton {
   display: inline-flex;
   align-items: center;
@@ -37,6 +36,8 @@
   font-size: 16px;
   border-radius: 12px;
 }
+
+/* 기본 보라색 버튼 스타일 */
 .variantPrimary {
   background: var(--primary-400);
   color: var(--white);
@@ -48,6 +49,8 @@
   color: var(--white);
   border: 1px solid var(--primary-100);
 }
+
+/* 기본 보라색 아웃라인 버튼 스타일 */
 .variantPrimary:disabled {
   background-color: var(--gray-300);
   cursor: not-allowed;
@@ -71,6 +74,8 @@
   cursor: not-allowed;
   border: 1px solid var(--gray-300);
 }
+
+/* 기본 회색 border가 있는 하얀색 버튼 스타일 */
 .variantGray {
   background-color: var(--white);
   color: var(--gray-600);
@@ -89,6 +94,7 @@
   border: none;
 }
 
+/* 배경이 컬러 only일때 적용하는 회색 텍스트 버튼 스타일 */
 .variantSmallText {
   background: transparent;
   border: none;
@@ -106,6 +112,44 @@
   cursor: not-allowed;
 }
 
+/* 배경이 이미지일때 적용하는 border가 있는 하얀색 버튼 스타일 */
+.variantWhite {
+  background-color: transparent;
+  color: var(--white);
+  font-weight: var(--font-weight-regular);
+  border: 1px solid var(--white);
+  transition: all 0.2s ease;
+}
+.variantWhite:hover {
+  background-color: var(--white-opacity-10);
+  color: var(--white);
+}
+.variantWhite:disabled {
+  background-color: transparent;
+  color: var(--white-opacity-50);
+  cursor: not-allowed;
+  border: 1px solid var(--white-opacity-50);
+}
+
+/* 배경이 이미지일때 적용하는 하얀색 텍스트 버튼 스타일 */
+.variantSmallWhiteText {
+  background: transparent;
+  border: none;
+  padding: 7.5px;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  gap: 5px;
+}
+.variantSmallWhiteText:hover {
+  color: var(--gray-100);
+}
+.variantSmallWhiteText:disabled {
+  color: var(--gray-300);
+  cursor: not-allowed;
+}
+
+/* 보라색 텍스트만 있는 버튼 스타일 */
 .variantMiddleText {
   background: transparent;
   border: none;
@@ -123,6 +167,7 @@
   cursor: not-allowed;
 }
 
+/* 아니오, 취소 등에 쓰는 버튼 */
 .variantGhost {
   width: 80px;
   height: 40px;
@@ -139,6 +184,7 @@
   color: var(--gray-500);
 }
 
+/* 메세지 추가에 쓰는 플러스 버튼 */
 .variantCircle {
   width: max-content;
   flex-direction: column;
@@ -190,6 +236,7 @@
   background-color: var(--gray-300);
 }
 
+/* 화살표 버튼 */
 .variantArrow {
   width: 40px;
   height: 40px;
