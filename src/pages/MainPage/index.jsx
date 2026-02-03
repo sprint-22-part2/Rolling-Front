@@ -1,7 +1,7 @@
 import styles from './index.module.css';
 import PopularRolling from '@/components/main/PopularRolling';
 import RecentRolling from '@/components/main/RecentRolling';
-import { Link } from 'react-router-dom';
+import LinkButton from '@/components/common/LinkButton';
 
 function MainPage() {
   return (
@@ -13,11 +13,15 @@ function MainPage() {
       <section className={styles.sectionRollingList}>
         <div className={styles.sectionTop}>
           <h2>최근에 만든 롤링 페이퍼 ⭐️️</h2>
-          <Link to="/" className={styles.makeButton}>
+          <LinkButton
+            to={'/post'}
+            variant="variantMiddleText"
+            className={styles.makeButton}
+          >
             + 롤링 페이퍼 만들기
-          </Link>
+          </LinkButton>
         </div>
-        <RecentRolling recipientName="Song" />
+        <RecentRolling />
       </section>
     </div>
   );
