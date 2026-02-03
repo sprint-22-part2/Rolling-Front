@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import COLOR_OPTIONS from '@/constants/post';
+import CheckMark from '@/components/post/CheckMark';
 import styles from './index.module.css';
 
 export default function ColorSelector({ value, onChange }) {
@@ -22,7 +23,7 @@ export default function ColorSelector({ value, onChange }) {
             style={{ background: option.gradient }}
             onClick={() => onChange(option.id)}
           >
-            {isSelected && <span className={styles.checkMark}>✓</span>}
+            {isSelected && <CheckMark />}
           </button>
         );
       })}

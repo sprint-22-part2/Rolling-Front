@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import ImagePreview from '@/components/post/ImagePreview';
+import CheckMark from '@/components/post/CheckMark';
 import styles from './index.module.css';
 
 export default function ImageSelector({ images, value, onChange }) {
@@ -30,11 +31,7 @@ export default function ImageSelector({ images, value, onChange }) {
               style={{ '--image-card-bg': `url(${option.url})` }}
               onClick={() => onChange(option.id)}
             >
-              {isSelected && (
-                <span className={styles.checkMark} aria-hidden="true">
-                  ✓
-                </span>
-              )}
+              {isSelected && <CheckMark />}
             </button>
           );
         })}
