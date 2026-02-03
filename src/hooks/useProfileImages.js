@@ -20,6 +20,7 @@ const useProfileImages = () => {
         if (error?.code === 'ERR_CANCELED') {
           return;
         }
+        console.error('Failed to fetch profile images:', error);
       })
       .finally(() => {
         setIsLoading(false);

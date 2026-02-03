@@ -9,7 +9,7 @@ import LinkButton from '@/components/common/LinkButton';
 
 function LandingPage() {
   return (
-    <main className={styles.container}>
+    <div className={styles.container}>
       {/* 히어로 섹션 */}
       <HeroSection />
 
@@ -61,7 +61,7 @@ function LandingPage() {
           구경해보기
         </LinkButton>
       </div>
-    </main>
+    </div>
   );
 }
 

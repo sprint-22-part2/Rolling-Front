@@ -23,11 +23,8 @@
   gap: 12px;
 }
 .makeButton {
-  color: var(--main-color);
-  font-size: 18px;
-  font-weight: var(--font-weight-bold);
+  white-space: nowrap;
 }
-
 @media (max-width: 1079px) {
   .rollingList {
     padding: 48px 24px;

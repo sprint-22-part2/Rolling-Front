@@ -1,26 +1,53 @@
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
-
-function RollingCard({ theme = 'yellow', recipientName = 'recipientName' }) {
+import ReactionBadge from '@/components/reaction/ReactionBadge';
+function RollingCard({ item }) {
+  if (!item) {
+    return null;
+  }
+  const { name, backgroundColor, topReactions, recentMessages } = item;
+  const profiles = recentMessages.map((message) => ({
+    id: message.id,
+    src: message.profileImageURL,
+    alt: message.sender,
+  }));
   return (
-    <div className={`${styles.rollingCard} ${styles[theme]}`}>
+    <div className={`${styles.rollingCard} ${styles[backgroundColor]}`}>
       <div className={styles.recipient}>
         <span className={styles.to}>To</span>
-        <p className={styles.name}>{recipientName}</p>
+        <p className={styles.name}>{name}</p>
       </div>
-      <ProfileGroup />
+
+      <ProfileGroup profiles={profiles} />
+
       <div className={styles.emojis}>
-        <div className={styles.emoji}>🥲 23</div>
-        <div className={styles.emoji}>🥲 203</div>
-        <div className={styles.emoji}>🥲 2663</div>
+        {topReactions?.map((reaction) => (
+          <ReactionBadge
+            key={reaction.id}
+            emoji={reaction.emoji}
+            count={reaction.count}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
 RollingCard.propTypes = {
-  theme: PropTypes.string.isRequired,
-  recipientName: PropTypes.string.isRequired,
+  item: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    messageCount: PropTypes.number.isRequired,
+    recentMessages: PropTypes.number.isRequired,
+    topReactions: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        emoji: PropTypes.string.isRequired,
+        count: PropTypes.number.isRequired,
+      })
+    ),
+  }),
 };
+
 export default RollingCard;

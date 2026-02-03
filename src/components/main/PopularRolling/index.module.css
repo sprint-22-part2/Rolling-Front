@@ -1,5 +1,6 @@
 .popularRolling {
   position: relative;
+  min-height: 282px;
 }
 
 .rollingSwiper {
@@ -40,4 +41,14 @@
 :global(.swiper-button-disabled) {
   opacity: 0.3;
   pointer-events: none;
+}
+@media (max-width: 1079px) {
+  .popularRolling {
+    min-height: 261px;
+  }
+}
+@media (max-width: 767px) {
+  .popularRolling {
+    min-height: 256px;
+  }
 }
