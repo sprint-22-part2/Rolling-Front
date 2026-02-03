@@ -1,6 +1,7 @@
 import styles from './index.module.css';
 import RollingCard from '@/components/main/RollingCard';
 import { getPopularRecipients } from '@/apis/recipients';
+import { getReactions } from '@/apis/reations';
 
 // Import Swiper React components
 // import Swiper core and required modules
@@ -20,13 +21,28 @@ import 'swiper/css/scrollbar';
 
 function PopularRolling() {
   const [rolling, setRolling] = useState([]);
-
   useEffect(() => {
-    async function rec() {
-      const popularRecipients = await getPopularRecipients({ limit: 8 });
-      setRolling(popularRecipients.results);
+    async function fetchData() {
+      const popularRes = await getPopularRecipients({ limit: 8 });
+
+      const recipientsWithReactions = await Promise.all(
+        popularRes.results.map(async (item) => {
+          if (!item.id) {
+            return { ...item, reactions: [] };
+          }
+
+          const reactionsRes = await getReactions(item.id);
+
+          return {
+            ...item,
+            reactions: reactionsRes.results,
+          };
+        })
+      );
+      setRolling(recipientsWithReactions);
     }
-    rec();
+
+    fetchData();
   }, []);
 
   const prevRef = useRef(null);
@@ -65,7 +81,7 @@ function PopularRolling() {
       >
         {rolling?.map((item) => (
           <SwiperSlide key={item.id}>
-            <Link className={styles.RollingCard} to={`/post/${item.id}`}>
+            <Link className={styles.RollingCard} to={`/list/${item.id}`}>
               <RollingCard item={item} />
             </Link>
           </SwiperSlide>

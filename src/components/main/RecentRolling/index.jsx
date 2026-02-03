@@ -9,22 +9,28 @@ import Button from '@/components/common/Button';
 function RecentRolling() {
   const [rolling, setRolling] = useState([]);
   const [rollingCounts, setRollingCounts] = useState(8);
-  const [reactions, setReactions] = useState('');
-
   useEffect(() => {
-    async function rec() {
-      const recipients = await getRecipients();
-      setRolling(recipients.results);
-    }
-    rec();
-  }, []);
+    async function fetchData() {
+      const recipientsRes = await getRecipients();
 
-  useEffect(() => {
-    async function rec() {
-      const reactions = await getReactions(15999);
-      setReactions(reactions.results);
+      const recipientsWithReactions = await Promise.all(
+        recipientsRes.results.map(async (item) => {
+          if (!item.id) {
+            return { ...item, reactions: [] };
+          }
+
+          const reactionsRes = await getReactions(item.id);
+
+          return {
+            ...item,
+            reactions: reactionsRes.results,
+          };
+        })
+      );
+      setRolling(recipientsWithReactions);
     }
-    rec();
+
+    fetchData();
   }, []);
 
   function handleMore() {
@@ -37,9 +43,9 @@ function RecentRolling() {
         <Link
           className={styles.RollingCard}
           key={item.id}
-          to={`/post/${item.id}`}
+          to={`/list/${item.id}`}
         >
-          <RollingCard item={item} reactions={reactions} />
+          <RollingCard item={item} />
         </Link>
       ))}
 

@@ -2,12 +2,11 @@ import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
 import ReactionBadge from '@/components/reaction/ReactionBadge';
-function RollingCard({ item, reactions }) {
+function RollingCard({ item }) {
+  const { name, backgroundColor } = item;
   if (!item) {
     return null;
   }
-  const { name, backgroundColor } = item;
-
   return (
     <div className={`${styles.rollingCard} ${styles[backgroundColor]}`}>
       <div className={styles.recipient}>
@@ -16,13 +15,13 @@ function RollingCard({ item, reactions }) {
       </div>
       <ProfileGroup />
       <div className={styles.emojis}>
-        {reactions?.map((reaction) => {
+        {item.reactions?.map((reaction) => (
           <ReactionBadge
             key={reaction.id}
             emoji={reaction.emoji}
             count={reaction.count}
-          />;
-        })}
+          />
+        ))}
       </div>
     </div>
   );
@@ -32,13 +31,14 @@ RollingCard.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
+    reactions: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        emoji: PropTypes.string.isRequired,
+        count: PropTypes.number.isRequired,
+      })
+    ),
   }).isRequired,
-  reactions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      emoji: PropTypes.string.isRequired,
-      count: PropTypes.number.isRequired,
-    })
-  ),
 };
+
 export default RollingCard;
