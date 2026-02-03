@@ -22,11 +22,11 @@ function PopularRolling() {
   const [rolling, setRolling] = useState([]);
 
   useEffect(() => {
-    async function rec() {
+    async function fetchPopularRecipients() {
       const popularRecipients = await getPopularRecipients();
       setRolling(popularRecipients.results);
     }
-    rec();
+    fetchPopularRecipients();
   }, []);
 
   const prevRef = useRef(null);
@@ -68,7 +68,7 @@ function PopularRolling() {
             <Link
               className={styles.RollingCard}
               key={item.id}
-              to={'/list/' + item.id}
+              to={`/list/${item.id}`}
             >
               <RollingCard item={item} />
             </Link>

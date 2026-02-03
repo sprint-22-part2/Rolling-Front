@@ -6,7 +6,6 @@ function RollingCard({ item }) {
   if (!item) {
     return null;
   }
-  console.log('item', item);
   const { name, backgroundColor, topReactions } = item;
   return (
     <div className={`${styles.rollingCard} ${styles[backgroundColor]}`}>
@@ -32,8 +31,14 @@ RollingCard.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-    topReactions: PropTypes.arrayOf,
-  }).isRequired,
+    topReactions: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        emoji: PropTypes.string.isRequired,
+        count: PropTypes.number.isRequired,
+      })
+    ),
+  }),
 };
 
 export default RollingCard;

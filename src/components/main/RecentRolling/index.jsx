@@ -10,11 +10,11 @@ function RecentRolling() {
   const [rollingCounts, setRollingCounts] = useState(8);
 
   useEffect(() => {
-    async function rec() {
+    async function fetchRecipients() {
       const popularRecipients = await getRecipients();
       setRolling(popularRecipients.results);
     }
-    rec();
+    fetchRecipients();
   }, []);
 
   function handleMore() {
