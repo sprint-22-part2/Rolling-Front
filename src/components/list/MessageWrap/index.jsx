@@ -9,6 +9,9 @@ import Message from '@/components/list/Message';
 function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
   const { id } = useParams();
 
+  const addButtonVariant =
+    theme === 'image' ? 'variantWhiteCircle' : 'variantCircle';
+
   // 메세지 하나도 없을 때
   if (!messages || messages.length === 0) {
     return (
@@ -27,7 +30,7 @@ function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
           <div className={styles.messageItem}>
             <LinkButton
               to={`/post/${id}/message`}
-              variant="variantCircle"
+              variant={addButtonVariant}
               leftIcon={<PlusIcon />}
               className={styles.addButtonLink}
             >
