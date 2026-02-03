@@ -12,18 +12,10 @@ export function ToastProvider({ children }) {
 
   const hideToast = useCallback((id) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
-    const timeoutId = timeoutsRef.current.get(id);
-    if (timeoutId) {
-      window.clearTimeout(timeoutId);
-      timeoutsRef.current.delete(id);
-    }
   }, []);
 
   const showToast = useCallback(
     (message, status = 'success', duration = DEFAULT_DURATION) => {
-      const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-      let targetId = id;
-
       setToasts((prev) => {
         const lastToast = prev[prev.length - 1];
         if (
@@ -31,29 +23,43 @@ export function ToastProvider({ children }) {
           lastToast.message === message &&
           lastToast.status === status
         ) {
-          targetId = lastToast.id;
-          return [
-            ...prev.slice(0, -1),
-            { ...lastToast, count: (lastToast.count ?? 1) + 1 },
-          ];
+          const updatedToast = {
+            ...lastToast,
+            count: (lastToast.count ?? 1) + 1,
+            duration,
+          };
+          return [...prev.slice(0, -1), updatedToast];
         }
 
-        return [...prev, { id, message, status, count: 1 }];
+        const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        return [...prev, { id, message, status, count: 1, duration }];
       });
-
-      const existingTimeout = timeoutsRef.current.get(targetId);
-      if (existingTimeout) {
-        window.clearTimeout(existingTimeout);
-      }
-
-      const timeoutId = window.setTimeout(() => {
-        setToasts((prev) => prev.filter((toast) => toast.id !== targetId));
-        timeoutsRef.current.delete(targetId);
-      }, duration);
-      timeoutsRef.current.set(targetId, timeoutId);
     },
     []
   );
+
+  useEffect(() => {
+    const toastIdMap = new Map(toasts.map((toast) => [toast.id, toast]));
+
+    timeoutsRef.current.forEach((timeoutId, id) => {
+      if (!toastIdMap.has(id)) {
+        window.clearTimeout(timeoutId);
+        timeoutsRef.current.delete(id);
+      }
+    });
+
+    toasts.forEach((toast) => {
+      if (timeoutsRef.current.has(toast.id)) {
+        window.clearTimeout(timeoutsRef.current.get(toast.id));
+      }
+
+      const timeoutId = window.setTimeout(() => {
+        hideToast(toast.id);
+      }, toast.duration);
+
+      timeoutsRef.current.set(toast.id, timeoutId);
+    });
+  }, [toasts, hideToast]);
 
   useEffect(() => {
     const timeouts = timeoutsRef.current;
