@@ -1,0 +1,26 @@
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  width: 138px;
+  border-radius: 24px;
+  background: var(--white-opacity-70);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 20;
+}
+
+.item {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  background: var(--white-opacity-70);
+  color: var(--gray-800);
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  text-align: left;
+  cursor: pointer;
+}
+
+.item:hover {
+  background: var(--gray-100);
+}
