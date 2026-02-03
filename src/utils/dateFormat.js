@@ -6,5 +6,8 @@ export const formatDate = (dateString) => {
   if (isNaN(date)) {
     return '';
   }
-  return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
+
+  const KST_OFFSET = 9 * 60 * 60 * 1000;
+  const kstDate = new Date(date.getTime() + KST_OFFSET);
+  return `${kstDate.getUTCFullYear()}.${String(kstDate.getUTCMonth() + 1).padStart(2, '0')}.${String(kstDate.getUTCDate()).padStart(2, '0')}`;
 };

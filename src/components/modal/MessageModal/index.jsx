@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
-import Modal from '@/components/common/Modal';
+import Modal from '@/components/modal/Modal';
 import Button from '@/components/common/Button';
 import ProfileImage from '@/components/common/ProfileImage';
 import RelationshipBadge from '@/components/common/RelationshipBadge';

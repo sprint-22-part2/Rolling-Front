@@ -11,6 +11,7 @@ import {
   deleteMessage,
   deleteRecipient,
 } from '@/apis/list';
+import ConfirmModal from '@/components/modal/ConfirmationModal';
 
 function ListPage() {
   const { id } = useParams();
@@ -20,36 +21,43 @@ function ListPage() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isRecipientModalOpen, setIsRecipientModalOpen] = useState(false);
+  const [deleteTargetMessageId, setDeleteTargetMessageId] = useState(null);
 
-  const handleDeleteRecipient = async () => {
-    const isConfirmed = window.confirm('롤링페이퍼를 삭제하시겠습니까?');
-    if (!isConfirmed) {
-      return;
-    }
+  const handleClickDeleteRecipient = () => {
+    setIsRecipientModalOpen(true);
+  };
 
+  const handleConfirmDeleteRecipient = async () => {
     try {
       await deleteRecipient(id);
-
       navigate('/main');
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsRecipientModalOpen(false);
     }
   };
 
-  const handleDeleteMessage = async (messageId) => {
-    const isConfirmed = window.confirm('메시지를 삭제하시겠습니까?');
-    if (!isConfirmed) {
+  const handleClickDeleteMessage = (messageId) => {
+    setDeleteTargetMessageId(messageId);
+  };
+
+  const handleConfirmDeleteMessage = async () => {
+    if (!deleteTargetMessageId) {
       return;
     }
 
     try {
-      await deleteMessage(messageId);
+      await deleteMessage(deleteTargetMessageId);
 
       setMessages((prevMessages) =>
-        prevMessages.filter((msg) => msg.id !== messageId)
+        prevMessages.filter((msg) => msg.id !== deleteTargetMessageId)
       );
     } catch (error) {
       console.error(error);
+    } finally {
+      setDeleteTargetMessageId(null);
     }
   };
 
@@ -113,7 +121,7 @@ function ListPage() {
           isEditMode={isEditMode}
           setIsEditMode={setIsEditMode}
           hasMessages={recipient.messageCount > 0}
-          onDelete={handleDeleteRecipient}
+          onDelete={handleClickDeleteRecipient}
         />
 
         <MessageWrap
@@ -121,9 +129,27 @@ function ListPage() {
           messages={messages}
           recipientName={recipient.name}
           theme={theme}
-          onDelete={handleDeleteMessage}
+          onDelete={handleClickDeleteMessage}
         />
       </section>
+
+      <ConfirmModal
+        title="롤링페이퍼를 삭제하시겠습니까?"
+        isOpen={isRecipientModalOpen}
+        onClose={() => setIsRecipientModalOpen(false)}
+        onConfirm={handleConfirmDeleteRecipient}
+        confirmText="삭제"
+        cancelText="취소"
+      />
+
+      <ConfirmModal
+        title="메시지를 삭제하시겠습니까?"
+        isOpen={!!deleteTargetMessageId}
+        onClose={() => setDeleteTargetMessageId(null)}
+        onConfirm={handleConfirmDeleteMessage}
+        confirmText="삭제"
+        cancelText="취소"
+      />
     </div>
   );
 }
