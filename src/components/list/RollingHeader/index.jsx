@@ -48,7 +48,7 @@ function RollingHeader({
     setIsShareOpen((prev) => !prev);
   };
 
-  const handleShareSelect = (type) => {
+  const handleShareSelect = async (type) => {
     const webUrl = window.location.href;
     const imageUrl = `${window.location.origin}/assets/img-og.png`;
 
@@ -62,7 +62,7 @@ function RollingHeader({
     }
 
     if (type === 'url') {
-      copyUrl(webUrl);
+      await copyUrl(webUrl);
     }
 
     setIsShareOpen(false);

@@ -10,11 +10,11 @@ const useShareActions = () => {
     });
   };
 
-  const copyUrl = (url) => {
+  const copyUrl = async (url) => {
     if (!url) {
       return;
     }
-    navigator.clipboard.writeText(url);
+    await navigator.clipboard.writeText(url);
   };
 
   return { shareKakaoLink, copyUrl };
