@@ -15,6 +15,7 @@ import AddReactionButton from '@/components/reaction/AddReactionButton';
 import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
 import ReactionPanel from '@/components/reaction/ReactionPanel';
 import ShareDropdown from '@/components/common/ShareDropdown';
+import useShareActions from '@/hooks/useShareActions';
 
 function RollingHeader({
   theme = 'blue',
@@ -29,6 +30,7 @@ function RollingHeader({
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const { shareKakaoLink, copyUrl } = useShareActions();
 
   const addBtnRef = useRef(null);
   const moreBtnRef = useRef(null);
@@ -47,7 +49,22 @@ function RollingHeader({
   };
 
   const handleShareSelect = (type) => {
-    console.log(`공유 방식 선택: ${type}`);
+    const webUrl = window.location.href;
+    const imageUrl = `${window.location.origin}/assets/img-og.png`;
+
+    if (type === 'kakao') {
+      shareKakaoLink({
+        title: `${recipientName}님의 롤링 페이퍼`,
+        description: '마음을 모으는 가장 쉬운 방법, 롤링',
+        imageUrl,
+        webUrl,
+      });
+    }
+
+    if (type === 'url') {
+      copyUrl(webUrl);
+    }
+
     setIsShareOpen(false);
   };
 
