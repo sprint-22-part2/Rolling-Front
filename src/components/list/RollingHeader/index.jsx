@@ -14,6 +14,7 @@ import ReactionBadge from '@/components/reaction/ReactionBadge';
 import AddReactionButton from '@/components/reaction/AddReactionButton';
 import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
 import ReactionPanel from '@/components/reaction/ReactionPanel';
+import ShareDropdown from '@/components/common/ShareDropdown';
 
 function RollingHeader({
   theme = 'blue',
@@ -27,6 +28,7 @@ function RollingHeader({
 }) {
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
 
   const addBtnRef = useRef(null);
   const moreBtnRef = useRef(null);
@@ -38,6 +40,15 @@ function RollingHeader({
     // TODO: API 연결 시 이모지 추가, 성공 후 처리 필요
     console.log(`이모지 클릭/추가: ${emoji}`);
     setIsPickerOpen(false);
+  };
+
+  const handleShareToggle = () => {
+    setIsShareOpen((prev) => !prev);
+  };
+
+  const handleShareSelect = (type) => {
+    console.log(`공유 방식 선택: ${type}`);
+    setIsShareOpen(false);
   };
 
   const profiles = recentMessages.map((msg) => ({
@@ -68,10 +79,15 @@ function RollingHeader({
                 <Button
                   variant="variantSmallText"
                   leftIcon={<ShareIcon />}
-                  onClick={() => console.log('공유하기 클릭')}
+                  onClick={handleShareToggle}
                 >
                   공유하기
                 </Button>
+                <ShareDropdown
+                  open={isShareOpen}
+                  onClose={() => setIsShareOpen(false)}
+                  onSelect={handleShareSelect}
+                />
                 <Button
                   variant="variantSmallText"
                   leftIcon={<EditIcon />}
