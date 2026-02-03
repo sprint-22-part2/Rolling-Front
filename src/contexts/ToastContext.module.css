@@ -1,0 +1,11 @@
+.toastContainer {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+  width: min(524px, calc(100% - 32px));
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

@@ -16,6 +16,7 @@ import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
 import ReactionPanel from '@/components/reaction/ReactionPanel';
 import ShareDropdown from '@/components/common/ShareDropdown';
 import useShareActions from '@/hooks/useShareActions';
+import useToast from '@/hooks/useToast';
 
 function RollingHeader({
   theme = 'blue',
@@ -32,6 +33,7 @@ function RollingHeader({
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const { shareKakaoLink, copyUrl } = useShareActions();
+  const { showToast } = useToast();
 
   const addBtnRef = useRef(null);
   const moreBtnRef = useRef(null);
@@ -67,7 +69,16 @@ function RollingHeader({
     }
 
     if (type === 'url') {
-      await copyUrl(webUrl);
+      try {
+        await copyUrl(webUrl);
+        showToast('URL이 복사되었습니다.', 'success');
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          // eslint-disable-next-line no-console
+          console.error('URL 복사 실패:', error);
+        }
+        showToast('URL 복사에 실패했습니다.', 'error');
+      }
     }
 
     setIsShareOpen(false);
