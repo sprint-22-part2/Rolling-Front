@@ -1,49 +1,22 @@
 import styles from './index.module.css';
 import RollingCard from '@/components/main/RollingCard';
 import { getPopularRecipients } from '@/apis/recipients';
-import { getReactions } from '@/apis/reations';
+import useRollingWithReactions from '@/hooks/useRollingWithReactions';
 
-// Import Swiper React components
-// import Swiper core and required modules
 import { Navigation, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-// Import Images
 import { ArrowLeftIcon, ArrowRightIcon } from '@/assets/icons';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 
 function PopularRolling() {
-  const [rolling, setRolling] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      const popularRes = await getPopularRecipients({ limit: 8 });
-
-      const recipientsWithReactions = await Promise.all(
-        popularRes.results.map(async (item) => {
-          if (!item.id) {
-            return { ...item, reactions: [] };
-          }
-
-          const reactionsRes = await getReactions(item.id);
-
-          return {
-            ...item,
-            reactions: reactionsRes.results,
-          };
-        })
-      );
-      setRolling(recipientsWithReactions);
-    }
-
-    fetchData();
-  }, []);
+  const { rolling } = useRollingWithReactions(getPopularRecipients);
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -82,7 +55,7 @@ function PopularRolling() {
         {rolling?.map((item) => (
           <SwiperSlide key={item.id}>
             <Link className={styles.RollingCard} to={`/list/${item.id}`}>
-              <RollingCard item={item} />
+              <RollingCard item={item} reactions={item.reactions} />
             </Link>
           </SwiperSlide>
         ))}

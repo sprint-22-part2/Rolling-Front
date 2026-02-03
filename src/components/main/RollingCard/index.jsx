@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
 import ReactionBadge from '@/components/reaction/ReactionBadge';
 function RollingCard({ item }) {
-  const { name, backgroundColor } = item;
   if (!item) {
     return null;
   }
+  const { name, backgroundColor } = item;
   return (
     <div className={`${styles.rollingCard} ${styles[backgroundColor]}`}>
       <div className={styles.recipient}>
