@@ -6,6 +6,7 @@ function RollingCard({ item }) {
   if (!item) {
     return null;
   }
+  console.log('item', item);
   const { name, backgroundColor, topReactions } = item;
   return (
     <div className={`${styles.rollingCard} ${styles[backgroundColor]}`}>
