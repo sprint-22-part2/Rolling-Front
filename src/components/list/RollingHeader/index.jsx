@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
@@ -47,6 +47,10 @@ function RollingHeader({
   const handleShareToggle = () => {
     setIsShareOpen((prev) => !prev);
   };
+
+  const handleShareClose = useCallback(() => {
+    setIsShareOpen(false);
+  }, []);
 
   const handleShareSelect = async (type) => {
     const webUrl = window.location.href;
@@ -102,7 +106,7 @@ function RollingHeader({
                 </Button>
                 <ShareDropdown
                   open={isShareOpen}
-                  onClose={() => setIsShareOpen(false)}
+                  onClose={handleShareClose}
                   onSelect={handleShareSelect}
                 />
                 <Button
