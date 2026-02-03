@@ -6,7 +6,7 @@ function RollingCard({ item }) {
   if (!item) {
     return null;
   }
-  const { name, backgroundColor } = item;
+  const { name, backgroundColor, topReactions } = item;
   return (
     <div className={`${styles.rollingCard} ${styles[backgroundColor]}`}>
       <div className={styles.recipient}>
@@ -15,7 +15,7 @@ function RollingCard({ item }) {
       </div>
       <ProfileGroup />
       <div className={styles.emojis}>
-        {item.reactions?.map((reaction) => (
+        {topReactions?.map((reaction) => (
           <ReactionBadge
             key={reaction.id}
             emoji={reaction.emoji}
@@ -31,13 +31,7 @@ RollingCard.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-    reactions: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        emoji: PropTypes.string.isRequired,
-        count: PropTypes.number.isRequired,
-      })
-    ),
+    topReactions: PropTypes.arrayOf,
   }).isRequired,
 };
 

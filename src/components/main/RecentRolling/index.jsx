@@ -1,14 +1,21 @@
 import styles from './index.module.css';
 import RollingCard from '@/components/main/RollingCard';
 import { getRecipients } from '@/apis/recipients';
-import useRollingWithReactions from '@/hooks/useRollingWithReactions';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@/components/common/Button';
 
 function RecentRolling() {
-  const { rolling } = useRollingWithReactions(getRecipients);
+  const [rolling, setRolling] = useState([]);
   const [rollingCounts, setRollingCounts] = useState(8);
+
+  useEffect(() => {
+    async function rec() {
+      const popularRecipients = await getRecipients();
+      setRolling(popularRecipients.results);
+    }
+    rec();
+  }, []);
 
   function handleMore() {
     setRollingCounts((prev) => prev + 8);
@@ -22,7 +29,7 @@ function RecentRolling() {
           key={item.id}
           to={`/list/${item.id}`}
         >
-          <RollingCard item={item} reactions={item.reactions} />
+          <RollingCard item={item} />
         </Link>
       ))}
 

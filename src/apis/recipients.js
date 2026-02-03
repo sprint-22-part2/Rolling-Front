@@ -8,11 +8,8 @@ export async function getRecipients(params) {
 }
 
 export async function getPopularRecipients(params) {
-  const res = await apiClient.get('/recipients/', {
-    params: {
-      ...params,
-      sort: 'like',
-    },
+  return getRecipients({
+    ...params,
+    sort: 'like',
   });
-  return res.data;
 }
