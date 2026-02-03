@@ -2,7 +2,7 @@ import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
 import ReactionBadge from '@/components/reaction/ReactionBadge';
-function RollingCard({ item }) {
+function RollingCard({ item, reactions }) {
   if (!item) {
     return null;
   }
@@ -16,10 +16,13 @@ function RollingCard({ item }) {
       </div>
       <ProfileGroup />
       <div className={styles.emojis}>
-        <ReactionBadge />
-        <div className={styles.emoji}>🥲 23</div>
-        <div className={styles.emoji}>🥲 203</div>
-        <div className={styles.emoji}>🥲 2663</div>
+        {reactions?.map((reaction) => {
+          <ReactionBadge
+            key={reaction.id}
+            emoji={reaction.emoji}
+            count={reaction.count}
+          />;
+        })}
       </div>
     </div>
   );
@@ -30,5 +33,12 @@ RollingCard.propTypes = {
     name: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
   }).isRequired,
+  reactions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      emoji: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+    })
+  ),
 };
 export default RollingCard;
