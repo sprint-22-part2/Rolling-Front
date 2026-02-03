@@ -6,14 +6,21 @@ function RollingCard({ item }) {
   if (!item) {
     return null;
   }
-  const { name, backgroundColor, topReactions } = item;
+  const { name, backgroundColor, topReactions, recentMessages } = item;
+  const profiles = recentMessages.map((message) => ({
+    id: message.id,
+    src: message.profileImageURL,
+    alt: message.sender,
+  }));
   return (
     <div className={`${styles.rollingCard} ${styles[backgroundColor]}`}>
       <div className={styles.recipient}>
         <span className={styles.to}>To</span>
         <p className={styles.name}>{name}</p>
       </div>
-      <ProfileGroup />
+
+      <ProfileGroup profiles={profiles} />
+
       <div className={styles.emojis}>
         {topReactions?.map((reaction) => (
           <ReactionBadge
@@ -31,6 +38,8 @@ RollingCard.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
+    messageCount: PropTypes.number.isRequired,
+    recentMessages: PropTypes.number.isRequired,
     topReactions: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
