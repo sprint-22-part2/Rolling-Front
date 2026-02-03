@@ -184,7 +184,7 @@
   color: var(--gray-500);
 }
 
-/* 메세지 추가에 쓰는 플러스 버튼 */
+/* 메세지 추가에 쓰는 플러스 버튼(컬러 배경용) */
 .variantCircle {
   width: max-content;
   flex-direction: column;
@@ -234,6 +234,58 @@
 .variantCircle:disabled .leftIcon:hover {
   cursor: not-allowed;
   background-color: var(--gray-300);
+}
+
+/* 메세지 추가에 쓰는 플러스 버튼(이미지 배경용) */
+.variantWhiteCircle {
+  width: max-content;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+  height: auto;
+  border-radius: 0;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
+}
+.variantWhiteCircle .leftIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.variantWhiteCircle .leftIcon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--gray-200);
+}
+.variantWhiteCircle .label {
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  color: var(--white);
+  line-height: 1.2;
+  margin-top: 24px;
+}
+.variantWhiteCircle .leftIcon:hover {
+  background: var(--gray-100);
+}
+.variantWhiteCircle:active {
+  transform: translateY(0);
+}
+.variantWhiteCircle:disabled {
+  cursor: not-allowed;
+}
+.variantWhiteCircle:disabled .leftIcon:hover {
+  cursor: not-allowed;
+  background-color: var(--gray-100);
 }
 
 /* 화살표 버튼 */
