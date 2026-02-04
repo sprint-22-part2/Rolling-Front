@@ -133,7 +133,7 @@ function RollingHeader({
     theme === 'image' ? 'variantSmallWhiteText' : 'variantSmallText';
 
   const themeKey = theme === 'image' ? 'trans' : theme;
-  const currentThemeObj = REACTION_THEMES[themeKey] || REACTION_THEMES.blue;
+  const currentThemeObj = REACTION_THEMES[themeKey];
 
   return (
     <div className={styles.rollingHeader} type={theme}>
