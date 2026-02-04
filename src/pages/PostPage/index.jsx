@@ -19,6 +19,7 @@ function PostPage() {
   const [backgroundType, setBackgroundType] = useState('color');
   const [backgroundColor, setBackgroundColor] = useState(DEFAULT_COLOR_ID);
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { imageOptions, isLoading: isBackgroundLoading } =
     useBackgroundImages();
 
@@ -44,6 +45,9 @@ function PostPage() {
   };
 
   const handleSubmit = async () => {
+    if (isSubmitting) {
+      return;
+    }
     const resolvedBackgroundColor =
       backgroundType === 'color' ? backgroundColor : DEFAULT_COLOR_ID;
     const resolvedBackgroundImageURL =
@@ -56,12 +60,15 @@ function PostPage() {
     };
 
     try {
+      setIsSubmitting(true);
       const createdRecipient = await createRecipient(payload);
       if (createdRecipient?.id) {
         navigate(`/post/${createdRecipient.id}`);
       }
     } catch {
       // TODO: 필요 시 사용자에게 에러 메시지 노출(토스트)
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -115,7 +122,7 @@ function PostPage() {
           disabled={isSubmitDisabled}
           onClick={handleSubmit}
         >
-          생성하기
+          {isSubmitting ? '생성 중...' : '생성하기'}
         </Button>
       </div>
     </div>

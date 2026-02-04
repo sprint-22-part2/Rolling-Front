@@ -23,6 +23,8 @@ function ListDetailPage() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isRecipientModalOpen, setIsRecipientModalOpen] = useState(false);
   const [deleteTargetMessageId, setDeleteTargetMessageId] = useState(null);
+  const [isDeletingRecipient, setIsDeletingRecipient] = useState(false);
+  const [isDeletingMessage, setIsDeletingMessage] = useState(false);
 
   const handleClickDeleteRecipient = () => {
     setIsRecipientModalOpen(true);
@@ -30,12 +32,16 @@ function ListDetailPage() {
 
   const handleConfirmDeleteRecipient = async () => {
     try {
+      if (isDeletingRecipient) {
+        return;
+      }
+      setIsDeletingRecipient(true);
       await deleteRecipient(id);
       navigate('/list');
     } catch (error) {
       console.error(error);
     } finally {
-      setIsRecipientModalOpen(false);
+      setIsDeletingRecipient(false);
     }
   };
 
@@ -49,6 +55,10 @@ function ListDetailPage() {
     }
 
     try {
+      if (isDeletingMessage) {
+        return;
+      }
+      setIsDeletingMessage(true);
       await deleteMessage(deleteTargetMessageId);
 
       setMessages((prevMessages) =>
@@ -58,6 +68,7 @@ function ListDetailPage() {
       console.error(error);
     } finally {
       setDeleteTargetMessageId(null);
+      setIsDeletingMessage(false);
     }
   };
 
@@ -138,8 +149,10 @@ function ListDetailPage() {
         isOpen={isRecipientModalOpen}
         onClose={() => setIsRecipientModalOpen(false)}
         onConfirm={handleConfirmDeleteRecipient}
-        confirmText="삭제"
+        confirmText={isDeletingRecipient ? '삭제 중' : '삭제'}
         cancelText="취소"
+        confirmButtonProps={{ disabled: isDeletingRecipient }}
+        cancelButtonProps={{ disabled: isDeletingRecipient }}
       />
 
       <ConfirmModal
@@ -147,8 +160,10 @@ function ListDetailPage() {
         isOpen={!!deleteTargetMessageId}
         onClose={() => setDeleteTargetMessageId(null)}
         onConfirm={handleConfirmDeleteMessage}
-        confirmText="삭제"
+        confirmText={isDeletingMessage ? '삭제 중' : '삭제'}
         cancelText="취소"
+        confirmButtonProps={{ disabled: isDeletingMessage }}
+        cancelButtonProps={{ disabled: isDeletingMessage }}
       />
     </div>
   );
