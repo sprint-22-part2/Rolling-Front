@@ -130,6 +130,7 @@ function ListDetailPage() {
           recipientName={recipient.name}
           theme={theme}
           onDelete={handleClickDeleteMessage}
+          recipientId={recipient.id}
         />
       </section>
 
