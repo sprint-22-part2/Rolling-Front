@@ -16,6 +16,7 @@ import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
 import ReactionPanel from '@/components/reaction/ReactionPanel';
 import ShareDropdown from '@/components/common/ShareDropdown';
 import useShareActions from '@/hooks/useShareActions';
+import useToast from '@/hooks/useToast';
 
 function RollingHeader({
   theme = 'blue',
@@ -26,11 +27,13 @@ function RollingHeader({
   recentMessages = [],
   messageCount = 0,
   topReactions = [],
+  onDelete,
 }) {
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const { shareKakaoLink, copyUrl } = useShareActions();
+  const { showToast } = useToast();
 
   const addBtnRef = useRef(null);
   const moreBtnRef = useRef(null);
@@ -66,7 +69,15 @@ function RollingHeader({
     }
 
     if (type === 'url') {
-      await copyUrl(webUrl);
+      try {
+        await copyUrl(webUrl);
+        showToast('URL이 복사되었습니다.', 'success');
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          console.error('URL 복사 실패:', error);
+        }
+        showToast('URL 복사에 실패했습니다.', 'error');
+      }
     }
 
     setIsShareOpen(false);
@@ -88,6 +99,9 @@ function RollingHeader({
 
   const MAX_VISIBLE_BADGES = 5;
 
+  const btnVariant =
+    theme === 'image' ? 'variantSmallWhiteText' : 'variantSmallText';
+
   return (
     <div className={styles.rollingHeader} type={theme}>
       <div className={styles.rollingHeaderTop}>
@@ -101,7 +115,7 @@ function RollingHeader({
             {!isEditMode ? (
               <>
                 <Button
-                  variant="variantSmallText"
+                  variant={btnVariant}
                   leftIcon={<ShareIcon />}
                   onClick={handleShareToggle}
                 >
@@ -113,7 +127,7 @@ function RollingHeader({
                   onSelect={handleShareSelect}
                 />
                 <Button
-                  variant="variantSmallText"
+                  variant={btnVariant}
                   leftIcon={<EditIcon />}
                   onClick={handleEdit}
                 >
@@ -123,14 +137,14 @@ function RollingHeader({
             ) : (
               <>
                 <Button
-                  variant="variantSmallText"
+                  variant={btnVariant}
                   leftIcon={<DeletedIcon />}
-                  onClick={() => console.log('삭제하기 클릭')}
+                  onClick={onDelete}
                 >
                   롤링페이퍼 삭제하기
                 </Button>
                 <Button
-                  variant="variantSmallText"
+                  variant={btnVariant}
                   leftIcon={<EditIcon />}
                   onClick={handleSave}
                 >
@@ -203,6 +217,7 @@ RollingHeader.propTypes = {
   recentMessages: PropTypes.array,
   messageCount: PropTypes.number,
   topReactions: PropTypes.array,
+  onDelete: PropTypes.func,
 };
 
 export default RollingHeader;

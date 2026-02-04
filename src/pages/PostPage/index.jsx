@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import TextInput from '@/components/common/TextInput';
 import SegmentToggle from '@/components/common/SegmentToggle';
 import ColorSelector from '@/components/post/ColorSelector';
@@ -23,6 +23,9 @@ function PostPage() {
   const { imageOptions, isLoading: isBackgroundLoading } =
     useBackgroundImages();
 
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
   const selectedBackgroundImage = useMemo(
     () => backgroundImage || (imageOptions[0]?.id ?? ''),
     [backgroundImage, imageOptions]

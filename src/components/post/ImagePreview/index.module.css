@@ -79,6 +79,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+  margin-top: 24px;
 }
 
 .previewTitle {
@@ -193,6 +194,58 @@
 
 @media screen and (max-width: 767px) {
   .previewFrame {
+    width: min(520px, 100%);
+    aspect-ratio: 3 / 4;
     border-radius: 8px;
+  }
+
+  .previewOverlay {
+    padding: 48px 40px 20px;
+    gap: 16px;
+  }
+
+  .previewTitle {
+    width: 140px;
+  }
+
+  .cardRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .addCard,
+  .previewCard {
+    aspect-ratio: 344 / 285;
+    min-height: unset;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .previewFrame {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+  }
+
+  .previewOverlay {
+    padding: 32px 24px 16px;
+    gap: 12px;
+  }
+
+  .previewTitle {
+    width: 180px;
+  }
+
+  .cardRow {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .addCard,
+  .previewCard {
+    aspect-ratio: 344 / 240;
+  }
+
+  .cardRow > :nth-child(n + 3) {
+    display: none;
   }
 }

@@ -6,8 +6,11 @@ import LinkButton from '@/components/common/LinkButton';
 import NoMessage from '@/components/list/NoMessage';
 import Message from '@/components/list/Message';
 
-function MessageWrap({ isEditMode, messages, recipientName }) {
+function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
   const { id } = useParams();
+
+  const addButtonVariant =
+    theme === 'image' ? 'variantWhiteCircle' : 'variantCircle';
 
   // 메세지 하나도 없을 때
   if (!messages || messages.length === 0) {
@@ -27,7 +30,7 @@ function MessageWrap({ isEditMode, messages, recipientName }) {
           <div className={styles.messageItem}>
             <LinkButton
               to={`/post/${id}/message`}
-              variant="variantCircle"
+              variant={addButtonVariant}
               leftIcon={<PlusIcon />}
               className={styles.addButtonLink}
             >
@@ -47,6 +50,9 @@ function MessageWrap({ isEditMode, messages, recipientName }) {
               content={message.content}
               font={message.font}
               createdAt={message.createdAt}
+              theme={theme}
+              id={message.id}
+              onDelete={onDelete}
             />
           </div>
         ))}
@@ -59,6 +65,8 @@ MessageWrap.propTypes = {
   isEditMode: PropTypes.bool.isRequired,
   messages: PropTypes.array,
   recipientName: PropTypes.string,
+  theme: PropTypes.string,
+  onDelete: PropTypes.func,
 };
 
 export default MessageWrap;

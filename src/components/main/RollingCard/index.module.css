@@ -16,7 +16,6 @@
   background-color: var(--bg);
   padding: 24px;
   cursor: pointer;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.07);
 }
 
 .recipient {
@@ -53,7 +52,7 @@
   font-size: 14px;
 }
 
-.yellow {
+.beige {
   --bg: var(--yellow-100);
   --accent: var(--yellow-300);
   --emoji-bg: var(--yellow-200);

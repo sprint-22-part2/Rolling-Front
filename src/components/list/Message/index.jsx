@@ -5,6 +5,7 @@ import ProfileImage from '@/components/common/ProfileImage';
 import RelationshipBadge from '@/components/common/RelationshipBadge';
 import { DeletedIcon } from '@/assets/icons';
 import Button from '@/components/common/Button';
+import { formatDate } from '@/utils/dateFormat';
 
 function Message({
   senderName,
@@ -14,22 +15,18 @@ function Message({
   font,
   createdAt,
   isEditMode,
+  theme,
+  id,
+  onDelete,
 }) {
-  const handleDelete = () => {
-    console.log('카드 삭제 클릭');
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+
+    onDelete(id);
   };
 
-  // 날짜 포맷팅
-  const formatDate = (dateString) => {
-    if (!dateString) {
-      return '';
-    }
-    const date = new Date(dateString);
-    if (isNaN(date)) {
-      return '';
-    }
-    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}.${String(date.getDate()).padStart(2, '0')}`;
-  };
+  const deleteBtnVariant =
+    theme === 'image' ? 'variantSmallWhiteText' : 'variantSmallText';
 
   return (
     <article>
@@ -57,8 +54,8 @@ function Message({
         {/* 편집 모드일 때만 삭제 버튼 노출 */}
         {isEditMode && (
           <Button
-            variant="variantSmallText"
-            onClick={handleDelete}
+            variant={deleteBtnVariant}
+            onClick={handleDeleteClick}
             leftIcon={<DeletedIcon />}
             className={styles.deleteBtn}
           >
@@ -78,6 +75,9 @@ Message.propTypes = {
   font: PropTypes.string,
   createdAt: PropTypes.string.isRequired,
   isEditMode: PropTypes.bool,
+  theme: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  onDelete: PropTypes.func,
 };
 
 export default Message;
