@@ -42,6 +42,7 @@ function ListDetailPage() {
       console.error(error);
     } finally {
       setIsDeletingRecipient(false);
+      setIsRecipientModalOpen(false);
     }
   };
 
@@ -141,7 +142,7 @@ function ListDetailPage() {
           recipientName={recipient.name}
           theme={theme}
           onDelete={handleClickDeleteMessage}
-          recipientId={id}
+          recipientId={recipient.id}
         />
       </section>
 
@@ -150,7 +151,7 @@ function ListDetailPage() {
         isOpen={isRecipientModalOpen}
         onClose={() => setIsRecipientModalOpen(false)}
         onConfirm={handleConfirmDeleteRecipient}
-        confirmText={isDeletingRecipient ? '삭제 중' : '삭제'}
+        confirmText="삭제"
         cancelText="취소"
         confirmButtonProps={{ disabled: isDeletingRecipient }}
         cancelButtonProps={{ disabled: isDeletingRecipient }}
@@ -161,7 +162,7 @@ function ListDetailPage() {
         isOpen={!!deleteTargetMessageId}
         onClose={() => setDeleteTargetMessageId(null)}
         onConfirm={handleConfirmDeleteMessage}
-        confirmText={isDeletingMessage ? '삭제 중' : '삭제'}
+        confirmText="삭제"
         cancelText="취소"
         confirmButtonProps={{ disabled: isDeletingMessage }}
         cancelButtonProps={{ disabled: isDeletingMessage }}
