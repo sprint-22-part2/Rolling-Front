@@ -1,7 +1,7 @@
-import { apiClient } from './axiosInstance';
+import { teamClient } from './axiosInstance';
 
 export async function getRecipients(params) {
-  const res = await apiClient.get('/recipients/', {
+  const res = await teamClient.get('/recipients/', {
     params,
   });
   return res.data;
