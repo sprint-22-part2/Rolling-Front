@@ -5,7 +5,14 @@ import LinkButton from '@/components/common/LinkButton';
 import NoMessage from '@/components/list-detail/NoMessage';
 import Message from '@/components/list-detail/Message';
 
-function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
+function MessageWrap({
+  isEditMode,
+  messages,
+  recipientName,
+  theme,
+  onDelete,
+  recipientId,
+}) {
   const addButtonVariant =
     theme === 'image' ? 'variantWhiteCircle' : 'variantCircle';
 
@@ -26,7 +33,7 @@ function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
         {!isEditMode && (
           <div className={styles.messageItem}>
             <LinkButton
-              to="/post/message"
+              to={`/post/${recipientId}/message`}
               variant={addButtonVariant}
               leftIcon={<PlusIcon />}
               className={styles.addButtonLink}
@@ -38,7 +45,7 @@ function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
 
         {/* 메세지 리스트 렌더링 */}
         {messages.map((message) => (
-          <div key={message.id} className={styles.messageItem}>
+          <div key={message.recipientId} className={styles.messageItem}>
             <Message
               isEditMode={isEditMode}
               senderName={message.sender}
@@ -48,7 +55,7 @@ function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
               font={message.font}
               createdAt={message.createdAt}
               theme={theme}
-              id={message.id}
+              id={message.recipientId}
               onDelete={onDelete}
             />
           </div>
@@ -64,6 +71,7 @@ MessageWrap.propTypes = {
   recipientName: PropTypes.string,
   theme: PropTypes.string,
   onDelete: PropTypes.func,
+  recipientId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default MessageWrap;

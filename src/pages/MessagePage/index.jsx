@@ -62,7 +62,7 @@ function MessagePage() {
       await createMessage(recipientId, payload);
 
       // 작성 완료 후 이동
-      navigate(`/list/${recipientId}`);
+      navigate(`/post/${recipientId}`);
     } catch (e) {
       console.log(
         'createMessage failed:',
