@@ -13,7 +13,7 @@ export default function AppRoutes() {
         <Route path="/" element={<Layout />}>
           <Route index element={<LandingPage />} />
           <Route path="/list" element={<ListPage />} />
-          <Route path="/post/:id" element={<ListDetailPage theme="blue" />} />
+          <Route path="/post/:id" element={<ListDetailPage />} />
           <Route path="/post" element={<PostPage />} />
           <Route path="/post/message" element={<MessagePage />} />
         </Route>
