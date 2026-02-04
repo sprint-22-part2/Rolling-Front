@@ -13,11 +13,41 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const RELATIONSHIP_OPTIONS = ['지인', '친구', '동료', '가족'];
 
+const extractTextFromJson = (node) => {
+  if (!node) {
+    return '';
+  }
+  if (typeof node === 'string') {
+    return node;
+  }
+  if (Array.isArray(node)) {
+    return node.map(extractTextFromJson).filter(Boolean).join(' ');
+  }
+  if (node.text) {
+    return node.text;
+  }
+  if (node.content) {
+    return node.content.map(extractTextFromJson).filter(Boolean).join(' ');
+  }
+  return '';
+};
+
 const getPlainText = (value) => {
-  return value
-    .replace(/<[^>]+>/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .trim();
+  if (!value) {
+    return '';
+  }
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value);
+      return extractTextFromJson(parsed).trim();
+    } catch {
+      return value
+        .replace(/<[^>]+>/g, '')
+        .replace(/&nbsp;/g, ' ')
+        .trim();
+    }
+  }
+  return extractTextFromJson(value).trim();
 };
 
 function MessagePage() {

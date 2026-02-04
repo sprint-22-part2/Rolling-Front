@@ -6,6 +6,7 @@ import RelationshipBadge from '@/components/common/RelationshipBadge';
 import { DeletedIcon } from '@/assets/icons';
 import Button from '@/components/common/Button';
 import { formatDate } from '@/utils/dateFormat';
+import EditorViewer from '@/components/message/EditorViewer';
 
 function Message({
   senderName,
@@ -45,7 +46,7 @@ function Message({
         className={`${styles.messageContent} ${styles[font]}`}
         style={{ fontFamily: FONT_MAP[font] }}
       >
-        {content}
+        <EditorViewer content={content} currentFont={FONT_MAP[font] ?? font} />
       </div>
 
       <div className={styles.messageFoot}>
