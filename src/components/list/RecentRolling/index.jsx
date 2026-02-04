@@ -1,5 +1,5 @@
 import styles from './index.module.css';
-import RollingCard from '@/components/main/RollingCard';
+import RollingCard from '@/components/list/RollingCard';
 import { getRecipients } from '@/apis/recipients';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -31,7 +31,7 @@ function RecentRolling() {
         <Link
           className={styles.RollingCard}
           key={item.id}
-          to={`/list/${item.id}`}
+          to={`/post/${item.id}`}
         >
           <RollingCard item={item} />
         </Link>

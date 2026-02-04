@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextInput from '@/components/common/TextInput';
 import SegmentToggle from '@/components/common/SegmentToggle';
 import ColorSelector from '@/components/post/ColorSelector';
@@ -9,12 +10,11 @@ import { createRecipient } from '@/apis/post';
 import useBackgroundImages from '@/hooks/useBackgroundImages';
 import Button from '@/components/common/Button';
 import styles from './index.module.css';
-import { useNavigate } from 'react-router-dom';
 
 const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
 
 function PostPage() {
-  const navigate = useNavigate(); // 추가
+  const navigate = useNavigate();
 
   const [recipientName, setRecipientName] = useState('');
   const [backgroundType, setBackgroundType] = useState('color');

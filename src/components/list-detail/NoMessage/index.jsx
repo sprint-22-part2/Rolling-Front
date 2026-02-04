@@ -1,11 +1,8 @@
 import styles from './index.module.css';
-import { useParams } from 'react-router-dom';
 import LinkButton from '@/components/common/LinkButton';
 import PropTypes from 'prop-types';
 
 function NoMessage({ recipientName }) {
-  const { id } = useParams();
-
   return (
     <div className={styles.noMessageBox}>
       <p className={styles.notiMessage}>
@@ -13,7 +10,7 @@ function NoMessage({ recipientName }) {
         <br />
         처음으로 {recipientName}님에게 메세지를 남겨보세요.
       </p>
-      <LinkButton to={`/post/${id}/message`} size="sizeLg">
+      <LinkButton to="/post/message" size="sizeLg">
         메세지 남기기
       </LinkButton>
     </div>
