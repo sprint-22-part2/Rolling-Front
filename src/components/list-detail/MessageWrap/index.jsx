@@ -1,17 +1,14 @@
 import { useState } from 'react';
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
 import { PlusIcon } from '@/assets/icons';
 import LinkButton from '@/components/common/LinkButton';
-import NoMessage from '@/components/list/NoMessage';
-import Message from '@/components/list/Message';
+import NoMessage from '@/components/list-detail/NoMessage';
+import Message from '@/components/list-detail/Message';
 import MessageModal from '@/components/modal/MessageModal';
 import { formatDate } from '@/utils/dateFormat';
 
 function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
-  const { id } = useParams();
-
   const [selectedMessage, setSelectedMessage] = useState(null);
 
   const addButtonVariant =
@@ -43,7 +40,7 @@ function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
           {!isEditMode && (
             <div className={styles.messageItem}>
               <LinkButton
-                to={`/post/${id}/message`}
+                to="/post/message"
                 variant={addButtonVariant}
                 leftIcon={<PlusIcon />}
                 className={styles.addButtonLink}

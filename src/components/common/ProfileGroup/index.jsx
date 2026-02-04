@@ -25,9 +25,8 @@ function ProfileGroup({
       {totalCount > 0 && (
         <div className={styles.profileGroup}>
           {displayProfiles.map((profile, index) => (
-            //TODO: API 연결 시 id 값으로 변경 필요
             <div
-              key={profile.id ?? `${profile.src}-${index}`}
+              key={profile.id}
               className={styles.profileItem}
               style={{ zIndex: index + 1 }}
             >
