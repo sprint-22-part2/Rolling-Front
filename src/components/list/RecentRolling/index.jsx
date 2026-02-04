@@ -6,28 +6,33 @@ import { Link } from 'react-router-dom';
 import Button from '@/components/common/Button';
 
 function RecentRolling() {
+  const LIMIT = 8;
   const [rolling, setRolling] = useState([]);
-  const [rollingCounts, setRollingCounts] = useState(8);
+  const [nextRolling, setNextRolling] = useState([]);
 
   useEffect(() => {
     async function fetchRecipients() {
       try {
-        const popularRecipients = await getRecipients();
-        setRolling(popularRecipients.results);
+        const recentRecipients = await getRecipients();
+        setRolling(recentRecipients.results);
       } catch (error) {
         console.error('Failed to fetch recipients:', error);
       }
     }
     fetchRecipients();
   }, []);
-
-  function handleMore() {
-    setRollingCounts((prev) => prev + 8);
-  }
-  const firstRolling = rolling.slice(0, rollingCounts);
+  const handleLoadMore = async () => {
+    const response = await getRecipients({
+      offset: rolling.length,
+      limit: LIMIT,
+    });
+    const { results } = response;
+    setRolling((prevItems) => [...prevItems, ...results]);
+    setNextRolling(response.next);
+  };
   return (
     <div className={styles.recentRolling}>
-      {firstRolling?.map((item) => (
+      {rolling?.map((item) => (
         <Link
           className={styles.RollingCard}
           key={item.id}
@@ -37,13 +42,13 @@ function RecentRolling() {
         </Link>
       ))}
 
-      {rollingCounts < rolling.length ? (
+      {nextRolling !== null && (
         <div className={styles.buttonWrap}>
-          <Button size="sizeBig" variant="variantGray" onClick={handleMore}>
+          <Button size="sizeBig" variant="variantGray" onClick={handleLoadMore}>
             더보기
           </Button>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }
