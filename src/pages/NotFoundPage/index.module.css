@@ -1,6 +1,6 @@
 .container {
   background-color: var(--primary-400);
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,10 +14,9 @@
 .airplane {
   width: 113px;
   height: 113px;
-  fill: white;
 }
 .desc {
-  color: white;
+  color: var(--white);
   font-size: 24px;
   font-weight: 500;
   opacity: 0.9;
@@ -30,7 +29,8 @@
   font-weight: var(--font-weight-medium);
   background-color: var(--white);
   color: var(--primary-400);
+  transition: all 0.2s ease;
 }
 .homeBtn:hover {
-  opacity: 0.9;
+  background-color: var(--gray-100);
 }
