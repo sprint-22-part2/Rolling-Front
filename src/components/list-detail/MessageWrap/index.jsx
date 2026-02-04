@@ -45,7 +45,7 @@ function MessageWrap({
 
         {/* 메세지 리스트 렌더링 */}
         {messages.map((message) => (
-          <div key={message.recipientId} className={styles.messageItem}>
+          <div key={message.id} className={styles.messageItem}>
             <Message
               isEditMode={isEditMode}
               senderName={message.sender}
@@ -55,7 +55,7 @@ function MessageWrap({
               font={message.font}
               createdAt={message.createdAt}
               theme={theme}
-              id={message.recipientId}
+              id={message.id}
               onDelete={onDelete}
             />
           </div>

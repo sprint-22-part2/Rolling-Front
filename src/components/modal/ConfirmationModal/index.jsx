@@ -15,8 +15,8 @@ export default function ConfirmModal({
   confirmButtonProps,
   cancelButtonProps,
 }) {
-  const handleConfirm = useCallback(() => {
-    onConfirm?.();
+  const handleConfirm = useCallback(async () => {
+    await onConfirm?.();
     onClose();
   }, [onConfirm, onClose]);
 
