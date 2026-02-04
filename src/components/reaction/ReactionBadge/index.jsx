@@ -2,12 +2,7 @@ import PropTypes from 'prop-types';
 import styles from './index.module.css';
 import { REACTION_THEMES } from '@/components/reaction/reactionThemes';
 
-export default function ReactionBadge({
-  emoji,
-  count,
-  onClick,
-  theme = REACTION_THEMES.blue,
-}) {
+export default function ReactionBadge({ emoji, count, onClick, theme }) {
   const safeTheme = theme ?? REACTION_THEMES.blue;
   return (
     <button
