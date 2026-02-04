@@ -8,13 +8,14 @@ import Button from '@/components/common/Button';
 function RecentRolling() {
   const LIMIT = 8;
   const [rolling, setRolling] = useState([]);
-  const [nextRolling, setNextRolling] = useState([]);
+  const [nextRolling, setNextRolling] = useState(null);
 
   useEffect(() => {
     async function fetchRecipients() {
       try {
         const recentRecipients = await getRecipients();
         setRolling(recentRecipients.results);
+        setNextRolling(recentRecipients.next);
       } catch (error) {
         console.error('Failed to fetch recipients:', error);
       }
