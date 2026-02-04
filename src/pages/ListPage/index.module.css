@@ -1,52 +1,4 @@
-/* 색상 배경 테마 공통 변수 설정 */
-[type='beige'],
-[type='purple'],
-[type='blue'],
-[type='green'] {
-  --message-bg: var(--white);
-  --message-text-primary: var(--gray-800);
-  --message-text-content: var(--gray-700);
-  --message-date: var(--gray-300);
-  --header-text: var(--gray-800);
-}
-
-[type='beige'] {
-  --bg: var(--yellow-100);
-}
-[type='purple'] {
-  --bg: var(--purple-100);
-}
-[type='blue'] {
-  --bg: var(--blue-100);
-}
-[type='green'] {
-  --bg: var(--green-100);
-}
-
-/* 이미지 배경 테마 설정 */
-[type='image'] {
-  /* 배경 오버레이 JS에서 인라인 스타일로 처리 */
-  --bg: transparent;
-  --emoji-text: var(--white);
-
-  /* 카드 스타일 */
-  --message-bg: var(--white-opacity-50);
-
-  /* 텍스트 스타일 */
-  --message-text-primary: var(--white);
-  --message-text-content: var(--white);
-  --message-date: var(--gray-100);
-  --header-text: var(--white);
-}
-
-.postList {
-  width: 100%;
-  display: flex;
-  gap: 64px;
-  background-color: var(--bg);
-}
-
-.sectionPostList {
+.rollingList {
   max-width: 1248px;
   width: 100%;
   margin: 0 auto;
@@ -54,4 +6,33 @@
   flex-direction: column;
   gap: 64px;
   padding: 80px 24px;
+}
+
+.sectionRollingList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sectionTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.makeButton {
+  white-space: nowrap;
+}
+@media (max-width: 1079px) {
+  .rollingList {
+    padding: 48px 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .rollingList {
+    padding: 32px 24px;
+  }
 }
