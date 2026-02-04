@@ -8,7 +8,14 @@ import Message from '@/components/list-detail/Message';
 import MessageModal from '@/components/modal/MessageModal';
 import { formatDate } from '@/utils/dateFormat';
 
-function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
+function MessageWrap({
+  isEditMode,
+  messages,
+  recipientName,
+  theme,
+  onDelete,
+  recipientId,
+}) {
   const [selectedMessage, setSelectedMessage] = useState(null);
 
   const addButtonVariant =
@@ -40,7 +47,7 @@ function MessageWrap({ isEditMode, messages, recipientName, theme, onDelete }) {
           {!isEditMode && (
             <div className={styles.messageItem}>
               <LinkButton
-                to="/post/message"
+                to={`/post/${recipientId}/message`}
                 variant={addButtonVariant}
                 leftIcon={<PlusIcon />}
                 className={styles.addButtonLink}
@@ -96,6 +103,7 @@ MessageWrap.propTypes = {
   recipientName: PropTypes.string,
   theme: PropTypes.string,
   onDelete: PropTypes.func,
+  recipientId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default MessageWrap;

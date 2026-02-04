@@ -8,8 +8,10 @@ import ProfileSelector from '@/components/message/ProfileSelector';
 import Dropdown from '@/components/common/Dropdown';
 import { FONT_MAP, FONT_OPTIONS } from '@/constants/editor';
 import useProfileImages from '@/hooks/useProfileImages';
+import { createMessage } from '@/apis/message';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const RELATIONSHIP_OPTIONS = ['친구', '지인', '동료', '가족'];
+const RELATIONSHIP_OPTIONS = ['지인', '친구', '동료', '가족'];
 
 const getPlainText = (value) => {
   return value
@@ -19,9 +21,12 @@ const getPlainText = (value) => {
 };
 
 function MessagePage() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   const [senderName, setSenderName] = useState('');
   const [profileImageId, setProfileImageId] = useState('');
-  const [relationship, setRelationship] = useState('');
+  const [relationship, setRelationship] = useState('지인');
   const [content, setContent] = useState('');
   const [font, setFont] = useState(FONT_OPTIONS[0] ?? 'Noto Sans');
   const { imageOptions } = useProfileImages();
@@ -30,12 +35,42 @@ function MessagePage() {
     () => profileImageId || (imageOptions[0]?.id ?? ''),
     [profileImageId, imageOptions]
   );
+
+  const selectedProfileImageURL = useMemo(() => {
+    const found = imageOptions.find((img) => img.id === selectedProfileImageId);
+    return found?.url ?? found?.imageUrl ?? found?.imageURL ?? found?.src ?? '';
+  }, [imageOptions, selectedProfileImageId]);
+
   const hasContent = getPlainText(content).length > 0;
   const isSubmitDisabled =
     !senderName.trim() ||
     !relationship ||
     !hasContent ||
-    !selectedProfileImageId;
+    !selectedProfileImageURL;
+
+  const handleSubmit = async () => {
+    const payload = {
+      recipientId: Number(id),
+      sender: senderName.trim(),
+      profileImageURL: selectedProfileImageURL,
+      relationship,
+      content,
+      font,
+    };
+
+    try {
+      await createMessage(id, payload);
+
+      // 작성 완료 후 이동
+      navigate(`/post/${id}`);
+    } catch (e) {
+      console.log(
+        'createMessage failed:',
+        e?.response?.status,
+        e?.response?.data ?? e?.message
+      );
+    }
+  };
 
   return (
     <div className={styles.messagePage}>
@@ -60,7 +95,6 @@ function MessagePage() {
           <h3 className={styles.sectionTitle}>상대와의 관계</h3>
         </div>
         <Dropdown
-          placeholder="관계를 선택해 주세요"
           options={RELATIONSHIP_OPTIONS}
           value={relationship}
           onChange={setRelationship}
@@ -88,6 +122,7 @@ function MessagePage() {
           size="sizeBig"
           variant="variantPrimary"
           disabled={isSubmitDisabled}
+          onClick={handleSubmit}
         >
           생성하기
         </Button>
