@@ -27,14 +27,13 @@ function RollingHeader({
   setIsEditMode,
   recentMessages = [],
   messageCount = 0,
-  topReactions = [],
   onDelete,
 }) {
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
-  const [reactions, setReactions] = useState(topReactions || []);
+  const [reactions, setReactions] = useState([]);
 
   const { id } = useParams();
   const { shareKakaoLink, copyUrl } = useShareActions();
@@ -46,23 +45,7 @@ function RollingHeader({
   const handleEdit = () => setIsEditMode(true);
   const handleSave = () => setIsEditMode(false);
 
-  useEffect(() => {
-    const initLoad = async () => {
-      if (!id) {
-        return;
-      }
-      try {
-        const data = await getReactions(id);
-        setReactions(data.results || []);
-      } catch (error) {
-        console.error('초기 로딩 실패:', error);
-      }
-    };
-
-    initLoad();
-  }, [id]);
-
-  const refreshReactions = async () => {
+  const fetchReactions = useCallback(async () => {
     if (!id) {
       return;
     }
@@ -70,21 +53,30 @@ function RollingHeader({
       const data = await getReactions(id);
       setReactions(data.results || []);
     } catch (error) {
-      console.error('새로고침 실패:', error);
+      console.error('리액션 로딩 실패:', error);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    const load = async () => {
+      await fetchReactions();
+    };
+    load();
+  }, [fetchReactions]);
 
   const handleEmojiClick = async (emojiData) => {
     try {
       await postReaction(id, emojiData);
 
-      await refreshReactions();
+      // 통합된 함수 호출
+      await fetchReactions();
 
       setIsPickerOpen(false);
     } catch (error) {
       console.error('이모지 추가 실패:', error);
     }
   };
+
   const handleShareToggle = () => {
     setIsShareOpen((prev) => !prev);
   };
@@ -255,7 +247,6 @@ RollingHeader.propTypes = {
   hasMessages: PropTypes.bool.isRequired,
   recentMessages: PropTypes.array,
   messageCount: PropTypes.number,
-  topReactions: PropTypes.array,
   onDelete: PropTypes.func,
 };
 
