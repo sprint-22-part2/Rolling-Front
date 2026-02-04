@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextInput from '@/components/common/TextInput';
 import SegmentToggle from '@/components/common/SegmentToggle';
 import ColorSelector from '@/components/post/ColorSelector';
@@ -13,6 +14,7 @@ import styles from './index.module.css';
 const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
 
 function PostPage() {
+  const navigate = useNavigate();
   const [recipientName, setRecipientName] = useState('');
   const [backgroundType, setBackgroundType] = useState('color');
   const [backgroundColor, setBackgroundColor] = useState(DEFAULT_COLOR_ID);
@@ -54,7 +56,10 @@ function PostPage() {
     };
 
     try {
-      await createRecipient(payload);
+      const createdRecipient = await createRecipient(payload);
+      if (createdRecipient?.id) {
+        navigate(`/post/${createdRecipient.id}`);
+      }
     } catch {
       // TODO: 필요 시 사용자에게 에러 메시지 노출(토스트)
     }
