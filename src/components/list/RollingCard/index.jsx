@@ -25,7 +25,7 @@ function RollingCard({ item }) {
     ? REACTION_THEMES.trans
     : REACTION_THEMES[backgroundColor];
 
-  const textColor = backgroundImageURL ? '#c2c2c2' : 'var(--gray-700)';
+  const textColor = backgroundImageURL ? 'var(--gray-200)' : 'var(--gray-700)';
 
   return (
     <div
@@ -60,7 +60,7 @@ RollingCard.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
     backgroundColor: PropTypes.string.isRequired,
-    backgroundImageURL: PropTypes.string.isRequired,
+    backgroundImageURL: PropTypes.string,
     messageCount: PropTypes.number.isRequired,
     recentMessages: PropTypes.number.isRequired,
     topReactions: PropTypes.arrayOf(
