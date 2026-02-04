@@ -8,6 +8,7 @@ import ImojiIcon from './ic-imoji.svg?react';
 import PlusIcon from './ic-plus.svg?react';
 import ShareIcon from './ic-share.svg?react';
 import CheckIcon from './ic-check.svg?react';
+import AirplaneIcon from './ic-airplane.svg?react';
 import EditorBoldIcon from './ic-editor-bold.svg?react';
 import EditorItalicIcon from './ic-editor-italic.svg?react';
 import EditorUnderlineIcon from './ic-editor-underline.svg?react';
@@ -31,6 +32,7 @@ export {
   PlusIcon,
   ShareIcon,
   CheckIcon,
+  AirplaneIcon,
   EditorBoldIcon,
   EditorItalicIcon,
   EditorUnderlineIcon,

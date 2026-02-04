@@ -1,0 +1,36 @@
+.container {
+  background-color: var(--primary-400);
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.row {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 69px;
+}
+.airplane {
+  width: 113px;
+  height: 113px;
+}
+.desc {
+  color: var(--white);
+  font-size: 24px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+.homeBtn {
+  width: 253px;
+  height: 52px;
+  border-radius: 0;
+  font-size: 20px;
+  font-weight: var(--font-weight-medium);
+  background-color: var(--white);
+  color: var(--primary-400);
+  transition: all 0.2s ease;
+}
+.homeBtn:hover {
+  background-color: var(--gray-100);
+}
