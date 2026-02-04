@@ -29,3 +29,23 @@ export const deleteRecipient = async (id) => {
 export const deleteMessage = async (messageId) => {
   await teamClient.delete(`/messages/${messageId}/`);
 };
+
+// 이모지 목록 가져오기
+export const getReactions = async (recipientId) => {
+  const response = await teamClient.get(
+    `/recipients/${recipientId}/reactions/`
+  );
+  return response.data;
+};
+
+// 이모지 추가하기
+export const postReaction = async (recipientId, emoji) => {
+  const response = await teamClient.post(
+    `/recipients/${recipientId}/reactions/`,
+    {
+      emoji: emoji,
+      type: 'increase',
+    }
+  );
+  return response.data;
+};

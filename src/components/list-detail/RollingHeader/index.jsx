@@ -1,4 +1,6 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getReactions, postReaction } from '@/apis/list';
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
@@ -23,15 +25,17 @@ function RollingHeader({
   recipientName = 'recipientName',
   isEditMode,
   setIsEditMode,
-  hasMessages,
   recentMessages = [],
   messageCount = 0,
-  topReactions = [],
   onDelete,
 }) {
   const [isPickerOpen, setIsPickerOpen] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
+
+  const [reactions, setReactions] = useState([]);
+
+  const { id } = useParams();
   const { shareKakaoLink, copyUrl } = useShareActions();
   const { showToast } = useToast();
 
@@ -41,10 +45,36 @@ function RollingHeader({
   const handleEdit = () => setIsEditMode(true);
   const handleSave = () => setIsEditMode(false);
 
-  const handleEmojiClick = (emoji) => {
-    // TODO: API 연결 시 이모지 추가, 성공 후 처리 필요
-    console.log(`이모지 클릭/추가: ${emoji}`);
-    setIsPickerOpen(false);
+  const fetchReactions = useCallback(async () => {
+    if (!id) {
+      return;
+    }
+    try {
+      const data = await getReactions(id);
+      setReactions(data.results || []);
+    } catch (error) {
+      console.error('리액션 로딩 실패:', error);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    const load = async () => {
+      await fetchReactions();
+    };
+    load();
+  }, [fetchReactions]);
+
+  const handleEmojiClick = async (emojiData) => {
+    try {
+      await postReaction(id, emojiData);
+
+      // 통합된 함수 호출
+      await fetchReactions();
+
+      setIsPickerOpen(false);
+    } catch (error) {
+      console.error('이모지 추가 실패:', error);
+    }
   };
 
   const handleShareToggle = () => {
@@ -92,12 +122,14 @@ function RollingHeader({
   const profileTextColor =
     theme === 'image' ? 'var(--white)' : 'var(--gray-800)';
 
-  const reactionsObject = topReactions.reduce((acc, curr) => {
+  const sortedReactions = [...reactions].sort((a, b) => b.count - a.count);
+
+  const reactionsObject = sortedReactions.reduce((acc, curr) => {
     acc[curr.emoji] = curr.count;
     return acc;
   }, {});
 
-  const MAX_VISIBLE_BADGES = 5;
+  const MAX_VISIBLE_BADGES = 3;
 
   const btnVariant =
     theme === 'image' ? 'variantSmallWhiteText' : 'variantSmallText';
@@ -110,55 +142,53 @@ function RollingHeader({
           <p className={styles.name}>{recipientName}</p>
         </div>
 
-        {hasMessages && (
-          <div className={styles.rollingButtons}>
-            {!isEditMode ? (
-              <>
-                <Button
-                  variant={btnVariant}
-                  leftIcon={<ShareIcon />}
-                  onClick={handleShareToggle}
-                >
-                  공유하기
-                </Button>
-                <ShareDropdown
-                  open={isShareOpen}
-                  onClose={handleShareClose}
-                  onSelect={handleShareSelect}
-                />
-                <Button
-                  variant={btnVariant}
-                  leftIcon={<EditIcon />}
-                  onClick={handleEdit}
-                >
-                  편집하기
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  variant={btnVariant}
-                  leftIcon={<DeletedIcon />}
-                  onClick={onDelete}
-                >
-                  롤링페이퍼 삭제하기
-                </Button>
-                <Button
-                  variant={btnVariant}
-                  leftIcon={<EditIcon />}
-                  onClick={handleSave}
-                >
-                  편집 완료
-                </Button>
-              </>
-            )}
-          </div>
-        )}
+        <div className={styles.rollingButtons}>
+          {!isEditMode ? (
+            <>
+              <Button
+                variant={btnVariant}
+                leftIcon={<ShareIcon />}
+                onClick={handleShareToggle}
+              >
+                공유하기
+              </Button>
+              <ShareDropdown
+                open={isShareOpen}
+                onClose={handleShareClose}
+                onSelect={handleShareSelect}
+              />
+              <Button
+                variant={btnVariant}
+                leftIcon={<EditIcon />}
+                onClick={handleEdit}
+              >
+                편집하기
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant={btnVariant}
+                leftIcon={<DeletedIcon />}
+                onClick={onDelete}
+              >
+                롤링페이퍼 삭제하기
+              </Button>
+              <Button
+                variant={btnVariant}
+                leftIcon={<EditIcon />}
+                onClick={handleSave}
+              >
+                편집 완료
+              </Button>
+            </>
+          )}
+        </div>
       </div>
 
       <div className={styles.rollingHeaderBottom}>
         <div className={styles.emojis}>
-          {topReactions.slice(0, MAX_VISIBLE_BADGES).map((reaction) => (
+          {sortedReactions.slice(0, MAX_VISIBLE_BADGES).map((reaction) => (
             <ReactionBadge
               key={reaction.id}
               emoji={reaction.emoji}
@@ -167,7 +197,8 @@ function RollingHeader({
             />
           ))}
 
-          {topReactions.length > MAX_VISIBLE_BADGES && (
+          {/* 더보기 버튼 */}
+          {sortedReactions.length > MAX_VISIBLE_BADGES && (
             <div className={styles.moreEmojiWrapper} ref={moreBtnRef}>
               <button
                 className={styles.moreEmoji}
@@ -216,7 +247,6 @@ RollingHeader.propTypes = {
   hasMessages: PropTypes.bool.isRequired,
   recentMessages: PropTypes.array,
   messageCount: PropTypes.number,
-  topReactions: PropTypes.array,
   onDelete: PropTypes.func,
 };
 
