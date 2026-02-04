@@ -15,6 +15,7 @@ const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
 
 function PostPage() {
   const navigate = useNavigate();
+
   const [recipientName, setRecipientName] = useState('');
   const [backgroundType, setBackgroundType] = useState('color');
   const [backgroundColor, setBackgroundColor] = useState(DEFAULT_COLOR_ID);
