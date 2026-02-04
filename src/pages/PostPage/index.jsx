@@ -9,10 +9,13 @@ import { createRecipient } from '@/apis/post';
 import useBackgroundImages from '@/hooks/useBackgroundImages';
 import Button from '@/components/common/Button';
 import styles from './index.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
 
 function PostPage() {
+  const navigate = useNavigate(); // 추가
+
   const [recipientName, setRecipientName] = useState('');
   const [backgroundType, setBackgroundType] = useState('color');
   const [backgroundColor, setBackgroundColor] = useState(DEFAULT_COLOR_ID);
@@ -52,6 +55,10 @@ function PostPage() {
 
     try {
       await createRecipient(payload);
+
+      // 생성된 recipient의 id로 MessagePage 이동
+      const created = await createRecipient(payload);
+      navigate(`/post/${created.id}/message`);
     } catch {
       // TODO: 필요 시 사용자에게 에러 메시지 노출(토스트)
     }
