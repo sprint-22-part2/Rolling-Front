@@ -22,7 +22,7 @@ const getPlainText = (value) => {
 
 function MessagePage() {
   const navigate = useNavigate();
-  const { recipientId } = useParams();
+  const { id } = useParams();
 
   const [senderName, setSenderName] = useState('');
   const [profileImageId, setProfileImageId] = useState('');
@@ -50,7 +50,7 @@ function MessagePage() {
 
   const handleSubmit = async () => {
     const payload = {
-      recipientId: Number(recipientId),
+      recipientId: Number(id),
       sender: senderName.trim(),
       profileImageURL: selectedProfileImageURL,
       relationship,
@@ -59,10 +59,10 @@ function MessagePage() {
     };
 
     try {
-      await createMessage(recipientId, payload);
+      await createMessage(id, payload);
 
       // 작성 완료 후 이동
-      navigate(`/post/${recipientId}`);
+      navigate(`/post/${id}`);
     } catch (e) {
       console.log(
         'createMessage failed:',

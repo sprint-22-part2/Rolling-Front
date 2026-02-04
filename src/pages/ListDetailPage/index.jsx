@@ -141,7 +141,7 @@ function ListDetailPage() {
           recipientName={recipient.name}
           theme={theme}
           onDelete={handleClickDeleteMessage}
-          recipientId={recipient.id}
+          recipientId={id}
         />
       </section>
 
