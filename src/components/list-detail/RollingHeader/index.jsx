@@ -200,7 +200,7 @@ function RollingHeader({
 
         <ProfileGroup
           profiles={profiles}
-          messageCount={messageCount}
+          totalCount={messageCount}
           textColor={profileTextColor}
         />
       </div>
