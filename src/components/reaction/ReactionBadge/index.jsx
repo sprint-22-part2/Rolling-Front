@@ -14,7 +14,6 @@ export default function ReactionBadge({ emoji, count, onClick, theme }) {
         '--rb-text': safeTheme.text,
       }}
     >
-      {}
       {emoji}
       <span className={styles.badgeGap} aria-hidden="true" />
       {count}
