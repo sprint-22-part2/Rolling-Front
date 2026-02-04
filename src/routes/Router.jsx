@@ -5,6 +5,7 @@ import ListDetailPage from '@/pages/ListDetailPage';
 import PostPage from '@/pages/PostPage';
 import LandingPage from '@/pages/LandingPage';
 import MessagePage from '@/pages/MessagePage';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 export default function AppRoutes() {
   return (
@@ -17,6 +18,7 @@ export default function AppRoutes() {
           <Route path="/post" element={<PostPage />} />
           <Route path="/post/:id/message" element={<MessagePage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
