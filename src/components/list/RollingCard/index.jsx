@@ -26,7 +26,7 @@ function RollingCard({ item }) {
     : REACTION_THEMES[backgroundColor];
 
   const textColor = backgroundImageURL ? '#c2c2c2' : 'var(--gray-700)';
-  console.log(textColor);
+
   return (
     <div
       className={`${styles.rollingCard} ${theme}`}
