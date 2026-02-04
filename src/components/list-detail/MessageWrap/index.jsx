@@ -20,7 +20,7 @@ function MessageWrap({
   if (!messages || messages.length === 0) {
     return (
       <div className={styles.messageWrap}>
-        <NoMessage recipientName={recipientName} />
+        <NoMessage recipientName={recipientName} recipientId={recipientId} />
       </div>
     );
   }
@@ -71,7 +71,8 @@ MessageWrap.propTypes = {
   recipientName: PropTypes.string,
   theme: PropTypes.string,
   onDelete: PropTypes.func,
-  recipientId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  recipientId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
 };
 
 export default MessageWrap;

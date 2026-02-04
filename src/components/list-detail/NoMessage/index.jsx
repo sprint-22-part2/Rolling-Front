@@ -2,7 +2,7 @@ import styles from './index.module.css';
 import LinkButton from '@/components/common/LinkButton';
 import PropTypes from 'prop-types';
 
-function NoMessage({ recipientName }) {
+function NoMessage({ recipientName, recipientId }) {
   return (
     <div className={styles.noMessageBox}>
       <p className={styles.notiMessage}>
@@ -10,7 +10,7 @@ function NoMessage({ recipientName }) {
         <br />
         처음으로 {recipientName}님에게 메세지를 남겨보세요.
       </p>
-      <LinkButton to="/post/message" size="sizeLg">
+      <LinkButton to={`/post/${recipientId}/message`} size="sizeLg">
         메세지 남기기
       </LinkButton>
     </div>
@@ -19,6 +19,8 @@ function NoMessage({ recipientName }) {
 
 NoMessage.propTypes = {
   recipientName: PropTypes.string,
+  recipientId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
 };
 
 export default NoMessage;
