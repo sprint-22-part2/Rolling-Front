@@ -19,6 +19,7 @@ import ReactionPanel from '@/components/reaction/ReactionPanel';
 import ShareDropdown from '@/components/common/ShareDropdown';
 import useShareActions from '@/hooks/useShareActions';
 import useToast from '@/hooks/useToast';
+import { REACTION_THEMES } from '@/components/reaction/reactionThemes';
 
 function RollingHeader({
   theme = 'blue',
@@ -67,10 +68,7 @@ function RollingHeader({
   const handleEmojiClick = async (emojiData) => {
     try {
       await postReaction(id, emojiData);
-
-      // 통합된 함수 호출
       await fetchReactions();
-
       setIsPickerOpen(false);
     } catch (error) {
       console.error('이모지 추가 실패:', error);
@@ -134,6 +132,9 @@ function RollingHeader({
   const btnVariant =
     theme === 'image' ? 'variantSmallWhiteText' : 'variantSmallText';
 
+  const themeKey = theme === 'image' ? 'trans' : theme;
+  const currentThemeObj = REACTION_THEMES[themeKey];
+
   return (
     <div className={styles.rollingHeader} type={theme}>
       <div className={styles.rollingHeaderTop}>
@@ -193,6 +194,7 @@ function RollingHeader({
               key={reaction.id}
               emoji={reaction.emoji}
               count={reaction.count}
+              theme={currentThemeObj}
               onClick={() => handleEmojiClick(reaction.emoji)}
             />
           ))}
