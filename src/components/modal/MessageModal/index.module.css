@@ -83,9 +83,15 @@
   justify-content: flex-end;
 }
 
-/* 모바일 전용 스타일 */
+/* 태블릿 전용 스타일 */
 @media screen and (max-width: 767px) {
   .modalContent {
     width: 327px;
+  }
+}
+
+@media screen and (max-width: 413px) {
+  .modalContent {
+    width: 250px;
   }
 }
