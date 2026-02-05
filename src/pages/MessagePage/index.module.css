@@ -1,8 +1,8 @@
 .messagePage {
-  max-width: 720px;
+  max-width: 768px;
   width: 100%;
   margin: 0 auto;
-  padding: 64px 0;
+  padding: 64px 24px;
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -34,7 +34,7 @@
   margin-top: 16px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .messagePage {
     padding: 48px 24px;
   }
