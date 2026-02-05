@@ -59,13 +59,19 @@ function ProfileSelector({ options, selectedOption, onSelect }) {
         <div className={styles.optionsRow}>
           <Swiper
             modules={[Navigation, A11y]}
-            slidesPerView="auto"
-            spaceBetween={12}
+            slidesPerView={4}
+            spaceBetween={24}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
               attachNavigation(swiper);
             }}
             className={styles.optionsSwiper}
+            breakpoints={{
+              768: {
+                slidesPerView: 8,
+                spaceBetween: 24,
+              },
+            }}
           >
             {normalizedOptions.map((option, index) => {
               const optionId = option.id;

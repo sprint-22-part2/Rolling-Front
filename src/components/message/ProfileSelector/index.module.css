@@ -2,10 +2,11 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 120px;
+  gap: 24px;
 }
 
 .content {
+  width: 100%;
   flex: 1;
   min-width: 0;
 }
@@ -35,29 +36,27 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0 48px;
+  padding: 0 24px;
 }
 
 .optionsSwiper {
-  width: calc(6 * 56px + 5 * 12px);
+  width: 100%;
   max-width: 100%;
   margin-right: auto;
 }
 
-.optionsSwiper :global(.swiper-slide) {
-  width: 56px;
-}
-
 .optionButton {
   position: relative;
+  max-width: 100%;
   width: 56px;
-  height: 56px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: none;
   cursor: pointer;
   display: grid;
   place-items: center;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .optionButton:focus-visible {
@@ -168,18 +167,9 @@
   pointer-events: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .wrapper {
-    gap: 30px;
-  }
-
-  .optionsRow {
-    padding: 0 40px;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .optionsRow {
-    padding: 0 32px;
+    flex-direction: column;
+    align-items: center;
   }
 }
