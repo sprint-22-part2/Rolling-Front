@@ -34,8 +34,9 @@ export default function MessageModal({
       closeOnOverlayClick
       closeOnEsc
     >
-      <div className={styles.modal}>
-        <header className={styles.modalHeader}>
+      <header className={styles.modalHeader}>
+        <div className={styles.meta}>
+          {' '}
           <ProfileImage
             src={profileSrc}
             alt={`${name}의 프로필 이미지`}
@@ -44,33 +45,27 @@ export default function MessageModal({
             borderWidth={1}
             className={styles.profile}
           />
-
-          <div className={styles.meta}>
-            <div className={styles.modalInfo}>
-              <div className={styles.nameRow}>
-                <span className={styles.from}>From.</span>
-                <span className={styles.name}>{name}</span>
+          <div className={styles.modalInfo}>
+            <div className={styles.nameRow}>
+              <div className={styles.fromAndBadge}>
+                <span className={styles.from}>From</span>
+                <RelationshipBadge relationship={relationship} />
               </div>
-              <RelationshipBadge relationship={relationship} />
+              <span className={styles.name}>{name}</span>
             </div>
-
-            <div className={styles.date}>{date}</div>
           </div>
-        </header>
-
-        <div className={styles.modalContent} style={{ fontFamily: safeFont }}>
-          <EditorViewer content={content} currentFont={safeFont} />
         </div>
+        <div className={styles.date}>{date}</div>
+      </header>
 
-        <div className={styles.actions}>
-          <Button
-            size="sizeMd"
-            variant="variantPrimary"
-            onClick={handleConfirm}
-          >
-            확인
-          </Button>
-        </div>
+      <div className={styles.modalContent} style={{ fontFamily: safeFont }}>
+        <EditorViewer content={content} currentFont={safeFont} />
+      </div>
+
+      <div className={styles.actions}>
+        <Button size="sizeMd" variant="variantPrimary" onClick={handleConfirm}>
+          확인
+        </Button>
       </div>
     </Modal>
   );

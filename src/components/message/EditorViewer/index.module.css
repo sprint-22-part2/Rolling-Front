@@ -3,10 +3,6 @@
   outline: none;
 }
 
-.viewerContent :global(p) {
-  margin: 0 0 8px;
-}
-
 .viewerContent :global(ul),
 .viewerContent :global(ol) {
   padding-left: 20px;

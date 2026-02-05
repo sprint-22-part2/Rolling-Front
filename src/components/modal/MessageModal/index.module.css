@@ -1,18 +1,7 @@
-.modal {
-  width: 100%;
-  max-width: 500px;
-  max-height: 432px;
-  background: var(--white);
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  overflow-y: auto;
-}
-
 .modalHeader {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
   border: none;
   padding: 0;
@@ -29,7 +18,9 @@
   justify-content: space-between;
   flex: 1;
   line-height: 1.1;
-  align-items: baseline;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
 }
 
 .modalInfo {
@@ -37,38 +28,49 @@
   flex-direction: column;
   gap: 6px;
   align-items: flex-start;
+  width: calc(100% - 72px);
 }
 
 .nameRow {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-start;
+  gap: 16px;
+}
+.fromAndBadge {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .from {
   font-size: 16px;
   font-weight: var(--font-weight-semibold);
-  color: var(--gray-800);
+  color: var(--gray-300);
+  margin-top: 6px;
 }
 
 .name {
   font-size: 28px;
   font-weight: var(--font-weight-bold);
   color: var(--gray-800);
+  white-space: normal;
+  width: calc(100% - 57px);
+  word-break: break-word;
 }
 
 .date {
   font-size: 12px;
   color: var(--gray-300);
   white-space: nowrap;
+  margin-top: 6px;
 }
 
 .modalContent {
-  width: 436px;
-  max-height: 230px;
+  width: 100%;
+  max-height: 200px;
   margin: 0;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.7;
   color: var(--gray-600);
   word-break: keep-all;
@@ -85,13 +87,12 @@
 
 /* 태블릿 전용 스타일 */
 @media screen and (max-width: 767px) {
-  .modalContent {
-    width: 327px;
+  .modalHeader {
+    flex-direction: column;
+    gap: 8px;
   }
-}
 
-@media screen and (max-width: 413px) {
-  .modalContent {
-    width: 250px;
+  .date {
+    margin-top: 0px;
   }
 }

@@ -39,6 +39,7 @@ function TextInput({ label, placeholder, onChange, name, value, disabled }) {
         onBlur={handleBlur} // 포커스 아웃 이벤트
         onFocus={handleFocus} // 포커스 인 이벤트
         onChange={handleChange}
+        maxLength={40}
       />
       {/* 에러가 있을 때만 에러 문구 표시 */}
       {isError && <span className={styles.errorMessage}>{errorMessage}</span>}
