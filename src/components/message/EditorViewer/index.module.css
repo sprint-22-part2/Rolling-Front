@@ -1,0 +1,28 @@
+.viewerContent {
+  min-height: 100%;
+  outline: none;
+}
+
+.viewerContent :global(p) {
+  margin: 0 0 8px;
+}
+
+.viewerContent :global(ul),
+.viewerContent :global(ol) {
+  padding-left: 20px;
+  margin: 0 0 8px;
+  list-style-position: outside;
+}
+
+.viewerContent :global(ul) {
+  list-style: disc;
+}
+
+.viewerContent :global(ol) {
+  list-style: decimal;
+}
+
+.viewerContent :global(li) {
+  display: list-item;
+  list-style: inherit;
+}

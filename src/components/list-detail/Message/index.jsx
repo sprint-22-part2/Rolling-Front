@@ -6,6 +6,7 @@ import RelationshipBadge from '@/components/common/RelationshipBadge';
 import { DeletedIcon } from '@/assets/icons';
 import Button from '@/components/common/Button';
 import { formatDate } from '@/utils/dateFormat';
+import EditorViewer from '@/components/message/EditorViewer';
 
 function Message({
   senderName,
@@ -27,6 +28,7 @@ function Message({
 
   const deleteBtnVariant =
     theme === 'image' ? 'variantSmallWhiteText' : 'variantSmallText';
+  const safeFont = FONT_MAP[font] ?? 'inherit';
 
   return (
     <article>
@@ -43,9 +45,9 @@ function Message({
 
       <div
         className={`${styles.messageContent} ${styles[font]}`}
-        style={{ fontFamily: FONT_MAP[font] }}
+        style={{ fontFamily: safeFont }}
       >
-        {content}
+        <EditorViewer content={content} currentFont={safeFont} />
       </div>
 
       <div className={styles.messageFoot}>
