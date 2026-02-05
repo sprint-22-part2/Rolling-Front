@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
@@ -33,6 +33,12 @@ function ListDetailPage() {
   const [hasNext, setHasNext] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const observerTarget = useRef(null);
+  const messageCount = messages.length;
+  const recentMessages = useMemo(() => {
+    return [...messages]
+      .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
+      .slice(0, 3);
+  }, [messages]);
 
   const handleClickDeleteRecipient = () => {
     setIsRecipientModalOpen(true);
@@ -200,12 +206,12 @@ function ListDetailPage() {
         <RollingHeader
           theme={theme}
           recipientName={recipient.name}
-          messageCount={recipient.messageCount}
-          recentMessages={recipient.recentMessages}
+          messageCount={messageCount}
+          recentMessages={recentMessages}
           topReactions={recipient.topReactions}
           isEditMode={isEditMode}
           setIsEditMode={setIsEditMode}
-          hasMessages={recipient.messageCount > 0}
+          hasMessages={messageCount > 0}
           onDelete={handleClickDeleteRecipient}
         />
 
