@@ -19,7 +19,7 @@ import ReactionPanel from '@/components/reaction/ReactionPanel';
 import ShareDropdown from '@/components/common/ShareDropdown';
 import useShareActions from '@/hooks/useShareActions';
 import useToast from '@/hooks/useToast';
-import { REACTION_THEMES } from '@/components/reaction/reactionThemes';
+import { REACTION_THEMES } from '@/constants/reactionThemes';
 
 function RollingHeader({
   theme = 'blue',
