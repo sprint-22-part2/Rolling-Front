@@ -46,6 +46,10 @@ function RollingHeader({
   const handleEdit = () => setIsEditMode(true);
   const handleSave = () => setIsEditMode(false);
 
+  const handlePanelClose = useCallback(() => {
+    setIsPanelOpen(false);
+  }, []);
+
   const fetchReactions = useCallback(async () => {
     if (!id) {
       return;
@@ -213,7 +217,7 @@ function RollingHeader({
                 <ReactionPanel
                   reactions={reactionsObject}
                   onItemClick={handleEmojiClick}
-                  onClose={() => setIsPanelOpen(false)}
+                  onClose={handlePanelClose}
                 />
               )}
             </div>

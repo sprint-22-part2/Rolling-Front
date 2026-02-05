@@ -16,13 +16,9 @@ export default function ReactionPanel({ reactions, onItemClick, onClose }) {
   const entries = Object.entries(reactions).sort((a, b) => b[1] - a[1]);
 
   useEffect(() => {
-    const handleMouseDown = (e) => {
-      if (!panelRef.current) {
-        return;
-      }
-
-      // 패널 안을 클릭한 게 아니라면 닫기
-      if (!panelRef.current.contains(e.target)) {
+    const handlePointerDown = (e) => {
+      // 패널(ref)이 존재하고, 클릭한 대상이 패널 내부에 있지 않을 때만 onClose 호출
+      if (panelRef.current && !panelRef.current.contains(e.target)) {
         onClose?.();
       }
     };
@@ -33,11 +29,11 @@ export default function ReactionPanel({ reactions, onItemClick, onClose }) {
       }
     };
 
-    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('pointerdown', handlePointerDown);
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('pointerdown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
