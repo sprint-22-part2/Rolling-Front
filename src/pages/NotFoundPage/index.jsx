@@ -18,7 +18,11 @@ function NotFoundPage() {
         <AirplaneIcon className={styles.airplane} />
         <p className={styles.desc}>접근 불가한 페이지 입니다</p>
 
-        <Button size="sizeMd" className={styles.homeBtn} onClick={handleGoHome}>
+        <Button
+          size="sizeMd"
+          className={styles.homeButton}
+          onClick={handleGoHome}
+        >
           홈으로 돌아가기
         </Button>
       </div>

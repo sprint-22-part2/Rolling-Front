@@ -20,6 +20,7 @@ import EditorListOrderedIcon from './ic-editor-list-ordered.svg?react';
 import EditorListBulletIcon from './ic-editor-list-bullet.svg?react';
 import EditorTextColorIcon from './ic-editor-text-color.svg?react';
 import EditorBackgroundColorIcon from './ic-editor-bg-color.svg?react';
+import ErrorIcon from './ic-error.svg?react';
 
 export {
   ArrowDownIcon,
@@ -44,4 +45,5 @@ export {
   EditorListBulletIcon,
   EditorTextColorIcon,
   EditorBackgroundColorIcon,
+  ErrorIcon,
 };

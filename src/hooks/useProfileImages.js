@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getProfileImages } from '@/apis/profileImage';
+import isRetryableError from '@/utils/isRetryableError';
 
 const useProfileImages = () => {
   const [imageOptions, setImageOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -21,6 +23,9 @@ const useProfileImages = () => {
           return;
         }
         console.error('Failed to fetch profile images:', error);
+        if (isRetryableError(error)) {
+          setError(error);
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -30,6 +35,10 @@ const useProfileImages = () => {
       controller.abort();
     };
   }, []);
+
+  if (error) {
+    throw error;
+  }
 
   return { imageOptions, isLoading };
 };

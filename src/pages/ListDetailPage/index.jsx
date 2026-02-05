@@ -12,6 +12,7 @@ import {
   deleteRecipient,
 } from '@/apis/list';
 import ConfirmModal from '@/components/modal/ConfirmationModal';
+import isRetryableError from '@/utils/isRetryableError';
 
 const LIMIT = 8;
 
@@ -27,6 +28,7 @@ function ListDetailPage() {
   const [deleteTargetMessageId, setDeleteTargetMessageId] = useState(null);
   const [isDeletingRecipient, setIsDeletingRecipient] = useState(false);
   const [isDeletingMessage, setIsDeletingMessage] = useState(false);
+  const [error, setError] = useState(null);
 
   const [hasNext, setHasNext] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -46,6 +48,9 @@ function ListDetailPage() {
       navigate('/list');
     } catch (error) {
       console.error(error);
+      if (isRetryableError(error)) {
+        setError(error);
+      }
     } finally {
       setIsDeletingRecipient(false);
       setIsRecipientModalOpen(false);
@@ -73,6 +78,9 @@ function ListDetailPage() {
       );
     } catch (error) {
       console.error(error);
+      if (isRetryableError(error)) {
+        setError(error);
+      }
     } finally {
       setDeleteTargetMessageId(null);
       setIsDeletingMessage(false);
@@ -100,6 +108,9 @@ function ListDetailPage() {
         }
       } catch (error) {
         console.error('데이터를 불러오는 중 에러 발생:', error);
+        if (isRetryableError(error)) {
+          setError(error);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -156,6 +167,9 @@ function ListDetailPage() {
     };
   }, [isLoading, hasNext, handleLoadMore]);
 
+  if (error) {
+    throw error;
+  }
   if (isLoading) {
     return <div>로딩 중...</div>;
   }

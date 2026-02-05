@@ -21,8 +21,8 @@
 }
 
 .icon {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
 }
 
 .success .iconCircle {
@@ -34,9 +34,7 @@
 }
 
 .error .icon {
-  font-size: 22px;
-  font-weight: var(--font-weight-bold);
-  line-height: 1;
+  color: var(--white);
 }
 
 .message {

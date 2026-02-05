@@ -10,6 +10,7 @@ import { FONT_MAP, FONT_OPTIONS } from '@/constants/editor';
 import useProfileImages from '@/hooks/useProfileImages';
 import { createMessage } from '@/apis/message';
 import { useNavigate, useParams } from 'react-router-dom';
+import useToast from '@/hooks/useToast';
 
 const RELATIONSHIP_OPTIONS = ['지인', '친구', '동료', '가족'];
 
@@ -60,6 +61,7 @@ function MessagePage() {
   const [content, setContent] = useState('');
   const [font, setFont] = useState(FONT_OPTIONS[0] ?? 'Noto Sans');
   const { imageOptions } = useProfileImages();
+  const { showToast } = useToast();
 
   const selectedProfileImageId = useMemo(
     () => profileImageId || (imageOptions[0]?.id ?? ''),
@@ -90,15 +92,12 @@ function MessagePage() {
 
     try {
       await createMessage(id, payload);
+      showToast('메시지가 생성되었습니다.', 'success');
 
       // 작성 완료 후 이동
       navigate(`/post/${id}`);
-    } catch (e) {
-      console.log(
-        'createMessage failed:',
-        e?.response?.status,
-        e?.response?.data ?? e?.message
-      );
+    } catch {
+      showToast('메시지 생성에 실패했습니다.', 'error');
     }
   };
 
