@@ -37,7 +37,7 @@ function TextInput({
   const handleChange = (e) => {
     const newValue = e.target.value;
     onChange && onChange(name, newValue);
-    if (newValue.length === 40) {
+    if (newValue.length >= 40) {
       setErrorMessage('40자까지만 입력 가능합니다.');
     } else {
       setErrorMessage('');
