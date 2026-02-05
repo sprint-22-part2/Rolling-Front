@@ -7,7 +7,7 @@ import ReactionPanel from '@/components/reaction/ReactionPanel/index';
 import AddReactionButton from '@/components/reaction/AddReactionButton/index';
 import EmojiPickerPopup from '@/components/reaction/EmojiPickerPopup';
 import { ArrowDownIcon } from '@/assets/icons';
-import { REACTION_THEMES } from '@/components/reaction/reactionThemes';
+import { REACTION_THEMES } from '@/constants/reactionThemes';
 
 const THEMES = ['blue', 'green', 'purple', 'beige', 'trans'];
 

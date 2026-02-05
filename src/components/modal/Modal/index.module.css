@@ -1,11 +1,18 @@
 .modal {
   outline: none;
+  width: calc(100% - 48px);
+  max-width: 500px;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
 }
 .overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(0,0,0,.45);
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;

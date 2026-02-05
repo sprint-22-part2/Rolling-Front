@@ -1,13 +1,19 @@
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
-import { REACTION_THEMES } from '@/components/reaction/reactionThemes';
+import { REACTION_THEMES } from '@/constants/reactionThemes';
 
-export default function ReactionBadge({ emoji, count, onClick, theme }) {
+export default function ReactionBadge({
+  emoji,
+  count,
+  onClick,
+  theme,
+  className,
+}) {
   const safeTheme = theme ?? REACTION_THEMES.blue;
   return (
     <button
       type="button"
-      className={styles.badge}
+      className={`${styles.badge} ${className || ''}`}
       onClick={onClick}
       style={{
         '--rb-chip-bg': safeTheme.chipBg,
@@ -29,9 +35,11 @@ ReactionBadge.propTypes = {
     chipBg: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
   }),
+  className: PropTypes.string,
 };
 
 ReactionBadge.defaultProps = {
   onClick: null,
   theme: undefined,
+  className: '',
 };

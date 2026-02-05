@@ -1,11 +1,11 @@
 .recentRolling {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 24px;
 }
 
 .RollingCard {
-  width: calc(25% - 24px);
+  width: calc(25% - 18px);
 }
 .buttonWrap {
   width: 100%;

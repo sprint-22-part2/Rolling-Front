@@ -91,6 +91,7 @@ function MessageWrap({
           relationship={selectedMessage.relationship}
           date={formatDate(selectedMessage.createdAt)}
           content={selectedMessage.content}
+          font={selectedMessage.font}
         />
       )}
     </>

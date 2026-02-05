@@ -32,29 +32,27 @@ export default function ConfirmModal({
       closeOnOverlayClick
       closeOnEsc
     >
-      <div className={styles.modal}>
-        <p className={styles.title}>{title}</p>
-        <div className={styles.actions}>
-          <Button
-            type="button"
-            size="sizeSm"
-            variant="variantPrimary"
-            onClick={handleConfirm}
-            {...confirmButtonProps}
-          >
-            {confirmText}
-          </Button>
+      <p className={styles.title}>{title}</p>
+      <div className={styles.actions}>
+        <Button
+          type="button"
+          size="sizeSm"
+          variant="variantPrimary"
+          onClick={handleConfirm}
+          {...confirmButtonProps}
+        >
+          {confirmText}
+        </Button>
 
-          <Button
-            type="button"
-            size="sizeSm"
-            className={styles.cancelButton}
-            onClick={handleCancel}
-            {...cancelButtonProps}
-          >
-            {cancelText}
-          </Button>
-        </div>
+        <Button
+          type="button"
+          size="sizeSm"
+          className={styles.cancelButton}
+          onClick={handleCancel}
+          {...cancelButtonProps}
+        >
+          {cancelText}
+        </Button>
       </div>
     </Modal>
   );
