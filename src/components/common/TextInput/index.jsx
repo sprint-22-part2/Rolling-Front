@@ -13,7 +13,7 @@ function TextInput({
 }) {
   // 에러 메시지 상태 관리
   const [errorMessage, setErrorMessage] = useState('');
-  const [inputLength, setInputLength] = useState('');
+  const [inputLength, setInputLength] = useState('0');
 
   // 에러 존재 여부를 불리언 값으로 변환 (메시지가 있으면 true)
   const isError = !!errorMessage;
