@@ -28,6 +28,7 @@ function Message({
 
   const deleteBtnVariant =
     theme === 'image' ? 'variantSmallWhiteText' : 'variantSmallText';
+  const safeFont = FONT_MAP[font] ?? 'inherit';
 
   return (
     <article>
@@ -44,9 +45,9 @@ function Message({
 
       <div
         className={`${styles.messageContent} ${styles[font]}`}
-        style={{ fontFamily: FONT_MAP[font] }}
+        style={{ fontFamily: safeFont }}
       >
-        <EditorViewer content={content} currentFont={FONT_MAP[font] ?? font} />
+        <EditorViewer content={content} currentFont={safeFont} />
       </div>
 
       <div className={styles.messageFoot}>
