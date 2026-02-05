@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getBackgroundImages } from '@/apis/post';
+import isRetryableError from '@/utils/isRetryableError';
 
 const useBackgroundImages = () => {
   const [imageOptions, setImageOptions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -22,6 +24,9 @@ const useBackgroundImages = () => {
           return;
         }
         console.error('Failed to fetch background images:', error);
+        if (isRetryableError(error)) {
+          setError(error);
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -31,6 +36,10 @@ const useBackgroundImages = () => {
       controller.abort();
     };
   }, []);
+
+  if (error) {
+    throw error;
+  }
 
   return { imageOptions, isLoading };
 };

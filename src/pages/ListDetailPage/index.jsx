@@ -12,6 +12,7 @@ import {
   deleteRecipient,
 } from '@/apis/list';
 import ConfirmModal from '@/components/modal/ConfirmationModal';
+import isRetryableError from '@/utils/isRetryableError';
 
 function ListDetailPage() {
   const { id } = useParams();
@@ -25,6 +26,7 @@ function ListDetailPage() {
   const [deleteTargetMessageId, setDeleteTargetMessageId] = useState(null);
   const [isDeletingRecipient, setIsDeletingRecipient] = useState(false);
   const [isDeletingMessage, setIsDeletingMessage] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleClickDeleteRecipient = () => {
     setIsRecipientModalOpen(true);
@@ -40,6 +42,9 @@ function ListDetailPage() {
       navigate('/list');
     } catch (error) {
       console.error(error);
+      if (isRetryableError(error)) {
+        setError(error);
+      }
     } finally {
       setIsDeletingRecipient(false);
     }
@@ -66,6 +71,9 @@ function ListDetailPage() {
       );
     } catch (error) {
       console.error(error);
+      if (isRetryableError(error)) {
+        setError(error);
+      }
     } finally {
       setDeleteTargetMessageId(null);
       setIsDeletingMessage(false);
@@ -89,6 +97,9 @@ function ListDetailPage() {
         setMessages(messagesData.results);
       } catch (error) {
         console.error('데이터를 불러오는 중 에러 발생:', error);
+        if (isRetryableError(error)) {
+          setError(error);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -96,6 +107,10 @@ function ListDetailPage() {
 
     fetchData();
   }, [id]);
+
+  if (error) {
+    throw error;
+  }
 
   if (isLoading) {
     return <div>로딩 중...</div>;
