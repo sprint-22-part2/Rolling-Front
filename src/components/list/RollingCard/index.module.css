@@ -11,11 +11,13 @@
   font-family: Poppins, 'Pretendard Variable', Pretendard;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   aspect-ratio: 1 / 1;
   background-color: var(--bg);
   padding: 24px;
   cursor: pointer;
+  height: 100%;
+  width: 100%;
 }
 
 .rollingCard > * {

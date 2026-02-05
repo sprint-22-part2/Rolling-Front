@@ -5,6 +5,7 @@
 
 .rollingSwiper {
   position: relative;
+  align-items: stretch;
 }
 
 .swiperArrowButtons {
