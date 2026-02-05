@@ -139,7 +139,7 @@
 }
 
 /* 모바일 전용 스타일 */
-@media screen and (max-width: 413px) {
+@media screen and (max-width: 768px) {
   .panel {
     left: auto;
     right: 0;
