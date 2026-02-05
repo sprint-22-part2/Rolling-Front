@@ -36,7 +36,7 @@ function ListDetailPage() {
   const messageCount = messages.length;
   const recentMessages = useMemo(() => {
     return [...messages]
-      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
       .slice(0, 3);
   }, [messages]);
 
