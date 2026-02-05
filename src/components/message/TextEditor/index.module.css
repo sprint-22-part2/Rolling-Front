@@ -2,43 +2,106 @@
   width: 100%;
 }
 
-/* 툴바 디자인 */
-.quillEditor :global(.ql-toolbar.ql-snow) {
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
   background-color: var(--gray-100);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 13px 15px 12px;
 }
 
-/* 입력창 디자인 */
-.quillEditor :global(.ql-container.ql-snow) {
+.toolbarGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbarButton {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--gray-600);
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbarIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.toolbarButton[data-active='true'] {
+  background: var(--gray-200);
+  color: var(--gray-800);
+}
+
+.colorPicker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--gray-600);
+}
+
+.colorInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.editorContent {
+  min-height: 211px;
+  padding: 16px;
   background-color: var(--white);
-  border: 1px solid var(--gray-200);
+  border: 1px solid var(--gray-100);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-
-  height: 211px;
-
   font-size: 16px;
-  font-family: inherit;
+  outline: none;
 }
 
-/* 실제 입력 부분 */
-.quillEditor :global(.ql-editor) {
-  min-height: 100%;
-  font-family: inherit;
+.editorContent :global(p) {
+  margin: 0 0 8px;
 }
 
-/* 플레이스 홀더 */
-.quillEditor :global(.ql-editor.ql-blank::before) {
+.editorContent :global(ul),
+.editorContent :global(ol) {
+  padding-left: 20px;
+  margin: 0 0 8px;
+  list-style-position: outside;
+}
+
+.editorContent :global(ul) {
+  list-style: disc;
+}
+
+.editorContent :global(ol) {
+  list-style: decimal;
+}
+
+.editorContent :global(li) {
+  display: list-item;
+  list-style: inherit;
+}
+
+.editorContent :global(.is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
   color: var(--gray-500);
-  font-style: normal;
-  transition: opacity 0.1s ease;
-  left: 16px;
-  top: 16px;
-}
-
-/* 포커스 시 플레이스 홀더 제거 */
-.quillEditor :global(.ql-editor:focus.ql-blank::before) {
-  opacity: 0;
+  float: left;
+  height: 0;
+  pointer-events: none;
 }

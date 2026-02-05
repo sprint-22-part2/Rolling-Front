@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
@@ -14,6 +14,8 @@ import {
 import ConfirmModal from '@/components/modal/ConfirmationModal';
 import isRetryableError from '@/utils/isRetryableError';
 
+const LIMIT = 8;
+
 function ListDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,6 +29,10 @@ function ListDetailPage() {
   const [isDeletingRecipient, setIsDeletingRecipient] = useState(false);
   const [isDeletingMessage, setIsDeletingMessage] = useState(false);
   const [error, setError] = useState(null);
+
+  const [hasNext, setHasNext] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const observerTarget = useRef(null);
 
   const handleClickDeleteRecipient = () => {
     setIsRecipientModalOpen(true);
@@ -47,6 +53,7 @@ function ListDetailPage() {
       }
     } finally {
       setIsDeletingRecipient(false);
+      setIsRecipientModalOpen(false);
     }
   };
 
@@ -91,10 +98,14 @@ function ListDetailPage() {
       try {
         const [recipientData, messagesData] = await Promise.all([
           getRecipient(id),
-          getMessages(id),
+          getMessages(id, LIMIT, 0),
         ]);
         setRecipient(recipientData);
         setMessages(messagesData.results);
+
+        if (!messagesData.next) {
+          setHasNext(false);
+        }
       } catch (error) {
         console.error('데이터를 불러오는 중 에러 발생:', error);
         if (isRetryableError(error)) {
@@ -108,10 +119,57 @@ function ListDetailPage() {
     fetchData();
   }, [id]);
 
+  const handleLoadMore = useCallback(async () => {
+    if (!hasNext || isLoadingMore || !id) {
+      return;
+    }
+
+    setIsLoadingMore(true);
+    try {
+      const currentOffset = messages.length;
+      const data = await getMessages(id, LIMIT, currentOffset);
+
+      setMessages((prev) => [...prev, ...data.results]);
+
+      if (!data.next) {
+        setHasNext(false);
+      }
+    } catch (error) {
+      console.error('추가 데이터 로딩 실패:', error);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  }, [id, hasNext, isLoadingMore, messages.length]);
+
+  useEffect(() => {
+    if (isLoading || !hasNext) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          handleLoadMore();
+        }
+      },
+      { threshold: 1 }
+    );
+
+    const target = observerTarget.current;
+    if (target) {
+      observer.observe(target);
+    }
+
+    return () => {
+      if (target) {
+        observer.unobserve(target);
+      }
+    };
+  }, [isLoading, hasNext, handleLoadMore]);
+
   if (error) {
     throw error;
   }
-
   if (isLoading) {
     return <div>로딩 중...</div>;
   }
@@ -121,6 +179,7 @@ function ListDetailPage() {
 
   const { backgroundColor, backgroundImageURL } = recipient;
   const theme = backgroundImageURL ? 'image' : backgroundColor;
+
   const backgroundStyle = backgroundImageURL
     ? {
         backgroundImage: `linear-gradient(var(--background-overlay), var(--background-overlay)), url(${backgroundImageURL})`,
@@ -156,8 +215,14 @@ function ListDetailPage() {
           recipientName={recipient.name}
           theme={theme}
           onDelete={handleClickDeleteMessage}
-          recipientId={id}
+          recipientId={recipient.id}
         />
+
+        {hasNext && (
+          <div ref={observerTarget} style={{ height: '20px', width: '100%' }}>
+            {isLoadingMore && '...'}
+          </div>
+        )}
       </section>
 
       <ConfirmModal
