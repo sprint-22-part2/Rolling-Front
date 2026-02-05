@@ -45,6 +45,7 @@
   background: var(--primary-400);
   color: var(--white);
   font-weight: var(--font-weight-bold);
+  border: 1px solid transparent;
   transition: all 0.2s ease;
 }
 .variantPrimary:hover {
