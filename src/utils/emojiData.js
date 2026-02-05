@@ -51,11 +51,7 @@ const mergedEmojiData = (() => {
         return;
       }
 
-      names.forEach((name) => {
-        if (!target.n.includes(name)) {
-          target.n.push(name);
-        }
-      });
+      target.n = [...new Set([...target.n, ...names])];
     });
   });
 
