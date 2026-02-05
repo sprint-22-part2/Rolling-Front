@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import { PlusIcon } from '@/assets/icons';
 import LinkButton from '@/components/common/LinkButton';
 import NoMessage from '@/components/list-detail/NoMessage';
 import Message from '@/components/list-detail/Message';
+import MessageModal from '@/components/modal/MessageModal';
+import { formatDate } from '@/utils/dateFormat';
 
 function MessageWrap({
   isEditMode,
@@ -13,8 +16,18 @@ function MessageWrap({
   onDelete,
   recipientId,
 }) {
+  const [selectedMessage, setSelectedMessage] = useState(null);
+
   const addButtonVariant =
     theme === 'image' ? 'variantWhiteCircle' : 'variantCircle';
+
+  const handleMessageClick = (message) => {
+    setSelectedMessage(message);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMessage(null);
+  };
 
   // 메세지 하나도 없을 때
   if (!messages || messages.length === 0) {
@@ -27,41 +40,60 @@ function MessageWrap({
 
   // 메세지가 있을 때
   return (
-    <div className={styles.messageWrap}>
-      <div className={styles.hasMessage}>
-        {/* 편집 모드가 아닐 때 '메세지 추가하기' 노출 */}
-        {!isEditMode && (
-          <div className={styles.messageItem}>
-            <LinkButton
-              to={`/post/${recipientId}/message`}
-              variant={addButtonVariant}
-              leftIcon={<PlusIcon />}
-              className={styles.addButtonLink}
-            >
-              메시지 추가하기
-            </LinkButton>
-          </div>
-        )}
+    <>
+      <div className={styles.messageWrap}>
+        <div className={styles.hasMessage}>
+          {/* 편집 모드가 아닐 때 '메세지 추가하기' 노출 */}
+          {!isEditMode && (
+            <div className={styles.messageItem}>
+              <LinkButton
+                to={`/post/${recipientId}/message`}
+                variant={addButtonVariant}
+                leftIcon={<PlusIcon />}
+                className={styles.addButtonLink}
+              >
+                메시지 추가하기
+              </LinkButton>
+            </div>
+          )}
 
-        {/* 메세지 리스트 렌더링 */}
-        {messages.map((message) => (
-          <div key={message.id} className={styles.messageItem}>
-            <Message
-              isEditMode={isEditMode}
-              senderName={message.sender}
-              profileImageURL={message.profileImageURL}
-              relationship={message.relationship}
-              content={message.content}
-              font={message.font}
-              createdAt={message.createdAt}
-              theme={theme}
-              id={message.id}
-              onDelete={onDelete}
-            />
-          </div>
-        ))}
+          {/* 메세지 리스트 렌더링 */}
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={styles.messageItem}
+              onClick={() => handleMessageClick(message)}
+            >
+              <Message
+                isEditMode={isEditMode}
+                senderName={message.sender}
+                profileImageURL={message.profileImageURL}
+                relationship={message.relationship}
+                content={message.content}
+                font={message.font}
+                createdAt={message.createdAt}
+                theme={theme}
+                id={message.id}
+                onDelete={onDelete}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {selectedMessage && (
+        <MessageModal
+          isOpen={!!selectedMessage}
+          onClose={handleCloseModal}
+          onConfirm={handleCloseModal}
+          profileSrc={selectedMessage.profileImageURL}
+          name={selectedMessage.sender}
+          relationship={selectedMessage.relationship}
+          date={formatDate(selectedMessage.createdAt)}
+          content={selectedMessage.content}
+        />
+      )}
+    </>
   );
 }
 
