@@ -36,7 +36,6 @@ export default function MessageModal({
     >
       <header className={styles.modalHeader}>
         <div className={styles.meta}>
-          {' '}
           <ProfileImage
             src={profileSrc}
             alt={`${name}의 프로필 이미지`}

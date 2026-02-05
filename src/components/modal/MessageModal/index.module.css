@@ -52,7 +52,7 @@
 
 .name {
   font-size: 28px;
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
   color: var(--gray-800);
   white-space: normal;
   width: calc(100% - 57px);
@@ -93,6 +93,6 @@
   }
 
   .date {
-    margin-top: 0px;
+    margin-top: 0;
   }
 }
