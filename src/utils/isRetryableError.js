@@ -4,6 +4,9 @@ const isRetryableError = (err) => {
   }
   const isAxiosError = !!err?.isAxiosError;
   if (isAxiosError) {
+    if (err.code === 'ERR_CANCELED') {
+      return false;
+    }
     if (!err.response) {
       return true;
     }
