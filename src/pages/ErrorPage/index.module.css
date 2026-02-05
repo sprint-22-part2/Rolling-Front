@@ -5,23 +5,32 @@
   justify-content: center;
   align-items: center;
 }
+
 .row {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 69px;
+  gap: 40px;
 }
+
 .airplane {
   width: 113px;
   height: 113px;
 }
+
 .desc {
   color: var(--white);
   font-size: 24px;
   font-weight: 500;
   opacity: 0.9;
 }
-.homeButton {
+
+.buttonRow {
+  display: flex;
+  gap: 12px;
+}
+
+.retryButton {
   width: 253px;
   height: 52px;
   border-radius: 4px;
@@ -31,6 +40,7 @@
   color: var(--primary-400);
   transition: all 0.2s ease;
 }
-.homeButton:hover {
+
+.retryButton:hover {
   background-color: var(--gray-100);
 }
