@@ -10,6 +10,7 @@ import { createRecipient } from '@/apis/post';
 import useBackgroundImages from '@/hooks/useBackgroundImages';
 import Button from '@/components/common/Button';
 import styles from './index.module.css';
+import useToast from '@/hooks/useToast';
 
 const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
 
@@ -23,6 +24,7 @@ function PostPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { imageOptions, isLoading: isBackgroundLoading } =
     useBackgroundImages();
+  const { showToast } = useToast();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -67,7 +69,7 @@ function PostPage() {
         navigate(`/post/${createdRecipient.id}`);
       }
     } catch {
-      // TODO: 필요 시 사용자에게 에러 메시지 노출(토스트)
+      showToast('롤링페이퍼 생성에 실패했습니다.', 'error');
     } finally {
       setIsSubmitting(false);
     }
