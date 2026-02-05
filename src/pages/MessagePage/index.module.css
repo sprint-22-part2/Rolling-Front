@@ -5,7 +5,7 @@
   padding: 64px 24px;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 64px;
 }
 
 .section {
@@ -37,5 +37,6 @@
 @media screen and (max-width: 767px) {
   .messagePage {
     padding: 48px 24px;
+    gap: 48px;
   }
 }
