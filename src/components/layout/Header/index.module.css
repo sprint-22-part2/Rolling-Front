@@ -7,6 +7,7 @@ header {
   justify-content: center;
   padding: 0 24px;
   z-index: 1000;
+  height: 64px;
 }
 
 .headerWrap {

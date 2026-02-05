@@ -8,6 +8,7 @@ import {
 } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import { createPortal } from 'react-dom';
+import mergedEmojiData from '@/utils/emojiData';
 import styles from './index.module.css';
 
 const ANCHOR_GAP = 8;
@@ -145,9 +146,9 @@ export default function EmojiPickerPopup({ open, onClose, onPick, anchorRef }) {
       style={{ top: pos.top, left: pos.left }}
     >
       <EmojiPicker
-        // 이모지 문자열은 emojiData.emoji
         onEmojiClick={(emojiData) => onPick(emojiData.emoji)}
-        searchPlaceholder="Search"
+        emojiData={mergedEmojiData}
+        searchPlaceholder="검색 / Search"
         skinTonesDisabled
         previewConfig={{ showPreview: false }}
       />

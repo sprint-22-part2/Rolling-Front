@@ -30,8 +30,9 @@ jobs:
               'geniexx64',
               'ziy1027',
             ]);
+            const allowedBases = new Set(['develop', 'release']);
             const allowed =
-              base === 'develop' &&
+              allowedBases.has(base) &&
               labels.includes('🔎 Preview') &&
               allowedAuthors.has(author);
             core.setOutput('allowed', allowed ? 'true' : 'false');
