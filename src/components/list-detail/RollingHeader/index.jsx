@@ -213,6 +213,7 @@ function RollingHeader({
                 <ReactionPanel
                   reactions={reactionsObject}
                   onItemClick={handleEmojiClick}
+                  onClose={() => setIsPanelOpen(false)}
                 />
               )}
             </div>
