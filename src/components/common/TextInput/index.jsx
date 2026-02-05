@@ -2,9 +2,18 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
 
-function TextInput({ label, placeholder, onChange, name, value, disabled }) {
+function TextInput({
+  label,
+  placeholder,
+  onChange,
+  name,
+  value,
+  disabled,
+  maxLength = 40,
+}) {
   // 에러 메시지 상태 관리
   const [errorMessage, setErrorMessage] = useState('');
+  const [inputLength, setInputLength] = useState('0');
 
   // 에러 존재 여부를 불리언 값으로 변환 (메시지가 있으면 true)
   const isError = !!errorMessage;
@@ -25,11 +34,23 @@ function TextInput({ label, placeholder, onChange, name, value, disabled }) {
   const handleFocus = () => setErrorMessage('');
 
   // 값이 변경될 때 부모 컴포넌트의 onChange 함수에 name과 value를 전달
-  const handleChange = (e) => onChange && onChange(name, e.target.value);
+  const handleChange = (e) => {
+    const newValue = e.target.value;
+    onChange && onChange(name, newValue);
+    if (newValue.length >= 40) {
+      setErrorMessage('40자까지만 입력 가능합니다.');
+    } else {
+      setErrorMessage('');
+    }
+    setInputLength(newValue.length);
+  };
 
   return (
     <div className={styles.inputContainer}>
-      {label && <label className={styles.label}>{label}</label>}
+      <div className={styles.labelCount}>
+        {label && <label className={styles.label}>{label}</label>}
+        <div className={styles.characterCount}>{inputLength}/40</div>
+      </div>
       <input
         // 기본 스타일과 에러 발생 시 스타일을 조건부로 결합
         disabled={disabled}
@@ -39,6 +60,7 @@ function TextInput({ label, placeholder, onChange, name, value, disabled }) {
         onBlur={handleBlur} // 포커스 아웃 이벤트
         onFocus={handleFocus} // 포커스 인 이벤트
         onChange={handleChange}
+        maxLength={maxLength}
       />
       {/* 에러가 있을 때만 에러 문구 표시 */}
       {isError && <span className={styles.errorMessage}>{errorMessage}</span>}
@@ -54,6 +76,7 @@ TextInput.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
   disabled: PropTypes.bool,
+  maxLength: PropTypes.number,
 };
 
 export default TextInput;
