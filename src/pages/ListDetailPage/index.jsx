@@ -48,6 +48,7 @@ function ListDetailPage() {
       console.error(error);
     } finally {
       setIsDeletingRecipient(false);
+      setIsRecipientModalOpen(false);
     }
   };
 
@@ -200,7 +201,7 @@ function ListDetailPage() {
           recipientName={recipient.name}
           theme={theme}
           onDelete={handleClickDeleteMessage}
-          recipientId={id}
+          recipientId={recipient.id}
         />
 
         {hasNext && (

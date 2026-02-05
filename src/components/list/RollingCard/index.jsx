@@ -13,6 +13,7 @@ function RollingCard({ item }) {
     topReactions,
     recentMessages,
     backgroundImageURL,
+    messageCount,
   } = item;
   const profiles = recentMessages.map((message) => ({
     id: message.id,
@@ -41,7 +42,11 @@ function RollingCard({ item }) {
         <p className={styles.name}>{name}</p>
       </div>
 
-      <ProfileGroup profiles={profiles} textColor={textColor} />
+      <ProfileGroup
+        profiles={profiles}
+        textColor={textColor}
+        totalCount={messageCount}
+      />
       <div className={styles.emojis}>
         {topReactions?.map((reaction) => (
           <ReactionBadge
