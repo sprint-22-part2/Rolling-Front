@@ -69,7 +69,6 @@ function ProfileSelector({ options, selectedOption, onSelect }) {
             breakpoints={{
               768: {
                 slidesPerView: 8,
-                spaceBetween: 24,
               },
             }}
           >
