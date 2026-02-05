@@ -6,7 +6,7 @@ import PostPage from '@/pages/PostPage';
 import LandingPage from '@/pages/LandingPage';
 import MessagePage from '@/pages/MessagePage';
 import NotFoundPage from '@/pages/NotFoundPage';
-import ScrollToTop from '@/components/common/ScrollToTopFunction';
+import ScrollToTop from '@/components/common/ScrollToTop';
 
 export default function AppRoutes() {
   return (
