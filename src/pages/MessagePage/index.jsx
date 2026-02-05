@@ -62,6 +62,7 @@ function MessagePage() {
 
     try {
       await createMessage(id, payload);
+      showToast('메시지가 생성되었습니다.', 'success');
 
       // 작성 완료 후 이동
       navigate(`/post/${id}`);

@@ -66,6 +66,7 @@ function PostPage() {
       setIsSubmitting(true);
       const createdRecipient = await createRecipient(payload);
       if (createdRecipient?.id) {
+        showToast('롤링페이퍼가 생성되었습니다.', 'success');
         navigate(`/post/${createdRecipient.id}`);
       }
     } catch {
