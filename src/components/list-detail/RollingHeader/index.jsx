@@ -196,6 +196,7 @@ function RollingHeader({
               count={reaction.count}
               theme={currentThemeObj}
               onClick={() => handleEmojiClick(reaction.emoji)}
+              className={styles.badgeWidth}
             />
           ))}
 
