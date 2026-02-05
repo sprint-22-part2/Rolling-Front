@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { CheckIcon, CloseIcon } from '@/assets/icons';
-import ErrorMarkIcon from './ErrorMarkIcon';
+import { CheckIcon, CloseIcon, ErrorIcon } from '@/assets/icons';
 import styles from './index.module.css';
 
 const STATUS_ICON = {
   success: CheckIcon,
-  error: ErrorMarkIcon,
+  error: ErrorIcon,
 };
 
 export default function Toast({

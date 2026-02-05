@@ -9,6 +9,7 @@ import PlusIcon from './ic-plus.svg?react';
 import ShareIcon from './ic-share.svg?react';
 import CheckIcon from './ic-check.svg?react';
 import AirplaneIcon from './ic-airplane.svg?react';
+import ErrorIcon from './ic-error.svg?react';
 
 export {
   ArrowDownIcon,
@@ -22,4 +23,5 @@ export {
   ShareIcon,
   CheckIcon,
   AirplaneIcon,
+  ErrorIcon,
 };
