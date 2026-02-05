@@ -142,3 +142,8 @@
   border: none;
   cursor: pointer;
 }
+
+.badgeWidth {
+  width: 83px;
+  justify-content: center;
+}
