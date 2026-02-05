@@ -5,6 +5,8 @@ import Modal from '@/components/modal/Modal';
 import Button from '@/components/common/Button';
 import ProfileImage from '@/components/common/ProfileImage';
 import RelationshipBadge from '@/components/common/RelationshipBadge';
+import EditorViewer from '@/components/message/EditorViewer';
+import { FONT_MAP } from '@/constants/editor';
 
 export default function MessageModal({
   isOpen,
@@ -15,11 +17,14 @@ export default function MessageModal({
   relationship,
   date,
   content,
+  font,
 }) {
   const handleConfirm = () => {
     onConfirm?.();
     onClose();
   };
+
+  const safeFont = FONT_MAP[font] ?? 'inherit';
 
   return (
     <Modal
@@ -53,7 +58,9 @@ export default function MessageModal({
           </div>
         </header>
 
-        <div className={styles.modalContent}>{content}</div>
+        <div className={styles.modalContent} style={{ fontFamily: safeFont }}>
+          <EditorViewer content={content} currentFont={safeFont} />
+        </div>
 
         <div className={styles.actions}>
           <Button
@@ -78,6 +85,7 @@ MessageModal.propTypes = {
   relationship: PropTypes.oneOf(['지인', '동료', '가족', '친구']).isRequired,
   date: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
+  font: PropTypes.string,
 };
 
 MessageModal.defaultProps = {
