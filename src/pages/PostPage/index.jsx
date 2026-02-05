@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextInput from '@/components/common/TextInput';
 import SegmentToggle from '@/components/common/SegmentToggle';
 import ColorSelector from '@/components/post/ColorSelector';
@@ -9,16 +10,21 @@ import { createRecipient } from '@/apis/post';
 import useBackgroundImages from '@/hooks/useBackgroundImages';
 import Button from '@/components/common/Button';
 import styles from './index.module.css';
+import useToast from '@/hooks/useToast';
 
 const DEFAULT_COLOR_ID = COLOR_OPTIONS[0]?.id ?? 'beige';
 
 function PostPage() {
+  const navigate = useNavigate();
+
   const [recipientName, setRecipientName] = useState('');
   const [backgroundType, setBackgroundType] = useState('color');
   const [backgroundColor, setBackgroundColor] = useState(DEFAULT_COLOR_ID);
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { imageOptions, isLoading: isBackgroundLoading } =
     useBackgroundImages();
+  const { showToast } = useToast();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -42,6 +48,9 @@ function PostPage() {
   };
 
   const handleSubmit = async () => {
+    if (isSubmitting) {
+      return;
+    }
     const resolvedBackgroundColor =
       backgroundType === 'color' ? backgroundColor : DEFAULT_COLOR_ID;
     const resolvedBackgroundImageURL =
@@ -54,9 +63,16 @@ function PostPage() {
     };
 
     try {
-      await createRecipient(payload);
+      setIsSubmitting(true);
+      const createdRecipient = await createRecipient(payload);
+      if (createdRecipient?.id) {
+        showToast('롤링페이퍼가 생성되었습니다.', 'success');
+        navigate(`/post/${createdRecipient.id}`);
+      }
     } catch {
-      // TODO: 필요 시 사용자에게 에러 메시지 노출(토스트)
+      showToast('롤링페이퍼 생성에 실패했습니다.', 'error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -110,7 +126,7 @@ function PostPage() {
           disabled={isSubmitDisabled}
           onClick={handleSubmit}
         >
-          생성하기
+          {isSubmitting ? '생성 중...' : '생성하기'}
         </Button>
       </div>
     </div>

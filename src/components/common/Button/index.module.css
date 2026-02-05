@@ -8,6 +8,9 @@
   align-items: center;
   justify-content: center;
 }
+.button:disabled {
+  cursor: not-allowed;
+}
 .sizeBig {
   width: 280px;
   height: 56px;

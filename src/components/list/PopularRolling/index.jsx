@@ -1,5 +1,5 @@
 import styles from './index.module.css';
-import RollingCard from '@/components/main/RollingCard';
+import RollingCard from '@/components/list/RollingCard';
 import { getPopularRecipients } from '@/apis/recipients';
 
 // Import Swiper React components
@@ -69,7 +69,7 @@ function PopularRolling() {
       >
         {rolling?.map((item) => (
           <SwiperSlide key={item.id}>
-            <Link className={styles.RollingCard} to={`/list/${item.id}`}>
+            <Link className={styles.RollingCard} to={`/post/${item.id}`}>
               <RollingCard item={item} />
             </Link>
           </SwiperSlide>

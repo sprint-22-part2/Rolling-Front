@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '@/components/layout/MainLayout';
-import MainPage from '@/pages/MainPage';
 import ListPage from '@/pages/ListPage';
+import ListDetailPage from '@/pages/ListDetailPage';
 import PostPage from '@/pages/PostPage';
 import LandingPage from '@/pages/LandingPage';
 import MessagePage from '@/pages/MessagePage';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 export default function AppRoutes() {
   return (
@@ -12,11 +13,12 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<LandingPage />} />
-          <Route path="/main" element={<MainPage />} />
-          <Route path="/list/:id" element={<ListPage theme="blue" />} />
+          <Route path="/list" element={<ListPage />} />
+          <Route path="/post/:id" element={<ListDetailPage />} />
           <Route path="/post" element={<PostPage />} />
-          <Route path="/post/message" element={<MessagePage />} />
+          <Route path="/post/:id/message" element={<MessagePage />} />
         </Route>
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

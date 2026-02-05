@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 function ProfileGroup({
   profiles = [],
+  totalCount,
   maxDisplay = 3,
   size = 28,
   borderColor = 'var(--white)',
@@ -13,21 +14,21 @@ function ProfileGroup({
   className,
 }) {
   const safeProfiles = Array.isArray(profiles) ? profiles : [];
-  const totalCount = safeProfiles.length;
+  const countForDisplay =
+    typeof totalCount === 'number' ? totalCount : safeProfiles.length;
   const safeMaxDisplay = Math.max(0, maxDisplay);
   const profileSize = typeof size === 'number' ? `${size}px` : size;
 
   const displayProfiles = safeProfiles.slice(0, safeMaxDisplay);
-  const remainingCount = Math.max(0, safeProfiles.length - safeMaxDisplay);
+  const remainingCount = Math.max(0, countForDisplay - displayProfiles.length);
 
   return (
     <div className={cn(styles.wrapper, className)}>
-      {totalCount > 0 && (
+      {countForDisplay > 0 && (
         <div className={styles.profileGroup}>
           {displayProfiles.map((profile, index) => (
-            //TODO: API 연결 시 id 값으로 변경 필요
             <div
-              key={profile.id ?? `${profile.src}-${index}`}
+              key={profile.id}
               className={styles.profileItem}
               style={{ zIndex: index + 1 }}
             >
@@ -58,7 +59,8 @@ function ProfileGroup({
       )}
 
       <span className={styles.writerCount} style={{ color: textColor }}>
-        <span className={styles.countBold}>{totalCount}</span>명이 작성했어요!
+        <span className={styles.countBold}>{countForDisplay}</span>명이
+        작성했어요!
       </span>
     </div>
   );
@@ -72,6 +74,7 @@ ProfileGroup.propTypes = {
       alt: PropTypes.string,
     })
   ),
+  totalCount: PropTypes.number,
   maxDisplay: PropTypes.number,
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   borderColor: PropTypes.string,

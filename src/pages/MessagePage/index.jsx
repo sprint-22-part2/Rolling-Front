@@ -8,34 +8,98 @@ import ProfileSelector from '@/components/message/ProfileSelector';
 import Dropdown from '@/components/common/Dropdown';
 import { FONT_MAP, FONT_OPTIONS } from '@/constants/editor';
 import useProfileImages from '@/hooks/useProfileImages';
+import { createMessage } from '@/apis/message';
+import { useNavigate, useParams } from 'react-router-dom';
+import useToast from '@/hooks/useToast';
 
-const RELATIONSHIP_OPTIONS = ['친구', '지인', '동료', '가족'];
+const RELATIONSHIP_OPTIONS = ['지인', '친구', '동료', '가족'];
+
+const extractTextFromJson = (node) => {
+  if (!node) {
+    return '';
+  }
+  if (typeof node === 'string') {
+    return node;
+  }
+  if (Array.isArray(node)) {
+    return node.map(extractTextFromJson).filter(Boolean).join(' ');
+  }
+  if (node.text) {
+    return node.text;
+  }
+  if (node.content) {
+    return node.content.map(extractTextFromJson).filter(Boolean).join(' ');
+  }
+  return '';
+};
 
 const getPlainText = (value) => {
-  return value
-    .replace(/<[^>]+>/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .trim();
+  if (!value) {
+    return '';
+  }
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value);
+      return extractTextFromJson(parsed).trim();
+    } catch {
+      return value
+        .replace(/<[^>]+>/g, '')
+        .replace(/&nbsp;/g, ' ')
+        .trim();
+    }
+  }
+  return extractTextFromJson(value).trim();
 };
 
 function MessagePage() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   const [senderName, setSenderName] = useState('');
   const [profileImageId, setProfileImageId] = useState('');
-  const [relationship, setRelationship] = useState('');
+  const [relationship, setRelationship] = useState('지인');
   const [content, setContent] = useState('');
   const [font, setFont] = useState(FONT_OPTIONS[0] ?? 'Noto Sans');
   const { imageOptions } = useProfileImages();
+  const { showToast } = useToast();
 
   const selectedProfileImageId = useMemo(
     () => profileImageId || (imageOptions[0]?.id ?? ''),
     [profileImageId, imageOptions]
   );
+
+  const selectedProfileImageURL = useMemo(() => {
+    const found = imageOptions.find((img) => img.id === selectedProfileImageId);
+    return found?.url ?? found?.imageUrl ?? found?.imageURL ?? found?.src ?? '';
+  }, [imageOptions, selectedProfileImageId]);
+
   const hasContent = getPlainText(content).length > 0;
   const isSubmitDisabled =
     !senderName.trim() ||
     !relationship ||
     !hasContent ||
-    !selectedProfileImageId;
+    !selectedProfileImageURL;
+
+  const handleSubmit = async () => {
+    const payload = {
+      recipientId: Number(id),
+      sender: senderName.trim(),
+      profileImageURL: selectedProfileImageURL,
+      relationship,
+      content,
+      font,
+    };
+
+    try {
+      await createMessage(id, payload);
+      showToast('메시지가 생성되었습니다.', 'success');
+
+      // 작성 완료 후 이동
+      navigate(`/post/${id}`);
+    } catch {
+      showToast('메시지 생성에 실패했습니다.', 'error');
+    }
+  };
 
   return (
     <div className={styles.messagePage}>
@@ -60,7 +124,6 @@ function MessagePage() {
           <h3 className={styles.sectionTitle}>상대와의 관계</h3>
         </div>
         <Dropdown
-          placeholder="관계를 선택해 주세요"
           options={RELATIONSHIP_OPTIONS}
           value={relationship}
           onChange={setRelationship}
@@ -88,6 +151,7 @@ function MessagePage() {
           size="sizeBig"
           variant="variantPrimary"
           disabled={isSubmitDisabled}
+          onClick={handleSubmit}
         >
           생성하기
         </Button>
