@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
-import { REACTION_THEMES } from '@/components/reaction/reactionThemes';
+import { REACTION_THEMES } from '@/constants/reactionThemes';
 
 export default function ReactionBadge({
   emoji,

@@ -2,7 +2,7 @@ import styles from './index.module.css';
 import PropTypes from 'prop-types';
 import ProfileGroup from '@/components/common/ProfileGroup';
 import ReactionBadge from '@/components/reaction/ReactionBadge';
-import { REACTION_THEMES } from '@/components/reaction/reactionThemes';
+import { REACTION_THEMES } from '@/constants/reactionThemes';
 function RollingCard({ item }) {
   if (!item) {
     return null;
