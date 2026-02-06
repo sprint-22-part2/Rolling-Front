@@ -116,6 +116,12 @@ function ListDetailPage() {
         }
       } catch (error) {
         console.error('데이터를 불러오는 중 에러 발생:', error);
+        const status = error?.response?.status;
+        if (status === 404) {
+          showToast('대상을 찾을 수 없습니다.', 'error');
+          navigate('/list');
+          return;
+        }
         if (isRetryableError(error)) {
           setError(error);
         }
@@ -125,7 +131,7 @@ function ListDetailPage() {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, navigate, showToast]);
 
   const handleLoadMore = useCallback(async () => {
     if (!hasNext || isLoadingMore || !id) {
@@ -154,13 +160,6 @@ function ListDetailPage() {
     hasNext,
     isLoading || isLoadingMore
   );
-
-  useEffect(() => {
-    if (!isLoading && !recipient && !error) {
-      showToast('대상을 찾을 수 없습니다.', 'error');
-      navigate('/list');
-    }
-  }, [isLoading, recipient, error, showToast, navigate]);
 
   if (error) {
     throw error;
