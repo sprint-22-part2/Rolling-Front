@@ -157,7 +157,11 @@ function ListDetailPage() {
     throw error;
   }
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return (
+      <div className={styles.loadingWrap}>
+        <p>로딩 중...</p>
+      </div>
+    );
   }
   if (!recipient) {
     return <div>대상을 찾을 수 없습니다.</div>;
