@@ -2,5 +2,5 @@ main {
   min-height: calc(100vh - 64px);
   display: flex;
   align-items: stretch;
-  overflow: hidden;
+  overflow-x: hidden;
 }
