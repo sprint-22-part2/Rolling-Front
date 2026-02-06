@@ -99,6 +99,7 @@
 
   line-height: 1.5;
   max-height: 4.5em;
+  white-space: nowrap;
 }
 
 .rollingHeaderBottom {
