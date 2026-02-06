@@ -76,7 +76,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  width: 100%;
+  flex: 1;
 }
 
 .to {
@@ -99,6 +99,7 @@
 
   line-height: 1.5;
   max-height: 4.5em;
+  white-space: nowrap;
 }
 
 .rollingHeaderBottom {

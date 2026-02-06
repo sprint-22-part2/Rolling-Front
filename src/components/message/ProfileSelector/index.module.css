@@ -36,7 +36,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .optionsSwiper {
@@ -47,8 +47,8 @@
 
 .optionButton {
   position: relative;
-  max-width: 100%;
-  width: 56px;
+  width: 80%;
+  min-width: 56px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: none;

@@ -60,7 +60,6 @@ function ProfileSelector({ options, selectedOption, onSelect }) {
           <Swiper
             modules={[Navigation, A11y]}
             slidesPerView={4}
-            spaceBetween={24}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
               attachNavigation(swiper);
