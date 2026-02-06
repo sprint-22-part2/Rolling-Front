@@ -51,33 +51,12 @@
   flex-wrap: wrap;
   align-content: flex-end;
 }
-.emoji {
-  background-color: var(--emoji-bg);
-  color: var(--emoji-text);
-  border-radius: 9999px;
-  padding: 6px 12px;
-  font-size: 14px;
-}
 
 .beige {
   --bg: var(--yellow-100);
   --accent: var(--yellow-300);
   --emoji-bg: var(--yellow-200);
   --emoji-text: var(--yellow-400);
-}
-
-.orange {
-  --bg: #ffe8dc;
-  --accent: #fb5607;
-  --emoji-bg: #ffd7c3;
-  --emoji-text: #c45119;
-}
-
-.pink {
-  --bg: var(--pink-100);
-  --accent: var(--pink-300);
-  --emoji-bg: var(--pink-200);
-  --emoji-text: var(--pink-400);
 }
 
 .purple {
