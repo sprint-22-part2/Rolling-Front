@@ -14,6 +14,7 @@ import {
 import ConfirmModal from '@/components/modal/ConfirmationModal';
 import isRetryableError from '@/utils/isRetryableError';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import useToast from '@/hooks/useToast';
 
 const LIMIT = 8;
 
@@ -39,6 +40,7 @@ function ListDetailPage() {
       .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
       .slice(0, 3);
   }, [messages]);
+  const { showToast } = useToast();
 
   const handleClickDeleteRecipient = () => {
     setIsRecipientModalOpen(true);
@@ -153,6 +155,13 @@ function ListDetailPage() {
     isLoading || isLoadingMore
   );
 
+  useEffect(() => {
+    if (!isLoading && !recipient && !error) {
+      showToast('대상을 찾을 수 없습니다.', 'error');
+      navigate('/list');
+    }
+  }, [isLoading, recipient, error, showToast, navigate]);
+
   if (error) {
     throw error;
   }
@@ -160,7 +169,7 @@ function ListDetailPage() {
     return <div>로딩 중...</div>;
   }
   if (!recipient) {
-    return <div>대상을 찾을 수 없습니다.</div>;
+    return null;
   }
 
   const { backgroundColor, backgroundImageURL } = recipient;
