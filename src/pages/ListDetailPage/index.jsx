@@ -114,7 +114,7 @@ function ListDetailPage() {
         setTotalCount(
           typeof recipientData.messageCount === 'number'
             ? recipientData.messageCount
-            : messagesData.results.length
+            : (messagesData.count ?? messagesData.results.length)
         );
 
         if (!messagesData.next) {
