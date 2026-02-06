@@ -23,5 +23,5 @@
 }
 
 .item:hover {
-  background: var(--gray-200);
+  background: var(--gray-100);
 }
