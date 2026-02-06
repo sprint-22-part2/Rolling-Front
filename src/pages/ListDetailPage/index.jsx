@@ -14,6 +14,7 @@ import {
 import ConfirmModal from '@/components/modal/ConfirmationModal';
 import isRetryableError from '@/utils/isRetryableError';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import useToast from '@/hooks/useToast';
 
 const LIMIT = 8;
 
@@ -23,6 +24,7 @@ function ListDetailPage() {
 
   const [recipient, setRecipient] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isRecipientModalOpen, setIsRecipientModalOpen] = useState(false);
@@ -33,12 +35,12 @@ function ListDetailPage() {
 
   const [hasNext, setHasNext] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const messageCount = messages.length;
   const recentMessages = useMemo(() => {
     return [...messages]
       .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
       .slice(0, 3);
   }, [messages]);
+  const { showToast } = useToast();
 
   const handleClickDeleteRecipient = () => {
     setIsRecipientModalOpen(true);
@@ -82,6 +84,7 @@ function ListDetailPage() {
       setMessages((prevMessages) =>
         prevMessages.filter((msg) => msg.id !== deleteTargetMessageId)
       );
+      setTotalCount((prev) => Math.max(0, prev - 1));
     } catch (error) {
       console.error(error);
       if (isRetryableError(error)) {
@@ -108,12 +111,23 @@ function ListDetailPage() {
         ]);
         setRecipient(recipientData);
         setMessages(messagesData.results);
+        setTotalCount(
+          typeof recipientData.messageCount === 'number'
+            ? recipientData.messageCount
+            : (messagesData.count ?? messagesData.results.length)
+        );
 
         if (!messagesData.next) {
           setHasNext(false);
         }
       } catch (error) {
         console.error('데이터를 불러오는 중 에러 발생:', error);
+        const status = error?.response?.status;
+        if (status === 404) {
+          showToast('대상을 찾을 수 없습니다.', 'error');
+          navigate('/list');
+          return;
+        }
         if (isRetryableError(error)) {
           setError(error);
         }
@@ -123,7 +137,7 @@ function ListDetailPage() {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, navigate, showToast]);
 
   const handleLoadMore = useCallback(async () => {
     if (!hasNext || isLoadingMore || !id) {
@@ -157,10 +171,14 @@ function ListDetailPage() {
     throw error;
   }
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return (
+      <div className={styles.loadingWrap}>
+        <p>로딩 중...</p>
+      </div>
+    );
   }
   if (!recipient) {
-    return <div>대상을 찾을 수 없습니다.</div>;
+    return null;
   }
 
   const { backgroundColor, backgroundImageURL } = recipient;
@@ -186,12 +204,12 @@ function ListDetailPage() {
         <RollingHeader
           theme={theme}
           recipientName={recipient.name}
-          messageCount={messageCount}
+          messageCount={totalCount}
           recentMessages={recentMessages}
           topReactions={recipient.topReactions}
           isEditMode={isEditMode}
           setIsEditMode={setIsEditMode}
-          hasMessages={messageCount > 0}
+          hasMessages={totalCount > 0}
           onDelete={handleClickDeleteRecipient}
         />
 

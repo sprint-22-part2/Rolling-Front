@@ -19,7 +19,9 @@
   background: #efe9d6;
   border: none;
   cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
 }
 .badgeEmoji {
   font-size: 16px;
@@ -53,7 +55,9 @@
   justify-content: center;
   gap: 2px;
   cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
 }
 .addEmoji {
   font-size: 18px;
@@ -131,7 +135,9 @@
   border: none;
   background: var(--gray-100);
   font-size: 18px;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
 }
 .pickerItem:hover {
   background: var(--gray-100);
@@ -139,7 +145,7 @@
 }
 
 /* 모바일 전용 스타일 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .panel {
     left: auto;
     right: 0;
@@ -147,5 +153,11 @@
   }
   .panelGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media screen and (max-width: 360px) {
+  .panel {
+    left: 0;
+    width: calc(100% - 32px);
   }
 }
