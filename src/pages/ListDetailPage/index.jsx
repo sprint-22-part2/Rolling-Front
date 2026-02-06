@@ -24,6 +24,7 @@ function ListDetailPage() {
 
   const [recipient, setRecipient] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isRecipientModalOpen, setIsRecipientModalOpen] = useState(false);
@@ -34,7 +35,6 @@ function ListDetailPage() {
 
   const [hasNext, setHasNext] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const messageCount = messages.length;
   const recentMessages = useMemo(() => {
     return [...messages]
       .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
@@ -84,6 +84,7 @@ function ListDetailPage() {
       setMessages((prevMessages) =>
         prevMessages.filter((msg) => msg.id !== deleteTargetMessageId)
       );
+      setTotalCount((prev) => Math.max(0, prev - 1));
     } catch (error) {
       console.error(error);
       if (isRetryableError(error)) {
@@ -110,6 +111,11 @@ function ListDetailPage() {
         ]);
         setRecipient(recipientData);
         setMessages(messagesData.results);
+        setTotalCount(
+          typeof recipientData.messageCount === 'number'
+            ? recipientData.messageCount
+            : (messagesData.count ?? messagesData.results.length)
+        );
 
         if (!messagesData.next) {
           setHasNext(false);
@@ -194,12 +200,12 @@ function ListDetailPage() {
         <RollingHeader
           theme={theme}
           recipientName={recipient.name}
-          messageCount={messageCount}
+          messageCount={totalCount}
           recentMessages={recentMessages}
           topReactions={recipient.topReactions}
           isEditMode={isEditMode}
           setIsEditMode={setIsEditMode}
-          hasMessages={messageCount > 0}
+          hasMessages={totalCount > 0}
           onDelete={handleClickDeleteRecipient}
         />
 
