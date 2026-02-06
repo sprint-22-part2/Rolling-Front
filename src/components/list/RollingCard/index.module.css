@@ -44,11 +44,12 @@
 
 .emojis {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   flex-grow: 1;
   align-items: flex-end;
   flex-direction: row;
   flex-wrap: wrap;
+  align-content: flex-end;
 }
 .emoji {
   background-color: var(--emoji-bg);
