@@ -2,6 +2,11 @@ import { useEffect, useRef } from 'react';
 
 export default function useInfiniteScroll(callback, hasNext, isLoading) {
   const targetRef = useRef(null);
+  const savedCallback = useRef(callback);
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
 
   useEffect(() => {
     if (isLoading || !hasNext) {
@@ -11,7 +16,7 @@ export default function useInfiniteScroll(callback, hasNext, isLoading) {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          callback();
+          savedCallback.current();
         }
       },
       { threshold: 1 }
@@ -27,7 +32,7 @@ export default function useInfiniteScroll(callback, hasNext, isLoading) {
         observer.unobserve(target);
       }
     };
-  }, [callback, hasNext, isLoading]);
+  }, [hasNext, isLoading]);
 
   return targetRef;
 }
