@@ -14,6 +14,7 @@ import {
 import ConfirmModal from '@/components/modal/ConfirmationModal';
 import isRetryableError from '@/utils/isRetryableError';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import useToast from '@/hooks/useToast';
 
 const LIMIT = 8;
 
@@ -39,6 +40,7 @@ function ListDetailPage() {
       .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
       .slice(0, 3);
   }, [messages]);
+  const { showToast } = useToast();
 
   const handleClickDeleteRecipient = () => {
     setIsRecipientModalOpen(true);
@@ -114,6 +116,12 @@ function ListDetailPage() {
         }
       } catch (error) {
         console.error('데이터를 불러오는 중 에러 발생:', error);
+        const status = error?.response?.status;
+        if (status === 404) {
+          showToast('대상을 찾을 수 없습니다.', 'error');
+          navigate('/list');
+          return;
+        }
         if (isRetryableError(error)) {
           setError(error);
         }
@@ -123,7 +131,7 @@ function ListDetailPage() {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, navigate, showToast]);
 
   const handleLoadMore = useCallback(async () => {
     if (!hasNext || isLoadingMore || !id) {
@@ -160,7 +168,7 @@ function ListDetailPage() {
     return <div>로딩 중...</div>;
   }
   if (!recipient) {
-    return <div>대상을 찾을 수 없습니다.</div>;
+    return null;
   }
 
   const { backgroundColor, backgroundImageURL } = recipient;
