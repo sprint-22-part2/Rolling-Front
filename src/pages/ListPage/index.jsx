@@ -2,13 +2,8 @@ import styles from './index.module.css';
 import PopularRolling from '@/components/list/PopularRolling';
 import RecentRolling from '@/components/list/RecentRolling';
 import LinkButton from '@/components/common/LinkButton';
-import { useEffect } from 'react';
 
 function ListPage() {
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-  }, []);
-
   return (
     <div className={styles.rollingList}>
       <section className={styles.sectionRollingList}>

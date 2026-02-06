@@ -76,6 +76,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
+  width: 100%;
 }
 
 .to {
@@ -91,13 +92,13 @@
   font-weight: var(--font-weight-semibold);
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 
   line-height: 1.5;
-  max-height: 3em;
+  max-height: 4.5em;
 }
 
 .rollingHeaderBottom {
@@ -110,7 +111,7 @@
 
 .rollingButtons {
   display: flex;
-  gap: 8px 16px;
+  gap: 8px 0;
   align-items: center;
   flex-wrap: wrap;
   position: relative;
@@ -141,4 +142,9 @@
   background-color: var(--rb-chip-bg);
   border: none;
   cursor: pointer;
+}
+
+.badgeWidth {
+  width: 83px;
+  justify-content: center;
 }

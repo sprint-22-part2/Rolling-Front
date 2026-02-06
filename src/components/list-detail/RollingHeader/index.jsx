@@ -19,7 +19,7 @@ import ReactionPanel from '@/components/reaction/ReactionPanel';
 import ShareDropdown from '@/components/common/ShareDropdown';
 import useShareActions from '@/hooks/useShareActions';
 import useToast from '@/hooks/useToast';
-import { REACTION_THEMES } from '@/components/reaction/reactionThemes';
+import { REACTION_THEMES } from '@/constants/reactionThemes';
 
 function RollingHeader({
   theme = 'blue',
@@ -45,6 +45,10 @@ function RollingHeader({
 
   const handleEdit = () => setIsEditMode(true);
   const handleSave = () => setIsEditMode(false);
+
+  const handlePanelClose = useCallback(() => {
+    setIsPanelOpen(false);
+  }, []);
 
   const fetchReactions = useCallback(async () => {
     if (!id) {
@@ -196,6 +200,7 @@ function RollingHeader({
               count={reaction.count}
               theme={currentThemeObj}
               onClick={() => handleEmojiClick(reaction.emoji)}
+              className={styles.badgeWidth}
             />
           ))}
 
@@ -213,6 +218,7 @@ function RollingHeader({
                 <ReactionPanel
                   reactions={reactionsObject}
                   onItemClick={handleEmojiClick}
+                  onClose={handlePanelClose}
                 />
               )}
             </div>

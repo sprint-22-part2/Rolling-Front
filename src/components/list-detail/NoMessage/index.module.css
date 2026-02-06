@@ -11,6 +11,7 @@
   font-size: 20px;
   font-weight: var(--font-weight-medium);
   color: var(--gray-400);
+  word-break: break-word;
 }
 
 [type='image'] .notiMessage {

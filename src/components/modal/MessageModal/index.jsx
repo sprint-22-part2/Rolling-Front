@@ -5,6 +5,8 @@ import Modal from '@/components/modal/Modal';
 import Button from '@/components/common/Button';
 import ProfileImage from '@/components/common/ProfileImage';
 import RelationshipBadge from '@/components/common/RelationshipBadge';
+import EditorViewer from '@/components/message/EditorViewer';
+import { FONT_MAP } from '@/constants/editor';
 
 export default function MessageModal({
   isOpen,
@@ -15,11 +17,14 @@ export default function MessageModal({
   relationship,
   date,
   content,
+  font,
 }) {
   const handleConfirm = () => {
     onConfirm?.();
     onClose();
   };
+
+  const safeFont = FONT_MAP[font] ?? 'inherit';
 
   return (
     <Modal
@@ -29,8 +34,8 @@ export default function MessageModal({
       closeOnOverlayClick
       closeOnEsc
     >
-      <div className={styles.modal}>
-        <header className={styles.modalHeader}>
+      <header className={styles.modalHeader}>
+        <div className={styles.meta}>
           <ProfileImage
             src={profileSrc}
             alt={`${name}의 프로필 이미지`}
@@ -39,31 +44,27 @@ export default function MessageModal({
             borderWidth={1}
             className={styles.profile}
           />
-
-          <div className={styles.meta}>
-            <div className={styles.modalInfo}>
-              <div className={styles.nameRow}>
-                <span className={styles.from}>From.</span>
-                <span className={styles.name}>{name}</span>
+          <div className={styles.modalInfo}>
+            <div className={styles.nameRow}>
+              <div className={styles.fromAndBadge}>
+                <span className={styles.from}>From</span>
+                <RelationshipBadge relationship={relationship} />
               </div>
-              <RelationshipBadge relationship={relationship} />
+              <span className={styles.name}>{name}</span>
             </div>
-
-            <div className={styles.date}>{date}</div>
           </div>
-        </header>
-
-        <div className={styles.modalContent}>{content}</div>
-
-        <div className={styles.actions}>
-          <Button
-            size="sizeMd"
-            variant="variantPrimary"
-            onClick={handleConfirm}
-          >
-            확인
-          </Button>
         </div>
+        <div className={styles.date}>{date}</div>
+      </header>
+
+      <div className={styles.modalContent} style={{ fontFamily: safeFont }}>
+        <EditorViewer content={content} currentFont={safeFont} />
+      </div>
+
+      <div className={styles.actions}>
+        <Button size="sizeMd" variant="variantPrimary" onClick={handleConfirm}>
+          확인
+        </Button>
       </div>
     </Modal>
   );
@@ -78,6 +79,7 @@ MessageModal.propTypes = {
   relationship: PropTypes.oneOf(['지인', '동료', '가족', '친구']).isRequired,
   date: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
+  font: PropTypes.string,
 };
 
 MessageModal.defaultProps = {

@@ -12,7 +12,7 @@ function Header() {
     <header className={styles.header}>
       <div className={styles.headerWrap}>
         <h1>
-          <Link to="/">
+          <Link to="/list">
             <img
               src={LogoImage}
               alt="logo image"

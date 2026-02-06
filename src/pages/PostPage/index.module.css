@@ -2,10 +2,10 @@
   max-width: 768px;
   width: 100%;
   margin: 0 auto;
-  padding: 88px 0;
+  padding: 64px 24px;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 64px;
 }
 
 .section {

@@ -31,7 +31,6 @@ jobs:
               'ziy1027',
             ]);
             const allowed =
-              base === 'develop' &&
               labels.includes('🔎 Preview') &&
               allowedAuthors.has(author);
             core.setOutput('allowed', allowed ? 'true' : 'false');

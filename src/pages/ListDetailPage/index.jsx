@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './index.module.css';
 import PropTypes from 'prop-types';
@@ -13,6 +13,7 @@ import {
 } from '@/apis/list';
 import ConfirmModal from '@/components/modal/ConfirmationModal';
 import isRetryableError from '@/utils/isRetryableError';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 const LIMIT = 8;
 
@@ -32,7 +33,12 @@ function ListDetailPage() {
 
   const [hasNext, setHasNext] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const observerTarget = useRef(null);
+  const messageCount = messages.length;
+  const recentMessages = useMemo(() => {
+    return [...messages]
+      .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
+      .slice(0, 3);
+  }, [messages]);
 
   const handleClickDeleteRecipient = () => {
     setIsRecipientModalOpen(true);
@@ -141,31 +147,11 @@ function ListDetailPage() {
     }
   }, [id, hasNext, isLoadingMore, messages.length]);
 
-  useEffect(() => {
-    if (isLoading || !hasNext) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          handleLoadMore();
-        }
-      },
-      { threshold: 1 }
-    );
-
-    const target = observerTarget.current;
-    if (target) {
-      observer.observe(target);
-    }
-
-    return () => {
-      if (target) {
-        observer.unobserve(target);
-      }
-    };
-  }, [isLoading, hasNext, handleLoadMore]);
+  const observerTarget = useInfiniteScroll(
+    handleLoadMore,
+    hasNext,
+    isLoading || isLoadingMore
+  );
 
   if (error) {
     throw error;
@@ -200,12 +186,12 @@ function ListDetailPage() {
         <RollingHeader
           theme={theme}
           recipientName={recipient.name}
-          messageCount={recipient.messageCount}
-          recentMessages={recipient.recentMessages}
+          messageCount={messageCount}
+          recentMessages={recentMessages}
           topReactions={recipient.topReactions}
           isEditMode={isEditMode}
           setIsEditMode={setIsEditMode}
-          hasMessages={recipient.messageCount > 0}
+          hasMessages={messageCount > 0}
           onDelete={handleClickDeleteRecipient}
         />
 

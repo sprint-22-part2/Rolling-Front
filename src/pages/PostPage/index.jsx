@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextInput from '@/components/common/TextInput';
 import SegmentToggle from '@/components/common/SegmentToggle';
@@ -26,9 +26,6 @@ function PostPage() {
     useBackgroundImages();
   const { showToast } = useToast();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-  }, []);
   const selectedBackgroundImage = useMemo(
     () => backgroundImage || (imageOptions[0]?.id ?? ''),
     [backgroundImage, imageOptions]
