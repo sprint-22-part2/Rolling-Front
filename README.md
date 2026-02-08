@@ -156,7 +156,6 @@
 | ![pc_6](https://github.com/user-attachments/assets/9c3163b5-8bc1-4874-aa04-37284eba5dbb)| ![tablet_2](https://github.com/user-attachments/assets/85eb66f2-0996-4a1d-a7d9-e4c9e6614b1e)| ![제목 없음 (2)](https://github.com/user-attachments/assets/88d7059c-fe8f-4d2b-b131-21eb87d2b7a6)|
 
 - 서비스 컨셉 및 주요 기능 소개
-- 반응형 레이아웃 적용
 
 ### 2️⃣ 리스트 페이지 (/list)
 | PC | Tablet | Mobile |
@@ -166,7 +165,7 @@
 - 인기 롤링페이퍼 슬라이드(swiper)
 - 최근 롤링페이퍼 더보기 기능
 
-### 3️⃣ 리스트 상세 페이지
+### 3️⃣ 리스트 상세 페이지 (/post/{id})
 | PC | Tablet | Mobile |
 |---|---|---|
 | ![pc_5](https://github.com/user-attachments/assets/9902f14f-122f-41ed-9865-caced1219038)| ![제목 없음 (1)](https://github.com/user-attachments/assets/d14522a7-834e-435e-817d-e47b235ad1a7)| ![제목 없음 (5)](https://github.com/user-attachments/assets/782e97b4-6406-4b0c-aca5-087dc9189e31)|
@@ -176,19 +175,19 @@
 - 이모지 리액션 생성
 - 카카오톡 공유 & url 복사
 
-### 4️⃣ 롤링페이퍼 작성 / 편집 페이지 (/post/{id})
+### 4️⃣ 롤링페이퍼 작성 / 편집 페이지 (/post)
 | PC | Tablet | Mobile |
 |---|---|---|
 | ![pc_2 (1)](https://github.com/user-attachments/assets/e662ab77-ece5-4e3a-b051-5e2288665ca0)|![제목 없음 (7)](https://github.com/user-attachments/assets/32f5b06f-f82f-4927-9b79-8016320e397c)|![제목 없음 (4)](https://github.com/user-attachments/assets/e4ab4034-ea49-404c-a2ad-9fcb559e71ed)|
 
-- 폰트 및 스타일 설정
+- 롤링 페이퍼 제목 및 배경 설정
 
 ### 5️⃣ 메시지 작성 페이지 (/post/{id}/message)
 | PC | Tablet | Mobile |
 |---|---|---|
 | ![pc_3](https://github.com/user-attachments/assets/5c38875b-0b96-44aa-8a28-79a1b4e719ca)| ![제목 없음](https://github.com/user-attachments/assets/3e664897-0e72-4175-84e9-9735caea2dde)| ![제목 없음 (6)](https://github.com/user-attachments/assets/06f84fa0-0eb1-4862-8814-fc3753d2ef23)|
 
-- Tiptap 기반 메시지 작성
+- 메시지 작성
 
 ---
 
